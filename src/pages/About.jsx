@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLang } from '../i18n/LanguageContext';
-
-const teamColors = [
+import Seo from '../components/Seo';
   { color: 'rgba(0,102,255,0.3)', tc: '#0066ff' },
   { color: 'rgba(16,185,129,0.2)', tc: '#10b981' },
   { color: 'rgba(245,158,11,0.2)', tc: '#f59e0b' },
@@ -14,6 +13,10 @@ export default function About() {
 
   return (
     <div style={{ paddingTop: 72 }}>
+      <Seo
+        title={t.nav.about}
+        description="Découvrez Virtual Art Production : une équipe créative algérienne spécialisée dans la production audiovisuelle, le film corporate et la communication visuelle."
+      />
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{a.tag}</div>
         <div className="section-title">{a.title1}<br />{a.title2}</div>

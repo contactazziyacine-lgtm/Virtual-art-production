@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
+import { SOCIAL } from '../config';
 import Logo from './Logo';
 
 export default function Footer() {
@@ -13,15 +14,16 @@ export default function Footer() {
 
   return (
     <footer style={{ background: '#0a0a0f', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '60px 5% 32px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
+      <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
         <div>
           <div style={{ marginBottom: 16 }}><Logo height={42} /></div>
           <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 20, maxWidth: 320, textAlign: 'justify' }}>
             {t.footer.desc}
           </p>
           <div style={{ display: 'flex', gap: 10 }}>
-            {['📘','📷','💼','▶️'].map((icon, i) => (
-              <a key={i} href="#" style={{ width: 38, height: 38, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16 }}>{icon}</a>
+            {[['📘', SOCIAL.facebook], ['📷', SOCIAL.instagram], ['💼', SOCIAL.linkedin], ['▶️', SOCIAL.youtube]].map(([icon, url], i) => (
+              <a key={i} href={url || '#'} target={url ? '_blank' : undefined} rel={url ? 'noopener noreferrer' : undefined}
+                 style={{ width: 38, height: 38, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, textDecoration: 'none' }}>{icon}</a>
             ))}
           </div>
         </div>
@@ -51,7 +53,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13, color: 'rgba(255,255,255,0.3)', flexWrap: 'wrap', gap: 8 }}>
+      <div className="footer-bottom" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13, color: 'rgba(255,255,255,0.3)', flexWrap: 'wrap', gap: 8 }}>
         <span>© 2024 Virtual Art Production. {t.footer.rights}</span>
         <span>Production 4K · Drone · 360° · Digital</span>
       </div>

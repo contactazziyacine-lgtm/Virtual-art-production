@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import ServiceIcon from '../components/ServiceIcon';
+import Seo from '../components/Seo';
 
 export default function Services() {
   const { t } = useLang();
@@ -10,6 +11,10 @@ export default function Services() {
 
   return (
     <div style={{ paddingTop: 72 }}>
+      <Seo
+        title={t.nav.services}
+        description="Spots publicitaires, films corporate, visites virtuelles 360°, captation drone, motion design et création de sites web — tous nos services de production audiovisuelle."
+      />
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{s.tag}</div>
         <div className="section-title">{s.title1}<br />{s.title2}</div>

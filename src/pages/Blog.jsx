@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLang } from '../i18n/LanguageContext';
-
-const bgColors = [
+import Seo from '../components/Seo';
   'linear-gradient(135deg,#0d1a3a,#1428aa)',
   'linear-gradient(135deg,#0d2a1a,#0d5a3a)',
   'linear-gradient(135deg,#1a0d2a,#3d0d5a)',
@@ -16,6 +15,10 @@ export default function Blog() {
 
   return (
     <div style={{ paddingTop: 72 }}>
+      <Seo
+        title={t.nav.blog}
+        description="Le blog de Virtual Art Production : conseils, tendances et coulisses de la production audiovisuelle, du film corporate et de la communication digitale en Algérie."
+      />
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{b.tag}</div>
         <div className="section-title">{b.title}</div>

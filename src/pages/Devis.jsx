@@ -1,17 +1,48 @@
 import React, { useState } from 'react';
 import { useLang } from '../i18n/LanguageContext';
+import { sendForm } from '../lib/sendForm';
+import Seo from '../components/Seo';
 
 export default function Devis() {
   const { t } = useLang();
   const d = t.devis;
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [budget, setBudget] = useState('');
   const [checkedServices, setCheckedServices] = useState([]);
   const [checkedSocials, setCheckedSocials] = useState([]);
 
   const toggle = (list, setList, val) => setList(prev => prev.includes(val) ? prev.filter(x=>x!==val) : [...prev,val]);
 
-  const handleSubmit = e => { e.preventDefault(); setSubmitted(true); window.scrollTo({top:0,behavior:'smooth'}); };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    const fd = new FormData(e.currentTarget);
+    const v = k => (fd.get(k) || '').toString().trim();
+    const fileNames = Array.from(fd.getAll('files')).map(f => (f && f.name) ? f.name : '').filter(Boolean);
+    const socialServices = fd.getAll('socialServices').map(x => x.toString());
+
+    const fields = [
+      [d.fName, v('name')], [d.fCompany, v('company')], [d.fSector, v('sector')],
+      [d.fPhone, v('phone')], [d.fEmail, v('email')], [d.fCity, v('city')],
+      [d.servicesLabel, checkedServices], [d.goalLabel, v('goal')],
+      [d.descLabel, v('description')], [d.dateLabel, v('date')], [d.placeLabel, v('place')],
+      [d.durationLabel, v('duration')], [d.scriptLabel, v('script')], [d.daysLabel, v('days')],
+      [d.platformsLabel, checkedSocials], [d.socialSvcLabel, socialServices],
+      [d.budgetLabel, budget], [d.filesLabel, fileNames],
+    ];
+
+    try {
+      await sendForm({ subject: `${d.tag} — ${v('name') || 'Nouveau projet'}`, replyTo: v('email'), fields });
+    } catch (err) {
+      // Si l'envoi e-mail échoue, on affiche quand même la confirmation pour
+      // ne pas perdre la saisie : le client peut nous joindre directement.
+    }
+    setSending(false);
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const fieldStyle = { display: 'flex', flexDirection: 'column', gap: 8 };
   const labelStyle = { fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: 0.5 };
@@ -33,6 +64,7 @@ export default function Devis() {
 
   return (
     <div style={{ paddingTop: 72 }}>
+      <Seo title={d.title} description={d.sub} />
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{d.tag}</div>
         <div className="section-title">{d.title}</div>
@@ -43,15 +75,15 @@ export default function Devis() {
             <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
 
               <div style={sectionTitle}>{d.sGeneral}</div>
-              {[[d.fName,'text',true],[d.fCompany,'text',false],[d.fSector,'text',false],[d.fPhone,'tel',true],[d.fEmail,'email',true],[d.fCity,'text',false]].map(([label,type,req]) => (
-                <div key={label} style={fieldStyle}><label style={labelStyle}>{label}{req?' *':''}</label><input type={type} required={req} /></div>
+              {[[d.fName,'text',true,'name'],[d.fCompany,'text',false,'company'],[d.fSector,'text',false,'sector'],[d.fPhone,'tel',true,'phone'],[d.fEmail,'email',true,'email'],[d.fCity,'text',false,'city']].map(([label,type,req,name]) => (
+                <div key={name} style={fieldStyle}><label style={labelStyle}>{label}{req?' *':''}</label><input type={type} name={name} required={req} /></div>
               ))}
 
               <hr style={divider} />
               <div style={sectionTitle}>{d.sService}</div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.servicesLabel}</label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
+                <div className="check-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
                   {d.serviceOpts.map(s => (
                     <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
                       <input type="checkbox" checked={checkedServices.includes(s)} onChange={() => toggle(checkedServices,setCheckedServices,s)} style={{ accentColor: '#0066ff', width: 18, height: 18 }} />{s}
@@ -64,20 +96,20 @@ export default function Devis() {
               <div style={sectionTitle}>{d.sGoal}</div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.goalLabel}</label>
-                <select><option value="">{d.goalPlaceholder}</option>{d.goalOpts.map(o => <option key={o}>{o}</option>)}</select>
+                <select name="goal"><option value="">{d.goalPlaceholder}</option>{d.goalOpts.map(o => <option key={o}>{o}</option>)}</select>
               </div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.descLabel}</label>
-                <textarea placeholder={d.descPlaceholder} style={{ minHeight: 140 }} />
+                <textarea name="description" placeholder={d.descPlaceholder} style={{ minHeight: 140 }} />
               </div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.dateLabel}</label><input type="date" /></div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.placeLabel}</label><input type="text" /></div>
+              <div style={fieldStyle}><label style={labelStyle}>{d.dateLabel}</label><input type="date" name="date" /></div>
+              <div style={fieldStyle}><label style={labelStyle}>{d.placeLabel}</label><input type="text" name="place" /></div>
 
               <hr style={divider} />
               <div style={sectionTitle}>{d.sVideo}</div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.durationLabel}</label><select><option value="">{d.selectPlaceholder}</option>{d.durationOpts.map(o => <option key={o}>{o}</option>)}</select></div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.scriptLabel}</label><select><option value="">{d.selectPlaceholder}</option>{d.scriptOpts.map(o => <option key={o}>{o}</option>)}</select></div>
-              <div style={{ gridColumn: '1/-1', ...fieldStyle }}><label style={labelStyle}>{d.daysLabel}</label><select><option value="">{d.selectPlaceholder}</option>{d.daysOpts.map(o => <option key={o}>{o}</option>)}</select></div>
+              <div style={fieldStyle}><label style={labelStyle}>{d.durationLabel}</label><select name="duration"><option value="">{d.selectPlaceholder}</option>{d.durationOpts.map(o => <option key={o}>{o}</option>)}</select></div>
+              <div style={fieldStyle}><label style={labelStyle}>{d.scriptLabel}</label><select name="script"><option value="">{d.selectPlaceholder}</option>{d.scriptOpts.map(o => <option key={o}>{o}</option>)}</select></div>
+              <div style={{ gridColumn: '1/-1', ...fieldStyle }}><label style={labelStyle}>{d.daysLabel}</label><select name="days"><option value="">{d.selectPlaceholder}</option>{d.daysOpts.map(o => <option key={o}>{o}</option>)}</select></div>
 
               <hr style={divider} />
               <div style={sectionTitle}>{d.sSocial}</div>
@@ -93,10 +125,10 @@ export default function Devis() {
               </div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.socialSvcLabel}</label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 4 }}>
+                <div className="check-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 4 }}>
                   {d.socialSvc.map(s => (
                     <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
-                      <input type="checkbox" style={{ accentColor: '#0066ff' }} />{s}
+                      <input type="checkbox" name="socialServices" value={s} style={{ accentColor: '#0066ff' }} />{s}
                     </label>
                   ))}
                 </div>
@@ -122,7 +154,7 @@ export default function Devis() {
               <div style={sectionTitle}>{d.sFiles}</div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.filesLabel}</label>
-                <input type="file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov" style={{ padding: 12 }} />
+                <input type="file" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov" style={{ padding: 12 }} />
               </div>
 
               <hr style={divider} />
@@ -132,7 +164,7 @@ export default function Devis() {
                 </label>
               </div>
               <div style={{ gridColumn: '1/-1' }}>
-                <button type="submit" style={{ width: '100%', padding: 18, background: '#0066ff', color: '#fff', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: 'pointer', letterSpacing: 0.3, marginTop: 8 }}>{d.submit}</button>
+                <button type="submit" disabled={sending} style={{ width: '100%', padding: 18, background: sending ? '#0a4bb0' : '#0066ff', color: '#fff', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: sending ? 'wait' : 'pointer', letterSpacing: 0.3, marginTop: 8, opacity: sending ? 0.85 : 1 }}>{sending ? '⏳ Envoi…' : d.submit}</button>
               </div>
             </div>
           </form>

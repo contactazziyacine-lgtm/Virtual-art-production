@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLang } from '../i18n/LanguageContext';
-
-const items = [
+import Seo from '../components/Seo';
   { cat: 'pub', video: '0Vb4MBjoRw4', title: 'Spot Publicitaire — Production 1', sub: 'Réalisation Virtual Art Production' },
   { cat: 'pub', video: '6AyGuNUa5tk', title: 'Spot Publicitaire — Production 2', sub: 'Réalisation Virtual Art Production' },
   { cat: 'pub', video: 'm_R9Ehai9g0', title: 'Spot Publicitaire — Production 3', sub: 'Réalisation Virtual Art Production' },
@@ -55,6 +54,10 @@ export default function Portfolio() {
 
   return (
     <div style={{ paddingTop: 72 }}>
+      <Seo
+        title={t.nav.portfolio}
+        description="Nos réalisations : spots publicitaires, films institutionnels, couvertures événementielles et visites virtuelles 360° produits par Virtual Art Production."
+      />
       <section style={{ padding: '80px 5%', background: '#12121a' }}>
         <div className="section-tag">{t.portfolio.tag}</div>
         <div className="section-title">{t.portfolio.title}</div>

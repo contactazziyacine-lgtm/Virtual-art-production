@@ -80,13 +80,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); }
 select option { background: var(--noir2); }
 textarea { min-height: 120px; resize: vertical; }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .section { padding: 70px 5%; }
-  .section-title { font-size: 28px; }
-}
-
-/* === TEXTE JUSTIFIÉ === */
+/* Le justifié est lisible sur colonnes larges, mais crée de vilains
+   espaces sur petit écran : on repasse à gauche en mobile (voir media query). */
 p, .section-sub { text-align: justify; }
 
 /* === SUPPORT ARABE (RTL) === */
@@ -95,9 +90,74 @@ html[dir="rtl"] .section-tag,
 html[dir="rtl"] .section-title { text-align: right; }
 html[dir="rtl"] p { text-align: justify; }
 html[lang="ar"] body { font-family: 'Cairo', 'Segoe UI', 'Inter', sans-serif; }
+html[dir="rtl"] .whatsapp-float { right: auto !important; left: 28px; }
 
-/* Responsive nav */
-@media (max-width: 768px) {
+/* ============================================================
+   RESPONSIVE — points de rupture consolidés
+   1024px = tablette · 768px = mobile · 480px = petit téléphone
+   Les règles utilisent !important pour surcharger les styles
+   grid-template-columns définis en inline dans les composants.
+   ============================================================ */
+
+/* ---------- Tablette (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  /* La nav complète déborde sur tablette → on bascule sur le menu burger */
   .nav-desktop { display: none !important; }
-  .hamburger { display: flex !important; }
+  .hamburger   { display: flex !important; }
+
+  .container { padding: 0 6%; }
+
+  .grid-3 { grid-template-columns: 1fr 1fr !important; }
+  .grid-4 { grid-template-columns: 1fr 1fr !important; }
+  .grid-5 { grid-template-columns: repeat(3, 1fr) !important; }
+
+  /* Les stats du hero sont en absolute sur desktop : on les remet
+     dans le flux pour éviter qu'elles chevauchent le texte. */
+  .hero-stats {
+    position: static !important;
+    right: auto !important; bottom: auto !important;
+    margin-top: 44px; justify-content: flex-start;
+  }
+
+  .about-grid   { gap: 48px !important; }
+  .contact-grid { gap: 44px !important; }
+}
+
+/* ---------- Mobile (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .section { padding: 70px 5%; }
+  .section-title { font-size: 28px; }
+  p, .section-sub { text-align: left; }
+
+  /* Tout ce qui était multi-colonnes passe sur une seule colonne */
+  .grid-3,
+  .svc-row,
+  .about-grid,
+  .contact-grid,
+  .form-grid,
+  .check-grid,
+  .footer-grid { grid-template-columns: 1fr !important; }
+
+  .grid-5        { grid-template-columns: 1fr 1fr !important; }
+  .budget-grid   { grid-template-columns: 1fr 1fr !important; }
+  .portfolio-grid{ grid-template-columns: 1fr 1fr !important; }
+
+  .hero-stats   { gap: 26px !important; flex-wrap: wrap; }
+  .footer-bottom{ flex-direction: column; align-items: flex-start !important; gap: 10px; }
+  .footer-grid  { gap: 36px !important; }
+}
+
+/* ---------- Petit téléphone (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .section { padding: 56px 5%; }
+  .grid-4,
+  .grid-5,
+  .budget-grid,
+  .portfolio-grid { grid-template-columns: 1fr !important; }
+
+  .btn-primary, .btn-outline { width: 100%; text-align: center; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100%; }
+  .whatsapp-float { bottom: 18px !important; right: 18px !important; width: 54px !important; height: 54px !important; }
 }

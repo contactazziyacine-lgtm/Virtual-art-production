@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import Clients from '../components/Clients';
 import ServiceIcon from '../components/ServiceIcon';
+import Seo from '../components/Seo';
 
 export default function Home() {
   const { t } = useLang();
@@ -20,6 +21,10 @@ export default function Home() {
 
   return (
     <div>
+      <Seo
+        title={t.nav.home}
+        description="Virtual Art Production — production audiovisuelle en Algérie : spots publicitaires, films corporate, visites virtuelles 360°, captation drone et motion design."
+      />
       {/* HERO */}
       <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', padding: '0 5%', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,#0a0a0f 0%,#0d0d1a 40%,#0a1428 100%)' }} />

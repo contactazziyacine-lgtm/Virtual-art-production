@@ -26,6 +26,11 @@ export default function Navbar() {
 
   useEffect(() => setMenuOpen(false), [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
   const langs = ['FR', 'AR', 'EN'];
 
   const LangSwitcher = () => (
@@ -56,8 +61,8 @@ export default function Navbar() {
         <Logo height={40} />
       </Link>
 
-      <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
-        <ul style={{ display: 'flex', gap: 26, listStyle: 'none', alignItems: 'center' }}>
+      <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
+        <ul style={{ display: 'flex', gap: 20, listStyle: 'none', alignItems: 'center' }}>
           {links.map(l => (
             <li key={l.to}>
               <Link to={l.to} style={{
@@ -85,7 +90,8 @@ export default function Navbar() {
         <div style={{
           position: 'fixed', top: 72, left: 0, right: 0,
           background: '#12121a', borderBottom: '1px solid rgba(255,255,255,0.06)',
-          padding: 20, display: 'flex', flexDirection: 'column', gap: 16
+          padding: 20, display: 'flex', flexDirection: 'column', gap: 16,
+          maxHeight: 'calc(100vh - 72px)', overflowY: 'auto'
         }}>
           {links.map(l => (
             <Link key={l.to} to={l.to} style={{ color: '#fff', textDecoration: 'none', fontSize: 16, fontWeight: 600 }}>{l.label}</Link>
