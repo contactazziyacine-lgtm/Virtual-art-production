@@ -42,7 +42,7 @@ export const portfolioItems = [
   { cat: 'motion', image: '/assets/motion/maxi-chazen-huiles.jpg', title: 'Maxi Chazen — Lait aux Huiles', sub: 'Composition visuelle & design produit' },
   { cat: 'motion', image: '/assets/motion/maxi-chazen-bebe.jpg', title: 'Maxi Chazen — Lait Hydratant Bébé', sub: 'Design produit & habillage graphique' },
 
-  { cat: 'web', link: 'https://algeriavirtualtravel.com/en', title: 'Algeria Virtual Travel', sub: 'Plateforme web de tourisme digital', cover: IMG.tlemcen, fallback: FALLBACK.tlemcen },
+  { cat: 'web', link: 'https://algeriavirtualtravel.com/en', title: 'Algeria Virtual Travel', sub: 'Plateforme web de tourisme digital', cover: '/assets/hero/avt-card.jpg', fallback: FALLBACK.tlemcen },
 ];
 
 // Aperçu page d'accueil : un échantillon représentatif (un par grande famille).

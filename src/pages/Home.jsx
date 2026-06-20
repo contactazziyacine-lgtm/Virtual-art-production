@@ -7,8 +7,9 @@ import AnimatedIcon from '../components/AnimatedIcon';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
+import Coverflow from '../components/Coverflow';
 import { IMG, FALLBACK } from '../data/covers';
-import { featuredPortfolio, portfolioThumb } from '../data/portfolio';
+import { featuredPortfolio } from '../data/portfolio';
 
 export default function Home() {
   const { t } = useLang();
@@ -111,32 +112,7 @@ export default function Home() {
             <Link to="/portfolio" className="alink">Voir tout le portfolio <span className="arw">→</span></Link>
           </Reveal>
 
-          <div className="port-grid cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(14px,1.4vw,20px)' }}>
-            {featuredPortfolio.map((item, i) => {
-              const isExternal = !!item.link;
-              const is360 = !!item.tour;
-              const pill = is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : (catLabel[item.cat] || 'Vidéo');
-              return (
-                <Reveal key={item.title} delay={(i % 3) * 80}>
-                  <Link to={`/portfolio?cat=${item.cat}`} className="home-port-card"
-                    style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/9', background: 'var(--deep)' }}>
-                    <div className="home-port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
-                      <Cover src={portfolioThumb(item)} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
-                    </div>
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.05) 0%, rgba(17,5,48,0.35) 55%, rgba(17,5,48,0.92) 100%)' }} />
-                    <div style={{ position: 'absolute', top: 14, left: 14, padding: '6px 12px', borderRadius: 100, background: 'rgba(17,5,48,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>{pill}</div>
-                    <div className="home-port-play" style={{ position: 'absolute', top: '46%', left: '50%', transform: 'translate(-50%,-50%) scale(.85)', width: 54, height: 54, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 10px 30px rgba(91,13,221,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', opacity: 0, transition: 'all .3s var(--ease)' }}>
-                      <span style={{ fontSize: 17, lineHeight: 1 }}>{is360 ? '⤢' : isExternal ? '↗' : '▶'}</span>
-                    </div>
-                    <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(16px,1.6vw,22px)', color: '#fff' }}>
-                      <h3 style={{ fontFamily: 'var(--display)', fontSize: 16, fontWeight: 700, marginBottom: 4, letterSpacing: '-.01em' }}>{item.title}</h3>
-                      <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.74)' }}>{item.sub}</p>
-                    </div>
-                  </Link>
-                </Reveal>
-              );
-            })}
-          </div>
+          <Coverflow items={featuredPortfolio} catLabel={catLabel} />
         </div>
       </section>
 
