@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
+import ServiceIcon from '../components/ServiceIcon';
 
 export default function Services() {
   const { t } = useLang();
   const s = t.servicesPage;
-  const cardColors = ['#f59e0b','#0066ff','#a855f7'];
+  const cardColors = ['#f59e0b','#0066ff','#a855f7','#10b981','#ec4899'];
 
   return (
     <div style={{ paddingTop: 72 }}>
@@ -17,7 +18,7 @@ export default function Services() {
 
           <div className="svc-row" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: 40, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 40, alignItems: 'center' }}>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 72, marginBottom: 12 }}>🎬</div>
+              <div style={{ display:'inline-flex', width:90, height:90, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.1)', border:'1px solid rgba(0,102,255,0.2)', borderRadius:20, marginBottom: 16 }}><ServiceIcon name="spot" size={48} /></div>
               <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0066ff' }}>{s.spotTitle}</h2>
             </div>
             <div>
@@ -46,7 +47,7 @@ export default function Services() {
               </div>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: 72, marginBottom: 12 }}>🏢</div>
+              <div style={{ display:'inline-flex', width:90, height:90, alignItems:'center', justifyContent:'center', background:'rgba(16,185,129,0.1)', border:'1px solid rgba(16,185,129,0.2)', borderRadius:20, marginBottom: 16 }}><ServiceIcon name="film" size={48} /></div>
               <h2 style={{ fontSize: 22, fontWeight: 900, color: '#10b981' }}>{s.filmTitle}</h2>
             </div>
           </div>
@@ -54,7 +55,7 @@ export default function Services() {
           <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20 }}>
             {s.cards.map((c, i) => (
               <div key={c.title} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28 }}>
-                <div style={{ fontSize: 44, marginBottom: 16 }}>{c.icon}</div>
+                <div style={{ display:'inline-flex', width:56, height:56, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.08)', border:'1px solid rgba(0,102,255,0.15)', borderRadius:14, marginBottom: 16 }}><ServiceIcon name={['event','drone','tour360','motion','web'][i]} size={30} /></div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, color: cardColors[i], marginBottom: 12 }}>{c.title}</h3>
                 <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 16, textAlign: 'justify' }}>{c.desc}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -66,7 +67,7 @@ export default function Services() {
 
           <div style={{ background: 'linear-gradient(135deg,rgba(0,102,255,0.08),rgba(168,85,247,0.08))', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 20, padding: 40 }}>
             <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <div style={{ fontSize: 48, marginBottom: 12 }}>📡</div>
+              <div style={{ display:'inline-flex', width:64, height:64, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.1)', border:'1px solid rgba(0,102,255,0.2)', borderRadius:16, marginBottom: 12 }}><ServiceIcon name="social" size={34} /></div>
               <h2 style={{ fontSize: 26, fontWeight: 900, marginBottom: 8 }}>{s.socialTitle}</h2>
               <p style={{ color: '#8892a4', maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>{s.socialDesc}</p>
             </div>

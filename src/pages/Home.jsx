@@ -2,19 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import Clients from '../components/Clients';
+import ServiceIcon from '../components/ServiceIcon';
 
 export default function Home() {
   const { t } = useLang();
 
   const services = [
-    { icon: '🎬', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV','Social','4K'] },
-    { icon: '🏢', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate','RH','Reportage'] },
-    { icon: '🌐', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel','Immobilier','Commerce'] },
-    { icon: '📡', title: t.cats.social, desc: 'Stratégie digitale complète, création de contenu et community management.', tags: ['Instagram','LinkedIn','TikTok'] },
-    { icon: '🚁', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K','Certifié','Pro'] },
-    { icon: '🎤', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live','Photo','Vidéo'] },
-    { icon: '🎨', title: 'Production 3D & Motion Graphics', desc: 'Animations 3D, motion design, habillage graphique et effets visuels pour des contenus modernes et dynamiques.', tags: ['3D','Motion','VFX'] },
-    { icon: '💻', title: 'Création de Site Web', desc: 'Sites web modernes, responsives et optimisés SEO. Vitrines, plateformes et applications web sur mesure.', tags: ['Web','Responsive','SEO'] },
+    { ic: 'spot', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV','Social','4K'] },
+    { ic: 'film', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate','RH','Reportage'] },
+    { ic: 'tour360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel','Immobilier','Commerce'] },
+    { ic: 'social', title: t.cats.social, desc: 'Stratégie digitale complète, création de contenu et community management.', tags: ['Instagram','LinkedIn','TikTok'] },
+    { ic: 'drone', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K','Certifié','Pro'] },
+    { ic: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live','Photo','Vidéo'] },
+    { ic: 'motion', title: 'Production 3D & Motion Graphics', desc: 'Animations 3D, motion design, habillage graphique et effets visuels pour des contenus modernes et dynamiques.', tags: ['3D','Motion','VFX'] },
+    { ic: 'web', title: 'Création de Site Web', desc: 'Sites web modernes, responsives et optimisés SEO. Vitrines, plateformes et applications web sur mesure.', tags: ['Web','Responsive','SEO'] },
   ];
 
   return (
@@ -61,7 +62,7 @@ export default function Home() {
             <div key={s.title} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 32, transition: 'all 0.35s', cursor: 'pointer' }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,102,255,0.4)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'none'; }}>
-              <div style={{ width: 52, height: 52, background: 'rgba(0,102,255,0.1)', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, marginBottom: 20 }}>{s.icon}</div>
+              <div style={{ width: 52, height: 52, background: 'rgba(0,102,255,0.1)', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}><ServiceIcon name={s.ic} size={28} /></div>
               <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 10 }}>{s.title}</h3>
               <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, textAlign: 'justify' }}>{s.desc}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16 }}>
