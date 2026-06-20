@@ -17,7 +17,7 @@ export default function Footer() {
       <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 48, marginBottom: 48 }}>
         <div>
           <div style={{ marginBottom: 16 }}><Logo height={42} /></div>
-          <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 20, maxWidth: 320, textAlign: 'justify' }}>
+          <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 20, maxWidth: 320 }}>
             {t.footer.desc}
           </p>
           <div style={{ display: 'flex', gap: 10 }}>

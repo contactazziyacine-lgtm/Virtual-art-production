@@ -55,7 +55,7 @@ export default function Devis() {
         <div style={{ textAlign: 'center', padding: 40 }}>
           <div style={{ fontSize: 72, marginBottom: 24 }}>✅</div>
           <h2 style={{ fontSize: 32, fontWeight: 900, marginBottom: 16 }}>{d.successTitle}</h2>
-          <p style={{ color: '#8892a4', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 24px', textAlign: 'justify' }}>{d.successText}</p>
+          <p style={{ color: '#8892a4', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 24px' }}>{d.successText}</p>
           <button onClick={() => setSubmitted(false)} className="btn-outline">{d.successBtn}</button>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function Devis() {
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{d.tag}</div>
         <div className="section-title">{d.title}</div>
-        <p className="section-sub" style={{ marginTop: 16, textAlign: 'justify' }}>{d.sub}</p>
+        <p className="section-sub" style={{ marginTop: 16 }}>{d.sub}</p>
 
         <div className="quote-form" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 24, padding: 60, maxWidth: 900, margin: '60px auto 0' }}>
           <form onSubmit={handleSubmit}>

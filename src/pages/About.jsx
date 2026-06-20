@@ -22,15 +22,15 @@ export default function About() {
         <div className="section-title">{a.title1}<br />{a.title2}</div>
         <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>
           <div>
-            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8, textAlign: 'justify' }}>{a.p1}</p>
-            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8, textAlign: 'justify' }}>{a.p2}</p>
-            <p style={{ color: '#8892a4', fontSize: 16, lineHeight: 1.8, textAlign: 'justify' }}>{a.p3}</p>
+            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8 }}>{a.p1}</p>
+            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8 }}>{a.p2}</p>
+            <p style={{ color: '#8892a4', fontSize: 16, lineHeight: 1.8 }}>{a.p3}</p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 36 }}>
               {a.values.map(v => (
                 <div key={v.title} style={{ background: '#2a2a3a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: 20 }}>
                   <div style={{ width: 40, height: 40, background: 'rgba(0,102,255,0.12)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, marginBottom: 12 }}>{v.icon}</div>
                   <h4 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{v.title}</h4>
-                  <p style={{ fontSize: 13, color: '#8892a4', lineHeight: 1.6, textAlign: 'justify' }}>{v.text}</p>
+                  <p style={{ fontSize: 13, color: '#8892a4', lineHeight: 1.6 }}>{v.text}</p>
                 </div>
               ))}
             </div>
@@ -52,7 +52,7 @@ export default function About() {
       <section style={{ padding: '80px 5%', background: '#12121a' }}>
         <div className="section-tag">{a.teamTag}</div>
         <div className="section-title">{a.teamTitle}</div>
-        <p className="section-sub" style={{ marginTop: 16, textAlign: 'justify' }}>{a.teamSub}</p>
+        <p className="section-sub" style={{ marginTop: 16 }}>{a.teamSub}</p>
         <div className="grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20, marginTop: 50 }}>
           {a.team.map((m, i) => (
             <div key={i} style={{ background: '#2a2a3a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28, textAlign: 'center' }}>

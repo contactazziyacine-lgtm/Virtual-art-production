@@ -18,7 +18,7 @@ export default function Services() {
       <section style={{ padding: '80px 5%' }}>
         <div className="section-tag">{s.tag}</div>
         <div className="section-title">{s.title1}<br />{s.title2}</div>
-        <p className="section-sub" style={{ marginTop: 16, textAlign: 'justify' }}>{s.sub}</p>
+        <p className="section-sub" style={{ marginTop: 16 }}>{s.sub}</p>
         <div style={{ marginTop: 60, display: 'flex', flexDirection: 'column', gap: 32 }}>
 
           <div className="svc-row" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: 40, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 40, alignItems: 'center' }}>
@@ -27,7 +27,7 @@ export default function Services() {
               <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0066ff' }}>{s.spotTitle}</h2>
             </div>
             <div>
-              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8, textAlign: 'justify' }}>{s.spotDesc}</p>
+              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8 }}>{s.spotDesc}</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {s.spotItems.map(([icon, label]) => (
                   <div key={label} style={{ background: 'rgba(0,102,255,0.08)', border: '1px solid rgba(0,102,255,0.15)', borderRadius: 8, padding: 14 }}>
@@ -41,7 +41,7 @@ export default function Services() {
 
           <div className="svc-row" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: 40, display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 40, alignItems: 'center' }}>
             <div>
-              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8, textAlign: 'justify' }}>{s.filmDesc}</p>
+              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8 }}>{s.filmDesc}</p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                 {s.filmItems.map(([icon, label]) => (
                   <div key={label} style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: 8, padding: 14 }}>
@@ -62,7 +62,7 @@ export default function Services() {
               <div key={c.title} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28 }}>
                 <div style={{ display:'inline-flex', width:56, height:56, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.08)', border:'1px solid rgba(0,102,255,0.15)', borderRadius:14, marginBottom: 16 }}><ServiceIcon name={['event','drone','tour360','motion','web'][i]} size={30} /></div>
                 <h3 style={{ fontSize: 18, fontWeight: 800, color: cardColors[i], marginBottom: 12 }}>{c.title}</h3>
-                <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 16, textAlign: 'justify' }}>{c.desc}</p>
+                <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 16 }}>{c.desc}</p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {c.tags.map(tag => <span key={tag} style={{ fontSize: 11, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: '4px 10px', borderRadius: 100, color: '#8892a4' }}>{tag}</span>)}
                 </div>

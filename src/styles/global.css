@@ -80,15 +80,15 @@ input:focus, select:focus, textarea:focus { border-color: var(--bleu); }
 select option { background: var(--noir2); }
 textarea { min-height: 120px; resize: vertical; }
 
-/* Le justifié est lisible sur colonnes larges, mais crée de vilains
-   espaces sur petit écran : on repasse à gauche en mobile (voir media query). */
-p, .section-sub { text-align: justify; }
+/* Alignement à gauche par défaut (rendu plus net et plus moderne que le
+   justifié, qui crée de vilains espaces, surtout sur petit écran). */
+p, .section-sub { text-align: left; }
 
 /* === SUPPORT ARABE (RTL) === */
 html[dir="rtl"] body { direction: rtl; }
 html[dir="rtl"] .section-tag,
 html[dir="rtl"] .section-title { text-align: right; }
-html[dir="rtl"] p { text-align: justify; }
+html[dir="rtl"] p { text-align: right; }
 html[lang="ar"] body { font-family: 'Cairo', 'Segoe UI', 'Inter', sans-serif; }
 html[dir="rtl"] .whatsapp-float { right: auto !important; left: 28px; }
 
@@ -110,6 +110,16 @@ html[dir="rtl"] .whatsapp-float { right: auto !important; left: 28px; }
   .grid-3 { grid-template-columns: 1fr 1fr !important; }
   .grid-4 { grid-template-columns: 1fr 1fr !important; }
   .grid-5 { grid-template-columns: repeat(3, 1fr) !important; }
+
+  /* Le hero est en flex-row sur desktop (texte à gauche, stats flottantes en
+     bas à droite). En tablette/mobile on EMPILE : la section passe en colonne,
+     sinon les stats — devenues statiques — restent collées À CÔTÉ du texte et
+     finissent par le chevaucher. C'était la cause du bug responsive du hero. */
+  .hero-section {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+  }
 
   /* Les stats du hero sont en absolute sur desktop : on les remet
      dans le flux pour éviter qu'elles chevauchent le texte. */
@@ -161,3 +171,18 @@ html[dir="rtl"] .whatsapp-float { right: auto !important; left: 28px; }
   .hero-actions .btn-outline { width: 100%; }
   .whatsapp-float { bottom: 18px !important; right: 18px !important; width: 54px !important; height: 54px !important; }
 }
+
+/* ============================================================
+   FINITIONS MODERNES — touches additives (élévation, sélection,
+   barre de défilement). Aucune incidence sur la structure.
+   ============================================================ */
+.btn-primary { box-shadow: 0 6px 18px rgba(0, 102, 255, 0.28); }
+.btn-primary:hover { box-shadow: 0 8px 24px rgba(0, 102, 255, 0.40); }
+
+::selection { background: rgba(0, 102, 255, 0.30); color: #fff; }
+
+/* Barre de défilement discrète (navigateurs WebKit) */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--noir); }
+::-webkit-scrollbar-thumb { background: var(--gris2); border-radius: 6px; border: 2px solid var(--noir); }
+::-webkit-scrollbar-thumb:hover { background: var(--gris3); }

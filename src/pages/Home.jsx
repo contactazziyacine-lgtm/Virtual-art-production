@@ -12,7 +12,7 @@ export default function Home() {
     { ic: 'spot', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV','Social','4K'] },
     { ic: 'film', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate','RH','Reportage'] },
     { ic: 'tour360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel','Immobilier','Commerce'] },
-    { ic: 'social', title: t.cats.social, desc: 'Stratégie digitale complète, création de contenu et community management.', tags: ['Instagram','LinkedIn','TikTok'] },
+    { ic: 'social', title: t.cats.social, desc: 'Stratégie marketing digitale complète : SEO, publicité en ligne, content marketing et analyse de performance.', tags: ['SEO','Ads','Analytics'] },
     { ic: 'drone', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K','Certifié','Pro'] },
     { ic: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live','Photo','Vidéo'] },
     { ic: 'motion', title: 'Production 3D & Motion Graphics', desc: 'Animations 3D, motion design, habillage graphique et effets visuels pour des contenus modernes et dynamiques.', tags: ['3D','Motion','VFX'] },
@@ -26,7 +26,7 @@ export default function Home() {
         description="Virtual Art Production — production audiovisuelle en Algérie : spots publicitaires, films corporate, visites virtuelles 360°, captation drone et motion design."
       />
       {/* HERO */}
-      <section style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', padding: '0 5%', overflow: 'hidden' }}>
+      <section className="hero-section" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', padding: '0 5%', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,#0a0a0f 0%,#0d0d1a 40%,#0a1428 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0,102,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,0.04) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
         <div style={{ position: 'absolute', width: 600, height: 600, background: 'radial-gradient(circle,rgba(0,102,255,0.12) 0%,transparent 70%)', top: '50%', left: '60%', transform: 'translate(-50%,-50%)' }} />
@@ -39,7 +39,7 @@ export default function Home() {
           <h1 style={{ fontSize: 'clamp(42px,6vw,80px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: -2, marginBottom: 24 }}>
             {t.hero.title1}<br /><span style={{ color: '#0066ff' }}>{t.hero.title2}</span><br />{t.hero.title3}
           </h1>
-          <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 44, lineHeight: 1.8, textAlign: 'justify' }}>
+          <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 44, lineHeight: 1.8 }}>
             {t.hero.sub}
           </p>
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -69,7 +69,7 @@ export default function Home() {
               onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'none'; }}>
               <div style={{ width: 52, height: 52, background: 'rgba(0,102,255,0.1)', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}><ServiceIcon name={s.ic} size={28} /></div>
               <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 10 }}>{s.title}</h3>
-              <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, textAlign: 'justify' }}>{s.desc}</p>
+              <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7 }}>{s.desc}</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16 }}>
                 {s.tags.map(tag => <span key={tag} style={{ fontSize: 11, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: '4px 10px', borderRadius: 100, color: '#8892a4' }}>{tag}</span>)}
               </div>
@@ -89,7 +89,7 @@ export default function Home() {
         <Link to="/devis" className="btn-primary" style={{ fontSize: 16, padding: '16px 40px' }}>{t.cta.btn}</Link>
       </section>
 
-      <style>{`@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}@media(max-width:768px){.grid-3{grid-template-columns:1fr!important}.hero-stats{position:static!important;margin-top:40px;right:auto!important}}`}</style>
+      <style>{`@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}@media(max-width:1024px){.hero-section{flex-direction:column!important;align-items:flex-start!important;justify-content:center!important}.hero-stats{position:static!important;right:auto!important;bottom:auto!important;margin-top:40px}}`}</style>
     </div>
   );
 }

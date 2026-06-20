@@ -15,9 +15,9 @@ import Seo from '../components/Seo';
   { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/safex-snc/index.htm', title: 'SAFEX — SNC', sub: 'Visite virtuelle 360° immersive', bg: 'linear-gradient(135deg,#1a0d2a,#3d1a5a)' },
   { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/AZ-hotel%20zeralda/index.htm', title: 'AZ Hôtel Zéralda', sub: 'Visite virtuelle 360° hôtellerie', bg: 'linear-gradient(135deg,#0d1a3a,#1428aa)' },
 
-  { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Réseaux Sociaux — Short 1', sub: 'Contenu vertical engageant' },
-  { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Réseaux Sociaux — Short 2', sub: 'Format court & dynamique' },
-  { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Réseaux Sociaux — Short 3', sub: 'Vidéo réseaux sociaux' },
+  { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Marketing Digital — Short 1', sub: 'Contenu vertical engageant' },
+  { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Marketing Digital — Short 2', sub: 'Format court & dynamique' },
+  { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Marketing Digital — Short 3', sub: 'Contenu social engageant' },
 
   { cat: 'motion', video: 'G3mUgVckCtA', title: 'Production 3D — Projet 1', sub: 'Animation 3D & motion design' },
   { cat: 'motion', video: 'qWK_MgDza2U', title: 'Production 3D — Projet 2', sub: 'Habillage graphique & VFX' },
@@ -61,7 +61,7 @@ export default function Portfolio() {
       <section style={{ padding: '80px 5%', background: '#12121a' }}>
         <div className="section-tag">{t.portfolio.tag}</div>
         <div className="section-title">{t.portfolio.title}</div>
-        <p className="section-sub" style={{ marginTop: 16, textAlign: 'justify' }}>{t.portfolio.sub}</p>
+        <p className="section-sub" style={{ marginTop: 16 }}>{t.portfolio.sub}</p>
 
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', margin: '40px 0' }}>
           {categories.map(c => (
