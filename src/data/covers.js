@@ -41,13 +41,17 @@ export const FALLBACK = {
 //  les valeurs ci-dessous par vos URLs.
 // =====================================================================
 export const BLOG_IMG = {
-  videoTrends:  IMG.constantine,        // 5 tendances vidéo
-  linkedin:     IMG.tlemcen,            // présence LinkedIn
-  tour360:      IMG.constantineMedina,  // visite virtuelle 360°
-  videoRoi:     IMG.constantineBridge,  // ROI pub vidéo
-  drone:        IMG.constantineNature,  // drone & réglementation
-  storytelling: IMG.tlemcenMosque,      // storytelling
+  videoTrends:  '/assets/blog/video-trends.jpg',  // 5 tendances vidéo
+  linkedin:     '/assets/blog/linkedin.jpg',      // présence LinkedIn
+  tour360:      '/assets/blog/tour360.jpg',       // visite virtuelle 360°
+  videoRoi:     '/assets/blog/video-roi.jpg',     // ROI pub vidéo vs display
+  drone:        '/assets/blog/drone.jpg',         // drone & réglementation
+  storytelling: '/assets/blog/storytelling.jpg',  // storytelling
 };
+
+// En-tête de la page Blog — photo réelle de tournage (image importée).
+export const BLOG_HERO    = '/assets/blog/cameraman.jpg';
+export const BLOG_HERO_FB = FALLBACK.constantineMedina;
 
 export const BLOG_FB = {
   videoTrends:  FALLBACK.constantine,

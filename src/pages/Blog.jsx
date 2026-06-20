@@ -4,7 +4,7 @@ import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK, BLOG_IMG, BLOG_FB } from '../data/covers';
+import { IMG, FALLBACK, BLOG_IMG, BLOG_FB, BLOG_HERO, BLOG_HERO_FB } from '../data/covers';
 
 export default function Blog() {
   const { t } = useLang();
@@ -19,7 +19,7 @@ export default function Blog() {
 
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 400, display: 'flex', alignItems: 'flex-end' }}>
-        <Cover src={IMG.constantineMedina} fallback={FALLBACK.constantineMedina} alt="Médina" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
+        <Cover src={BLOG_HERO} fallback={BLOG_HERO_FB} alt="Tournage" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.5) 0%, rgba(17,5,48,0.42) 42%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,80px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 820 }}>

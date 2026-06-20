@@ -12,14 +12,14 @@ export default function Home() {
   const { t } = useLang();
 
   const services = [
-    { ic: 'spot', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV', 'Social', '4K'] },
-    { ic: 'film', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate', 'RH', 'Reportage'] },
-    { ic: 'tour360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel', 'Immobilier', 'Commerce'] },
-    { ic: 'social', title: t.cats.social, desc: 'Stratégie marketing digitale complète : SEO, publicité en ligne, content marketing et performance.', tags: ['SEO', 'Ads', 'Analytics'] },
-    { ic: 'drone', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K', 'Certifié', 'Pro'] },
-    { ic: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live', 'Photo', 'Vidéo'] },
-    { ic: 'motion', title: 'Production 3D & Motion', desc: 'Animations 3D, motion design, habillage graphique et effets visuels modernes.', tags: ['3D', 'Motion', 'VFX'] },
-    { ic: 'web', title: 'Création de site web', desc: 'Sites modernes, responsives et optimisés SEO. Vitrines, plateformes et applications.', tags: ['Web', 'Responsive', 'SEO'] },
+    { ic: 'spot', to: 'pub', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV', 'Social', '4K'] },
+    { ic: 'film', to: 'corporate', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate', 'RH', 'Reportage'] },
+    { ic: 'tour360', to: '360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel', 'Immobilier', 'Commerce'] },
+    { ic: 'social', to: 'social', title: t.cats.social, desc: 'Stratégie marketing digitale complète : SEO, publicité en ligne, content marketing et performance.', tags: ['SEO', 'Ads', 'Analytics'] },
+    { ic: 'drone', to: 'all', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K', 'Certifié', 'Pro'] },
+    { ic: 'event', to: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live', 'Photo', 'Vidéo'] },
+    { ic: 'motion', to: 'motion', title: 'Production 3D & Motion', desc: 'Animations 3D, motion design, habillage graphique et effets visuels modernes.', tags: ['3D', 'Motion', 'VFX'] },
+    { ic: 'web', to: 'web', title: 'Création de site web', desc: 'Sites modernes, responsives et optimisés SEO. Vitrines, plateformes et applications.', tags: ['Web', 'Responsive', 'SEO'] },
   ];
 
   return (
@@ -79,15 +79,16 @@ export default function Home() {
           <div className="cols-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid var(--line)', borderLeft: '1px solid var(--line)' }}>
             {services.map((s, i) => (
               <Reveal key={s.title} delay={(i % 4) * 70} style={{ borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-                <div className="svc-cell" style={{ padding: 'clamp(22px,2.2vw,30px)', height: '100%', transition: 'background .25s', cursor: 'default' }}
-                  onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
-                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                <Link to={`/portfolio?cat=${s.to}`} className="svc-cell" style={{ display: 'block', padding: 'clamp(22px,2.2vw,30px)', height: '100%', color: 'inherit', transition: 'background .25s' }}>
                   <div style={{ width: 46, height: 46, borderRadius: 'var(--r)', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
                     <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={s.ic} size={24} /></span>
                   </div>
-                  <h3 className="h3" style={{ marginBottom: 9 }}>{s.title}</h3>
+                  <h3 className="h3" style={{ marginBottom: 9, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    {s.title}
+                    <span className="svc-arw" aria-hidden="true" style={{ opacity: 0, transform: 'translateX(-4px)', transition: 'opacity .25s var(--ease), transform .25s var(--ease)', color: 'var(--accent)' }}>→</span>
+                  </h3>
                   <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{s.desc}</p>
-                </div>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -125,6 +126,12 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      <style>{`
+        .svc-cell:hover{background:var(--paper)}
+        .svc-cell:hover .svc-arw{opacity:1;transform:none}
+        .svc-cell:focus-visible{background:var(--paper);outline-offset:-2px}
+      `}</style>
     </div>
   );
 }

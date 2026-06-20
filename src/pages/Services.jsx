@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import ServiceIcon from '../components/ServiceIcon';
+import UiIcon from '../components/UiIcon';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
@@ -11,6 +12,7 @@ export default function Services() {
   const { t } = useLang();
   const s = t.servicesPage;
   const cardIcons = ['event', 'drone', 'tour360', 'motion', 'web'];
+  const cardCats = ['event', 'all', '360', 'motion', 'web'];
 
   return (
     <div>
@@ -45,7 +47,7 @@ export default function Services() {
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {s.spotItems.map(([icon, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
-                  <span style={{ fontSize: 18, lineHeight: 1 }}>{icon}</span>
+                  <UiIcon e={icon} size={20} style={{ color: 'var(--accent)' }} />
                   <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
                 </div>
               ))}
@@ -64,7 +66,7 @@ export default function Services() {
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {s.filmItems.map(([icon, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
-                  <span style={{ fontSize: 18, lineHeight: 1 }}>{icon}</span>
+                  <UiIcon e={icon} size={20} style={{ color: 'var(--accent)' }} />
                   <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
                 </div>
               ))}
@@ -86,6 +88,7 @@ export default function Services() {
           <div className="svc-cards cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', borderTop: '1px solid var(--line)', borderLeft: '1px solid var(--line)' }}>
             {s.cards.map((c, i) => (
               <Reveal key={c.title} delay={(i % 3) * 70} style={{ borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+                <Link to={`/portfolio?cat=${cardCats[i]}`} style={{ display: 'block', height: '100%', color: 'inherit' }}>
                 <div style={{ padding: 'clamp(24px,2.4vw,32px)', height: '100%', transition: 'background .25s' }}
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
@@ -98,6 +101,7 @@ export default function Services() {
                     {c.tags.map(tag => <span key={tag} style={{ fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 500, background: 'var(--paper)', border: '1px solid var(--line-2)', padding: '4px 11px', borderRadius: 100, color: 'var(--ink-soft)' }}>{tag}</span>)}
                   </div>
                 </div>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -117,7 +121,7 @@ export default function Services() {
               <div key={label} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(18px,2vw,26px) 14px', textAlign: 'center', transition: 'transform .25s var(--ease), border-color .25s' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
-                <div style={{ fontSize: 28, marginBottom: 10 }}>{icon}</div>
+                <div style={{ marginBottom: 10, color: 'var(--accent)', display: 'flex', justifyContent: 'center' }}><UiIcon e={icon} size={30} /></div>
                 <p style={{ fontSize: 13, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
               </div>
             ))}

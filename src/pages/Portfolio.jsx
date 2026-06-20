@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
@@ -41,10 +42,24 @@ const destinations = [
 ];
 const AVT_PLATFORM = 'https://algeriavirtualtravel.com/en';
 
+const VALID_CATS = ['all', 'pub', 'corporate', 'event', '360', 'social', 'motion', 'web'];
+
 export default function Portfolio() {
   const { t } = useLang();
-  const [active, setActive] = useState('all');
+  const [params, setParams] = useSearchParams();
+  const catParam = params.get('cat');
+  const [active, setActive] = useState(VALID_CATS.includes(catParam) ? catParam : 'all');
   const [modal, setModal] = useState(null);
+
+  // Suit le paramètre d'URL (lien depuis la page d'accueil / services / retour navigateur)
+  useEffect(() => {
+    setActive(VALID_CATS.includes(catParam) ? catParam : 'all');
+  }, [catParam]);
+
+  const selectCat = key => {
+    setActive(key);
+    setParams(key === 'all' ? {} : { cat: key }, { replace: true });
+  };
 
   const categories = [
     { key: 'all', label: t.cats.all },
@@ -133,7 +148,7 @@ export default function Portfolio() {
             {categories.map(c => {
               const on = active === c.key;
               return (
-                <button key={c.key} onClick={() => setActive(c.key)} style={{
+                <button key={c.key} onClick={() => selectCat(c.key)} style={{
                   padding: '9px 18px', borderRadius: 100,
                   border: `1px solid ${on ? 'var(--accent)' : 'var(--line-2)'}`,
                   background: on ? 'var(--accent)' : 'transparent',

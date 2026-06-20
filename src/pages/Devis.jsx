@@ -3,6 +3,7 @@ import { useLang } from '../i18n/LanguageContext';
 import { sendForm } from '../lib/sendForm';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
+import UiIcon from '../components/UiIcon';
 
 export default function Devis() {
   const { t } = useLang();
@@ -48,9 +49,22 @@ export default function Devis() {
   const ACCENT = '#5B0DDD';
   const fieldStyle = { display: 'flex', flexDirection: 'column', gap: 8 };
   const labelStyle = { fontFamily: 'var(--display)', fontSize: 12.5, fontWeight: 600, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '.06em' };
-  const sectionTitle = { gridColumn: '1/-1', fontFamily: 'var(--display)', fontSize: 13, fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.1em', paddingTop: 8 };
+  const sectionTitle = { gridColumn: '1/-1', display: 'flex', alignItems: 'center', gap: 9, fontFamily: 'var(--display)', fontSize: 13, fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.1em', paddingTop: 8 };
   const divider = { gridColumn: '1/-1', border: 'none', borderTop: '1px solid var(--line)', margin: '8px 0' };
   const checkLabel = { display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 14, color: 'var(--ink-soft)' };
+
+  // Titre de section : on remplace l'emoji de tête par une icône SVG fiable.
+  const SectionTitle = ({ children }) => {
+    const sp = typeof children === 'string' ? children.indexOf(' ') : -1;
+    const icon = sp > 0 ? children.slice(0, sp) : '';
+    const label = sp > 0 ? children.slice(sp + 1) : children;
+    return (
+      <div style={sectionTitle}>
+        {icon && <UiIcon e={icon} size={18} />}
+        <span>{label}</span>
+      </div>
+    );
+  };
 
   if (submitted) {
     return (
@@ -86,13 +100,13 @@ export default function Devis() {
           <form onSubmit={handleSubmit}>
             <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
 
-              <div style={sectionTitle}>{d.sGeneral}</div>
+              <SectionTitle>{d.sGeneral}</SectionTitle>
               {[[d.fName, 'text', true, 'name'], [d.fCompany, 'text', false, 'company'], [d.fSector, 'text', false, 'sector'], [d.fPhone, 'tel', true, 'phone'], [d.fEmail, 'email', true, 'email'], [d.fCity, 'text', false, 'city']].map(([label, type, req, name]) => (
                 <div key={name} style={fieldStyle}><label style={labelStyle}>{label}{req ? ' *' : ''}</label><input type={type} name={name} required={req} /></div>
               ))}
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sService}</div>
+              <SectionTitle>{d.sService}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.servicesLabel}</label>
                 <div className="check-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
@@ -105,7 +119,7 @@ export default function Devis() {
               </div>
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sGoal}</div>
+              <SectionTitle>{d.sGoal}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.goalLabel}</label>
                 <select name="goal"><option value="">{d.goalPlaceholder}</option>{d.goalOpts.map(o => <option key={o}>{o}</option>)}</select>
@@ -118,13 +132,13 @@ export default function Devis() {
               <div style={fieldStyle}><label style={labelStyle}>{d.placeLabel}</label><input type="text" name="place" /></div>
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sVideo}</div>
+              <SectionTitle>{d.sVideo}</SectionTitle>
               <div style={fieldStyle}><label style={labelStyle}>{d.durationLabel}</label><select name="duration"><option value="">{d.selectPlaceholder}</option>{d.durationOpts.map(o => <option key={o}>{o}</option>)}</select></div>
               <div style={fieldStyle}><label style={labelStyle}>{d.scriptLabel}</label><select name="script"><option value="">{d.selectPlaceholder}</option>{d.scriptOpts.map(o => <option key={o}>{o}</option>)}</select></div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}><label style={labelStyle}>{d.daysLabel}</label><select name="days"><option value="">{d.selectPlaceholder}</option>{d.daysOpts.map(o => <option key={o}>{o}</option>)}</select></div>
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sSocial}</div>
+              <SectionTitle>{d.sSocial}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.platformsLabel}</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 4 }}>
@@ -147,7 +161,7 @@ export default function Devis() {
               </div>
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sBudget}</div>
+              <SectionTitle>{d.sBudget}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.budgetLabel}</label>
                 <div className="budget-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginTop: 4 }}>
@@ -167,7 +181,7 @@ export default function Devis() {
               </div>
 
               <hr style={divider} />
-              <div style={sectionTitle}>{d.sFiles}</div>
+              <SectionTitle>{d.sFiles}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.filesLabel}</label>
                 <input type="file" name="files" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.mp4,.mov" style={{ padding: 12 }} />
