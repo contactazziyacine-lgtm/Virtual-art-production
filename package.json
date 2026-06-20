@@ -1,0 +1,24 @@
+{
+  "name": "virtual-art-prod",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.0",
+    "react-scripts": "5.0.1",
+    "lucide-react": "^0.383.0",
+    "framer-motion": "^11.0.0",
+    "react-intersection-observer": "^9.8.1",
+    "react-helmet-async": "^2.0.4",
+    "@emailjs/browser": "^4.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead"],
+    "development": ["last 1 chrome version"]
+  }
+}

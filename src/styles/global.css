@@ -1,0 +1,103 @@
+/* === VIRTUAL ART PROD – GLOBAL STYLES === */
+
+:root {
+  --noir: #0a0a0f;
+  --noir2: #12121a;
+  --bleu: #0066ff;
+  --bleu2: #004fd4;
+  --bleu-glow: rgba(0, 102, 255, 0.15);
+  --blanc: #ffffff;
+  --gris: #8892a4;
+  --gris2: #1e1e2a;
+  --gris3: #2a2a3a;
+  --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--noir);
+  color: var(--blanc);
+  font-family: var(--font);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* UTILS */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
+.section { padding: 100px 5%; }
+.section-tag { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--bleu); margin-bottom: 16px; }
+.section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+.section-sub { font-size: 17px; color: var(--gris); max-width: 600px; line-height: 1.7; }
+
+/* BUTTONS */
+.btn-primary {
+  display: inline-block;
+  background: var(--bleu);
+  color: var(--blanc);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+  letter-spacing: 0.2px;
+}
+.btn-primary:hover { background: var(--bleu2); transform: translateY(-2px); }
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--blanc);
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-outline:hover { border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
+
+/* FORM ELEMENTS */
+input, select, textarea {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 13px 16px;
+  color: var(--blanc);
+  font-size: 15px;
+  font-family: var(--font);
+  transition: border-color 0.2s;
+  outline: none;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--bleu); }
+select option { background: var(--noir2); }
+textarea { min-height: 120px; resize: vertical; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .section { padding: 70px 5%; }
+  .section-title { font-size: 28px; }
+}
+
+/* === TEXTE JUSTIFIÉ === */
+p, .section-sub { text-align: justify; }
+
+/* === SUPPORT ARABE (RTL) === */
+html[dir="rtl"] body { direction: rtl; }
+html[dir="rtl"] .section-tag,
+html[dir="rtl"] .section-title { text-align: right; }
+html[dir="rtl"] p { text-align: justify; }
+html[lang="ar"] body { font-family: 'Cairo', 'Segoe UI', 'Inter', sans-serif; }
+
+/* Responsive nav */
+@media (max-width: 768px) {
+  .nav-desktop { display: none !important; }
+  .hamburger { display: flex !important; }
+}
