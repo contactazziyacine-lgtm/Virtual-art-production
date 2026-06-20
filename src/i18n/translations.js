@@ -49,7 +49,7 @@ export const translations = {
       teamSub: 'Une équipe multidisciplinaire passionnée, réunissant réalisateurs, directeurs artistiques, techniciens et stratèges digitaux.',
       team: [
         { icon: '🎬', name: 'Directeur Artistique', role: 'Réalisation', desc: 'Réalisateur certifié avec une solide expérience en production publicitaire.' },
-        { icon: '✂️', name: 'Chef Monteur', role: 'Montage & étalonnage', desc: 'Spécialiste du montage, des effets visuels et de l\'étalonnage.' },
+        { icon: '✂️', name: 'Post-Production', role: 'Montage • Étalonnage • Mixage', desc: 'Nous transformons vos rushes en une œuvre cinématographique aboutie grâce à un montage narratif précis, un étalonnage couleur cinéma et un mixage audio immersif.' },
         { icon: '🚁', name: 'Pilote Drone', role: 'Captation aérienne', desc: 'Pilote certifié avec autorisation de vol professionnelle.' },
         { icon: '📊', name: 'Stratège Digital', role: 'Marketing digital', desc: 'Expert en marketing digital et gestion des réseaux sociaux.' },
       ],
@@ -408,7 +408,7 @@ export const translations = {
       teamSub: 'فريق متعدد التخصصات وشغوف، يجمع مخرجين ومديرين فنيين وتقنيين واستراتيجيين رقميين.',
       team: [
         { icon: '🎬', name: 'مدير فني', role: 'الإخراج', desc: 'مخرج معتمد بخبرة قوية في الإنتاج الإعلاني.' },
-        { icon: '✂️', name: 'رئيس المونتاج', role: 'المونتاج والتلوين', desc: 'متخصص في المونتاج والمؤثرات البصرية والتلوين.' },
+        { icon: '✂️', name: 'ما بعد الإنتاج', role: 'مونتاج • تلوين • مكساج', desc: 'نحوّل لقطاتكم الخام إلى عمل سينمائي متكامل بفضل مونتاج سردي دقيق، وتدرّج ألوان سينمائي، ومزج صوتي غامر.' },
         { icon: '🚁', name: 'طيار طائرة مسيّرة', role: 'التصوير الجوي', desc: 'طيار معتمد بترخيص طيران احترافي.' },
         { icon: '📊', name: 'استراتيجي رقمي', role: 'التسويق الرقمي', desc: 'خبير في التسويق الرقمي وإدارة الشبكات الاجتماعية.' },
       ],
@@ -766,7 +766,7 @@ export const translations = {
       teamSub: 'A passionate multidisciplinary team of directors, art directors, technicians and digital strategists.',
       team: [
         { icon: '🎬', name: 'Art Director', role: 'Direction', desc: 'Certified director with solid experience in advertising production.' },
-        { icon: '✂️', name: 'Lead Editor', role: 'Editing & grading', desc: 'Specialist in editing, visual effects and colour grading.' },
+        { icon: '✂️', name: 'Post-Production', role: 'Editing • Grading • Mixing', desc: 'We turn your rushes into a polished cinematic work through precise narrative editing, cinema-grade colour grading and immersive audio mixing.' },
         { icon: '🚁', name: 'Drone Pilot', role: 'Aerial filming', desc: 'Certified pilot with professional flight authorisation.' },
         { icon: '📊', name: 'Digital Strategist', role: 'Digital marketing', desc: 'Expert in digital marketing and social media management.' },
       ],

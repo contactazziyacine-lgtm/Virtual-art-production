@@ -164,6 +164,24 @@ const PATHS = {
       <path d="m2.5 13.5 3 3M21.5 8l-3 3" />
     </svg>
   ),
+  // ---- Équipe (À propos) ----
+  '\u2702': (                                 // Chef monteur / montage (ciseaux)
+    <svg viewBox="0 0 24 24" {...base}>
+      <circle cx="6" cy="6" r="2.8" />
+      <circle cx="6" cy="18" r="2.8" />
+      <path d="M20 4 8.5 15.5M14.5 14.5 20 20M8.5 8.5 12 12" />
+    </svg>
+  ),
+  '\uD83D\uDE81': (                            // Pilote drone (drone quadricoptère)
+    <svg viewBox="0 0 24 24" {...base}>
+      <rect x="9.5" y="9.5" width="5" height="5" rx="1" />
+      <path d="M9.5 11h-3M17.5 11h-3M9.5 13h-3M17.5 13h-3" />
+      <circle cx="4" cy="6" r="2.2" />
+      <circle cx="20" cy="6" r="2.2" />
+      <path d="M5.5 7.6 9 10M18.5 7.6 15 10" />
+      <path d="M10 15v3M14 15v3M9 18h2M13 18h2" />
+    </svg>
+  ),
 };
 
 export default function UiIcon({ e, size = 20, style }) {

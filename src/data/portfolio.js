@@ -26,11 +26,14 @@ export const portfolioItems = [
   { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Marketing Digital — Short 2', sub: 'Format court & dynamique' },
   { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Marketing Digital — Short 3', sub: 'Contenu social engageant' },
   { cat: 'social', video: '7Gm__UsPA5g', short: true, title: 'Marketing Digital — Short 4', sub: 'Format court & dynamique' },
+  { cat: 'social', video: 'emxJ5U2yOzk', short: true, title: 'Marketing Digital — Short 5', sub: 'Contenu vertical engageant' },
 
   { cat: 'motion', video: 'G3mUgVckCtA', title: 'Production 3D — Projet 1', sub: 'Animation 3D & motion design' },
   { cat: 'motion', video: 'qWK_MgDza2U', title: 'Production 3D — Projet 2', sub: 'Habillage graphique & VFX' },
   { cat: 'motion', video: '62WtUzTOhmk', title: 'Motion Graphics — Projet 3', sub: 'Animation graphique dynamique' },
   { cat: 'motion', video: 'idVjpMBZaGM', title: 'Motion Graphics — Projet 4', sub: 'Design animé & effets visuels' },
+  { cat: 'motion', video: 'sRtP0d8jQF0', title: 'Production 3D — Projet 5', sub: 'Animation 3D & motion design' },
+  { cat: 'motion', video: '731VdMfeuuQ', title: 'Motion Graphics — Projet 6', sub: 'Habillage graphique & VFX' },
 
   { cat: 'motion', image: '/assets/motion/vg-bright-white.jpg', title: 'Vogue Secret — Bright White', sub: 'Design produit & habillage graphique' },
   { cat: 'motion', image: '/assets/motion/minas-ecran-total-spf50.jpg', title: 'Minas — Écran Total SPF 50', sub: 'Habillage graphique & design produit' },

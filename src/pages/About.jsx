@@ -4,6 +4,7 @@ import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import UiIcon from '../components/UiIcon';
+import TeamIcon from '../components/TeamIcon';
 import AnimatedIcon from '../components/AnimatedIcon';
 import { PHOTO, PHOTO_FB, HERO, HERO_FB } from '../data/covers';
 
@@ -88,7 +89,7 @@ export default function About() {
                   <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(22px,2.2vw,30px)', textAlign: 'center', height: '100%', transition: 'transform .25s var(--ease), border-color .25s' }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
-                    <div style={{ width: 76, height: 76, background: c.color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}><AnimatedIcon style={{ fontSize: 30 }}>{m.icon}</AnimatedIcon></div>
+                    <div style={{ width: 76, height: 76, background: c.color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><AnimatedIcon style={{ color: c.tc, display: 'inline-flex' }}><TeamIcon e={m.icon} index={i} size={30} /></AnimatedIcon></div>
                     <h3 style={{ fontFamily: 'var(--display)', fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{m.name}</h3>
                     <p style={{ fontSize: 13, color: c.tc, fontWeight: 600, marginBottom: 8 }}>{m.role}</p>
                     <p style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.6 }}>{m.desc}</p>

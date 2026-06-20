@@ -78,7 +78,7 @@ export const AZ_HOTEL_IMG = '/assets/hero/az-hotel.jpg';
 export const PHOTO = {
   cameraman:     '/assets/blog/cameraman.jpg',    // tournage / spot pub
   boardroom:     '/assets/blog/video-roi.jpg',    // réunion entreprise / film institutionnel
-  communication: '/assets/blog/video-trends.jpg', // communication / à propos
+  communication: '/assets/about/vr.jpg',         // visuel page À propos (casque VR)
 };
 export const PHOTO_FB = {
   cameraman:     FALLBACK.constantineMedina,

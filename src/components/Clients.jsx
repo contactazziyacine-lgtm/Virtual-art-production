@@ -14,6 +14,7 @@ const clients = [
   { name: 'ELKENDI — Part of MS Pharma', file: 'elkendi.png' },
   { name: 'Agro Alimentaire', file: 'agro.jpg' },
   { name: 'Minas', file: 'minas.png' },
+  { name: 'AET Industries', file: 'aet.png' },
   { name: 'Algeria Virtual Travel', file: 'avt.png' },
 ];
 

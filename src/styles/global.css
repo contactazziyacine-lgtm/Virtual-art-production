@@ -140,6 +140,11 @@ input, select, textarea {
   background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r);
   padding: 13px 15px; outline: none; transition: border-color .2s, box-shadow .2s;
 }
+/* Cases à cocher / radios : ne pas hériter du style « champ pleine largeur » */
+input[type="checkbox"], input[type="radio"] {
+  width: 18px; height: 18px; flex: none; padding: 0; margin: 0;
+  border: 0; border-radius: 0; background: none; accent-color: var(--accent);
+}
 input::placeholder, textarea::placeholder { color: #9aa7a2; }
 input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 textarea { min-height: 130px; resize: vertical; }
