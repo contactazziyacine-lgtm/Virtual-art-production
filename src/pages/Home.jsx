@@ -119,7 +119,7 @@ export default function Home() {
               return (
                 <Reveal key={item.title} delay={(i % 3) * 80}>
                   <Link to={`/portfolio?cat=${item.cat}`} className="home-port-card"
-                    style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/10', background: 'var(--deep)' }}>
+                    style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/9', background: 'var(--deep)' }}>
                     <div className="home-port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
                       <Cover src={portfolioThumb(item)} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
                     </div>

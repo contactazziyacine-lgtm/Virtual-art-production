@@ -50,8 +50,29 @@ export const BLOG_IMG = {
 };
 
 // En-tête de la page Blog — photo réelle de tournage (image importée).
-export const BLOG_HERO    = '/assets/blog/cameraman.jpg';
+export const BLOG_HERO    = '/assets/hero/blog.jpg';
 export const BLOG_HERO_FB = FALLBACK.constantineMedina;
+
+// =====================================================================
+//  EN-TÊTES DE PAGES — photos importées (héros Portfolio / À propos /
+//  Services + visuel AZ Hôtel). Remplacez simplement les fichiers dans
+//  /public/assets/hero pour changer ces visuels.
+// =====================================================================
+export const HERO = {
+  portfolio: '/assets/hero/portfolio.jpg',   // héro page Portfolio
+  about:     '/assets/hero/about.jpg',        // héro page À propos
+  services:  '/assets/hero/services.jpg',     // héro page Services
+  avt2:      '/assets/hero/avt2.jpg',         // visuel Virtual Art Production
+};
+export const HERO_FB = {
+  portfolio: FALLBACK.constantineBridge,
+  about:     FALLBACK.constantineNature,
+  services:  FALLBACK.tlemcen,
+  avt2:      FALLBACK.alger,
+};
+
+// Visite virtuelle AZ Hôtel Zéralda — photo réelle de la chambre.
+export const AZ_HOTEL_IMG = '/assets/hero/az-hotel.jpg';
 
 // Photos réelles (images importées) réutilisées dans les sections du site.
 export const PHOTO = {

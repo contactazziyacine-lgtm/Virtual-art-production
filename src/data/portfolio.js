@@ -3,7 +3,7 @@
 //  Utilisé par la page /portfolio (galerie complète + lightbox) ET par
 //  la vitrine de la page d'accueil. Un seul endroit à mettre à jour.
 // =====================================================================
-import { IMG, FALLBACK } from './covers';
+import { IMG, FALLBACK, AZ_HOTEL_IMG } from './covers';
 
 export const portfolioItems = [
   { cat: 'pub', video: '0Vb4MBjoRw4', title: 'Spot Publicitaire — Production 1', sub: 'Réalisation Virtual Art Production' },
@@ -13,12 +13,13 @@ export const portfolioItems = [
   { cat: 'corporate', video: 'Y87QLWrx8dE', title: 'Film Institutionnel — Entreprise 1', sub: 'Communication corporate' },
   { cat: 'corporate', video: 'Xa4nVCcB5Xg', title: 'Film Institutionnel — Entreprise 2', sub: 'Présentation d\'entreprise' },
   { cat: 'corporate', video: '_dvTG-fB4C4', title: 'Film Institutionnel — Entreprise 3', sub: 'Reportage d\'entreprise' },
+  { cat: 'corporate', video: 'up9vN1RuifU', title: 'Film Institutionnel — Entreprise 4', sub: 'Communication corporate' },
 
   { cat: 'event', video: 'H3ZkvTk7Lys', title: 'Couverture Médiatique — Événement 1', sub: 'Captation événementielle' },
   { cat: 'event', video: 'RP7wOoqQmoU', title: 'Couverture Médiatique — Événement 2', sub: 'Reportage vidéo professionnel' },
 
   { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/safex-snc/index.htm', title: 'SAFEX — SNC', sub: 'Visite virtuelle 360° immersive', cover: IMG.constantineBelle, fallback: FALLBACK.constantineBelle },
-  { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/AZ-hotel%20zeralda/index.htm', title: 'AZ Hôtel Zéralda', sub: 'Visite virtuelle 360° hôtellerie', cover: IMG.alger, fallback: FALLBACK.alger },
+  { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/AZ-hotel%20zeralda/index.htm', title: 'AZ Hôtel Zéralda', sub: 'Visite virtuelle 360° hôtellerie', cover: AZ_HOTEL_IMG, fallback: FALLBACK.alger },
 
   { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Marketing Digital — Short 1', sub: 'Contenu vertical engageant' },
   { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Marketing Digital — Short 2', sub: 'Format court & dynamique' },

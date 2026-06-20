@@ -5,7 +5,7 @@ import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK } from '../data/covers';
+import { IMG, FALLBACK, HERO, HERO_FB } from '../data/covers';
 import { portfolioItems as items } from '../data/portfolio';
 
 // Destinations phares — chaque carte ouvre la plateforme réelle Algeria Virtual Travel
@@ -46,6 +46,8 @@ export default function Portfolio() {
   ];
 
   const filtered = active === 'all' ? items : items.filter(i => i.cat === active);
+  // Les stories verticales 9:16 passent toujours en dernier dans la grille.
+  const ordered = [...filtered].sort((a, b) => (a.short ? 1 : 0) - (b.short ? 1 : 0));
 
   const openItem = item => {
     if (item.link) window.open(item.link, '_blank', 'noopener');
@@ -63,7 +65,7 @@ export default function Portfolio() {
 
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 460, display: 'flex', alignItems: 'flex-end' }}>
-        <Cover src={IMG.constantineBridge} fallback={FALLBACK.constantineBridge} alt="Constantine" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
+        <Cover src={HERO.portfolio} fallback={HERO_FB.portfolio} alt="Portfolio Virtual Art Production" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.55) 0%, rgba(17,5,48,0.40) 40%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 860 }}>
@@ -136,7 +138,7 @@ export default function Portfolio() {
           {/* Grille */}
           <motion.div layout className="port-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(14px,1.4vw,20px)', alignItems: 'start' }}>
             <AnimatePresence mode="popLayout">
-              {filtered.map(item => {
+              {ordered.map(item => {
                 const ytThumb = item.video ? `https://img.youtube.com/vi/${item.video}/hqdefault.jpg` : null;
                 const isExternal = !!item.link;
                 const is360 = !!item.tour;
@@ -148,7 +150,7 @@ export default function Portfolio() {
                     transition={{ duration: .35, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => openItem(item)}
                     className="port-card"
-                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: item.short ? '9 / 16' : '16/10', cursor: 'pointer', background: 'var(--deep)' }}>
+                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: item.short ? '9 / 16' : '16/9', cursor: 'pointer', background: 'var(--deep)', width: '100%', maxWidth: item.short ? 230 : 'none', justifySelf: item.short ? 'center' : 'stretch' }}>
                     <div className="port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
                       <Cover src={ytThumb || item.cover} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
                     </div>

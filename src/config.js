@@ -19,6 +19,6 @@ export const SOCIAL = {
   facebook: '',
   instagram: '',
   linkedin: '',
-  youtube: '',
+  youtube: 'https://www.youtube.com/channel/UCY9QO4uXFHzNwJ4OZsVk1QA',
   tiktok: '',
 };

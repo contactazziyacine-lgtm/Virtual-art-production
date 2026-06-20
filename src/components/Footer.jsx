@@ -14,7 +14,7 @@ export default function Footer() {
 
   const colTitle = { fontFamily: 'var(--body)', fontSize: 12, fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: 'rgba(234,242,238,0.5)', marginBottom: 18 };
   const colLink = { fontSize: 14.5, color: 'rgba(234,242,238,0.78)' };
-  const social = [['Facebook', SOCIAL.facebook], ['Instagram', SOCIAL.instagram], ['LinkedIn', SOCIAL.linkedin], ['YouTube', SOCIAL.youtube]];
+  const social = [['Facebook', SOCIAL.facebook], ['Instagram', SOCIAL.instagram], ['LinkedIn', SOCIAL.linkedin], ['YouTube', SOCIAL.youtube], ['TikTok', SOCIAL.tiktok]].filter(([, url]) => url);
 
   return (
     <footer className="band--deep" style={{ paddingBlock: '76px 30px' }}>

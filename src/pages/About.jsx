@@ -5,7 +5,7 @@ import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import UiIcon from '../components/UiIcon';
 import AnimatedIcon from '../components/AnimatedIcon';
-import { IMG, FALLBACK, PHOTO, PHOTO_FB } from '../data/covers';
+import { PHOTO, PHOTO_FB, HERO, HERO_FB } from '../data/covers';
 
 const teamColors = [
   { color: 'rgba(91,13,221,0.14)', tc: 'var(--accent)' },
@@ -27,7 +27,7 @@ export default function About() {
 
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 440, display: 'flex', alignItems: 'flex-end' }}>
-        <Cover src={IMG.constantineNature} fallback={FALLBACK.constantineNature} alt="Algérie" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
+        <Cover src={HERO.about} fallback={HERO_FB.about} alt="Virtual Art Production" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.5) 0%, rgba(17,5,48,0.40) 42%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 860 }}>
