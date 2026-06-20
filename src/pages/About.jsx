@@ -1,10 +1,15 @@
 import React from 'react';
 import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
-  { color: 'rgba(0,102,255,0.3)', tc: '#0066ff' },
-  { color: 'rgba(16,185,129,0.2)', tc: '#10b981' },
-  { color: 'rgba(245,158,11,0.2)', tc: '#f59e0b' },
-  { color: 'rgba(168,85,247,0.2)', tc: '#a855f7' },
+import Reveal from '../components/Reveal';
+import Cover from '../components/Cover';
+import { IMG, FALLBACK } from '../data/covers';
+
+const teamColors = [
+  { color: 'rgba(18,160,101,0.14)', tc: 'var(--accent)' },
+  { color: 'rgba(14,134,84,0.14)', tc: 'var(--accent-2)' },
+  { color: 'rgba(10,50,42,0.10)', tc: 'var(--deep)' },
+  { color: 'rgba(18,160,101,0.10)', tc: 'var(--accent)' },
 ];
 
 export default function About() {
@@ -12,59 +17,91 @@ export default function About() {
   const a = t.about;
 
   return (
-    <div style={{ paddingTop: 72 }}>
+    <div>
       <Seo
         title={t.nav.about}
         description="Découvrez Virtual Art Production : une équipe créative algérienne spécialisée dans la production audiovisuelle, le film corporate et la communication visuelle."
       />
-      <section style={{ padding: '80px 5%' }}>
-        <div className="section-tag">{a.tag}</div>
-        <div className="section-title">{a.title1}<br />{a.title2}</div>
-        <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>
-          <div>
-            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8 }}>{a.p1}</p>
-            <p style={{ color: '#8892a4', marginBottom: 20, fontSize: 16, lineHeight: 1.8 }}>{a.p2}</p>
-            <p style={{ color: '#8892a4', fontSize: 16, lineHeight: 1.8 }}>{a.p3}</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 36 }}>
-              {a.values.map(v => (
-                <div key={v.title} style={{ background: '#2a2a3a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: 20 }}>
-                  <div style={{ width: 40, height: 40, background: 'rgba(0,102,255,0.12)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, marginBottom: 12 }}>{v.icon}</div>
-                  <h4 style={{ fontSize: 15, fontWeight: 700, marginBottom: 6 }}>{v.title}</h4>
-                  <p style={{ fontSize: 13, color: '#8892a4', lineHeight: 1.6 }}>{v.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div style={{ background: 'linear-gradient(135deg,#0d1a2e,#1a0d1a,#0a1428)', borderRadius: 20, padding: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 400, gap: 32 }}>
-            <div style={{ fontSize: 80 }}>🎬</div>
-            <div style={{ display: 'flex', gap: 32, justifyContent: 'center' }}>
-              {a.stats.map(([n,l]) => (
-                <div key={l} style={{ textAlign: 'center' }}>
-                  <span style={{ fontSize: 30, fontWeight: 900, color: '#0066ff', display: 'block' }}>{n}</span>
-                  <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: 1 }}>{l}</span>
-                </div>
-              ))}
-            </div>
+
+      {/* ============ HÉRO ============ */}
+      <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 440, display: 'flex', alignItems: 'flex-end' }}>
+        <Cover src={IMG.constantineNature} fallback={FALLBACK.constantineNature} alt="Algérie" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.5) 0%, rgba(7,39,31,0.40) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
+          <div className="reveal in" style={{ maxWidth: 860 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{a.tag}</div>
+            <h1 className="display" style={{ color: '#fff', textWrap: 'balance' }}>{a.title1} {a.title2}</h1>
           </div>
         </div>
       </section>
 
-      <section style={{ padding: '80px 5%', background: '#12121a' }}>
-        <div className="section-tag">{a.teamTag}</div>
-        <div className="section-title">{a.teamTitle}</div>
-        <p className="section-sub" style={{ marginTop: 16 }}>{a.teamSub}</p>
-        <div className="grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 20, marginTop: 50 }}>
-          {a.team.map((m, i) => (
-            <div key={i} style={{ background: '#2a2a3a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28, textAlign: 'center' }}>
-              <div style={{ width: 72, height: 72, background: teamColors[i].color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>{m.icon}</div>
-              <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{m.name}</h3>
-              <p style={{ fontSize: 13, color: teamColors[i].tc, marginBottom: 8 }}>{m.role}</p>
-              <p style={{ fontSize: 12, color: '#8892a4' }}>{m.desc}</p>
+      {/* ============ HISTOIRE + VALEURS ============ */}
+      <section className="band band--surface">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 'clamp(36px,5vw,84px)', alignItems: 'start' }}>
+          <Reveal>
+            <p className="lead" style={{ marginBottom: 18 }}>{a.p1}</p>
+            <p style={{ color: 'var(--muted)', marginBottom: 18, fontSize: 16, lineHeight: 1.8 }}>{a.p2}</p>
+            <p style={{ color: 'var(--muted)', fontSize: 16, lineHeight: 1.8 }}>{a.p3}</p>
+            <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 36 }}>
+              {a.values.map(v => (
+                <div key={v.title} style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 22 }}>
+                  <div style={{ width: 42, height: 42, background: 'var(--accent-soft)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, marginBottom: 14 }}>{v.icon}</div>
+                  <h4 style={{ fontFamily: 'var(--display)', fontSize: 15.5, fontWeight: 700, marginBottom: 7 }}>{v.title}</h4>
+                  <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65 }}>{v.text}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </Reveal>
+
+          <Reveal delay={120} style={{ position: 'sticky', top: 100 }}>
+            <div style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4' }}>
+              <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Alger" />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0) 45%, rgba(7,39,31,0.9) 100%)' }} />
+              <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(22px,2.4vw,30px)', display: 'flex', gap: 'clamp(20px,3vw,38px)', flexWrap: 'wrap' }}>
+                {a.stats.map(([n, l]) => (
+                  <div key={l}>
+                    <span style={{ fontFamily: 'var(--display)', fontSize: 'clamp(26px,3vw,38px)', fontWeight: 800, letterSpacing: '-.02em', color: '#fff', display: 'block' }}>{n}</span>
+                    <span style={{ fontSize: 11.5, color: 'rgba(255,255,255,0.72)', textTransform: 'uppercase', letterSpacing: '.12em' }}>{l}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
-      <style>{`@media(max-width:768px){.about-grid{grid-template-columns:1fr!important;gap:40px!important}.grid-4{grid-template-columns:1fr 1fr!important}}`}</style>
+
+      {/* ============ ÉQUIPE ============ */}
+      <section className="band band--paper">
+        <div className="wrap">
+          <Reveal>
+            <div className="eyebrow">{a.teamTag}</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 10 }}>{a.teamTitle}</h2>
+            <p className="lead measure" style={{ marginBottom: 'clamp(30px,4vw,50px)' }}>{a.teamSub}</p>
+          </Reveal>
+          <div className="team-grid cols-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 'clamp(14px,1.4vw,20px)' }}>
+            {a.team.map((m, i) => {
+              const c = teamColors[i % teamColors.length];
+              return (
+                <Reveal key={i} delay={(i % 4) * 70}>
+                  <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(22px,2.2vw,30px)', textAlign: 'center', height: '100%', transition: 'transform .25s var(--ease), border-color .25s' }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
+                    <div style={{ width: 76, height: 76, background: c.color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}>{m.icon}</div>
+                    <h3 style={{ fontFamily: 'var(--display)', fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{m.name}</h3>
+                    <p style={{ fontSize: 13, color: c.tc, fontWeight: 600, marginBottom: 8 }}>{m.role}</p>
+                    <p style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.6 }}>{m.desc}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        @media(max-width:860px){.split{grid-template-columns:1fr!important;gap:32px!important}.team-grid{grid-template-columns:1fr 1fr!important}}
+        @media(max-width:560px){.team-grid{grid-template-columns:1fr!important}}
+      `}</style>
     </div>
   );
 }

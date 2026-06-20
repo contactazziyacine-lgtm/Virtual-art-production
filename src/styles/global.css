@@ -1,188 +1,183 @@
-/* === VIRTUAL ART PROD – GLOBAL STYLES === */
+/* =====================================================================
+   VIRTUAL ART PRODUCTION — Système de design éditorial (clair)
+   Direction : Trafigura — pleine page photographique, typographie large,
+   filets fins, beaucoup de blanc. Accent : vert Algeria Virtual Travel.
+   ===================================================================== */
 
 :root {
-  --noir: #0a0a0f;
-  --noir2: #12121a;
-  --bleu: #0066ff;
-  --bleu2: #004fd4;
-  --bleu-glow: rgba(0, 102, 255, 0.15);
-  --blanc: #ffffff;
-  --gris: #8892a4;
-  --gris2: #1e1e2a;
-  --gris3: #2a2a3a;
-  --font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  /* Couleurs */
+  --paper:    #FBFAF8;   /* fond chaud, presque blanc */
+  --surface:  #FFFFFF;   /* cartes, panneaux */
+  --ink:      #0E1A1C;   /* texte / titres */
+  --ink-soft: #34433F;
+  --muted:    #6B7A75;   /* texte secondaire */
+  --line:     #E7E3DA;   /* filets */
+  --line-2:   #D9D4C8;
+  --deep:     #0A322A;   /* bandes sombres / footer (vert pétrole) */
+  --deep-2:   #07271F;
+  --accent:   #12A065;   /* vert AVT — signature */
+  --accent-2: #0E8654;   /* vert pressé */
+  --accent-soft: rgba(18,160,101,0.10);
+
+  /* Typo */
+  --display: 'Archivo', 'Inter', system-ui, sans-serif;
+  --body:    'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+  --ar:      'Cairo', 'Segoe UI', sans-serif;
+
+  /* Mesures */
+  --wrap: 1320px;
+  --pad: clamp(20px, 5vw, 72px);
+  --r: 4px;            /* rayons sobres, façon corporate */
+  --r-lg: 8px;
+  --ease: cubic-bezier(.22,.61,.36,1);
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; }
+
 body {
-  background: var(--noir);
-  color: var(--blanc);
-  font-family: var(--font);
-  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
   line-height: 1.6;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* UTILS */
-.container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
-.section { padding: 100px 5%; }
-.section-tag { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--bleu); margin-bottom: 16px; }
-.section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
-.section-sub { font-size: 17px; color: var(--gris); max-width: 600px; line-height: 1.7; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: var(--accent); color: #fff; }
 
-/* BUTTONS */
-.btn-primary {
-  display: inline-block;
-  background: var(--bleu);
-  color: var(--blanc);
-  padding: 14px 32px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s;
-  letter-spacing: 0.2px;
+/* ---------- Mise en page ---------- */
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: var(--pad); }
+.band { padding-block: clamp(64px, 9vw, 132px); }
+.band--tight { padding-block: clamp(48px, 6vw, 84px); }
+.band--paper   { background: var(--paper); }
+.band--surface { background: var(--surface); }
+.band--deep    { background: var(--deep); color: #EAF2EE; }
+.band--deep .muted { color: rgba(234,242,238,0.62); }
+.rule { height: 1px; background: var(--line); border: 0; }
+
+/* ---------- Typographie ---------- */
+.eyebrow {
+  font-family: var(--body);
+  font-size: 12px; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex; align-items: center; gap: 10px;
 }
-.btn-primary:hover { background: var(--bleu2); transform: translateY(-2px); }
-
-.btn-outline {
-  display: inline-block;
-  background: transparent;
-  color: var(--blanc);
-  padding: 14px 32px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s;
+.eyebrow--muted { color: var(--muted); }
+.eyebrow::before {
+  content: ""; width: 26px; height: 1px; background: currentColor; opacity: .6;
 }
-.btn-outline:hover { border-color: rgba(255, 255, 255, 0.6); transform: translateY(-2px); }
+.eyebrow.no-tick::before { display: none; }
 
-/* FORM ELEMENTS */
+.display {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(40px, 6.4vw, 92px);
+  line-height: .98; letter-spacing: -.03em;
+}
+.h1 { font-family: var(--display); font-weight: 800; font-size: clamp(32px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.025em; }
+.h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3vw, 40px); line-height: 1.08; letter-spacing: -.02em; }
+.h3 { font-family: var(--display); font-weight: 700; font-size: clamp(19px, 1.5vw, 23px); line-height: 1.2; letter-spacing: -.01em; }
+.lead { font-size: clamp(17px, 1.4vw, 21px); color: var(--ink-soft); line-height: 1.6; max-width: 60ch; }
+.muted { color: var(--muted); }
+.measure { max-width: 64ch; }
+
+/* ---------- Boutons & liens ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--accent); color: #fff;
+  font-family: var(--body); font-weight: 600; font-size: 15px;
+  padding: 14px 26px; border: 1px solid var(--accent); border-radius: var(--r);
+  cursor: pointer; transition: background .2s var(--ease), transform .2s var(--ease);
+}
+.btn:hover { background: var(--accent-2); border-color: var(--accent-2); }
+.btn:active { transform: translateY(1px); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-2); }
+.btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn--light { background: #fff; color: var(--deep); border-color: #fff; }
+.btn--light:hover { background: rgba(255,255,255,.86); }
+
+/* Lien fléché façon Trafigura : "Découvrir →" */
+.alink {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-weight: 600; font-size: 15px; color: var(--ink);
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: gap .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+}
+.alink .arw { transition: transform .25s var(--ease); }
+.alink:hover { color: var(--accent); border-color: var(--accent); gap: 14px; }
+.alink:hover .arw { transform: translateX(3px); }
+.band--deep .alink { color: #fff; }
+.band--deep .alink:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+
+/* ---------- Média ---------- */
+.media { position: relative; overflow: hidden; background: var(--line); border-radius: var(--r); }
+.media img { width: 100%; height: 100%; object-fit: cover; }
+.media--16x9 { aspect-ratio: 16/9; }
+.media--4x3  { aspect-ratio: 4/3; }
+.media--3x4  { aspect-ratio: 3/4; }
+.media--1x1  { aspect-ratio: 1/1; }
+.zoom img { transition: transform .7s var(--ease); }
+.zoom:hover img { transform: scale(1.06); }
+
+/* ---------- Révélation au scroll ---------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------- Formulaires ---------- */
+label.field-label { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
 input, select, textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 13px 16px;
-  color: var(--blanc);
-  font-size: 15px;
-  font-family: var(--font);
-  transition: border-color 0.2s;
-  outline: none;
-  width: 100%;
+  width: 100%; font-family: var(--body); font-size: 15px; color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r);
+  padding: 13px 15px; outline: none; transition: border-color .2s, box-shadow .2s;
 }
-input:focus, select:focus, textarea:focus { border-color: var(--bleu); }
-select option { background: var(--noir2); }
-textarea { min-height: 120px; resize: vertical; }
+input::placeholder, textarea::placeholder { color: #9aa7a2; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+textarea { min-height: 130px; resize: vertical; }
+select option { color: var(--ink); }
 
-/* Alignement à gauche par défaut (rendu plus net et plus moderne que le
-   justifié, qui crée de vilains espaces, surtout sur petit écran). */
-p, .section-sub { text-align: left; }
+/* ---------- Accessibilité ---------- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* === SUPPORT ARABE (RTL) === */
+/* =====================================================================
+   SUPPORT ARABE (RTL)
+   ===================================================================== */
+html[lang="ar"] body { font-family: var(--ar); }
+html[lang="ar"] .display, html[lang="ar"] .h1, html[lang="ar"] .h2, html[lang="ar"] .h3 { font-family: var(--ar); letter-spacing: 0; }
 html[dir="rtl"] body { direction: rtl; }
-html[dir="rtl"] .section-tag,
-html[dir="rtl"] .section-title { text-align: right; }
-html[dir="rtl"] p { text-align: right; }
-html[lang="ar"] body { font-family: 'Cairo', 'Segoe UI', 'Inter', sans-serif; }
-html[dir="rtl"] .whatsapp-float { right: auto !important; left: 28px; }
+html[dir="rtl"] .eyebrow::before { } /* le filet reste correct via flex */
+html[dir="rtl"] .alink .arw { transform: scaleX(-1); }
+html[dir="rtl"] .alink:hover .arw { transform: scaleX(-1) translateX(3px); }
+html[dir="rtl"] .whatsapp-float { right: auto !important; left: 24px !important; }
 
-/* ============================================================
-   RESPONSIVE — points de rupture consolidés
-   1024px = tablette · 768px = mobile · 480px = petit téléphone
-   Les règles utilisent !important pour surcharger les styles
-   grid-template-columns définis en inline dans les composants.
-   ============================================================ */
-
-/* ---------- Tablette (≤ 1024px) ---------- */
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
 @media (max-width: 1024px) {
-  /* La nav complète déborde sur tablette → on bascule sur le menu burger */
   .nav-desktop { display: none !important; }
-  .hamburger   { display: flex !important; }
-
-  .container { padding: 0 6%; }
-
-  .grid-3 { grid-template-columns: 1fr 1fr !important; }
-  .grid-4 { grid-template-columns: 1fr 1fr !important; }
-  .grid-5 { grid-template-columns: repeat(3, 1fr) !important; }
-
-  /* Le hero est en flex-row sur desktop (texte à gauche, stats flottantes en
-     bas à droite). En tablette/mobile on EMPILE : la section passe en colonne,
-     sinon les stats — devenues statiques — restent collées À CÔTÉ du texte et
-     finissent par le chevaucher. C'était la cause du bug responsive du hero. */
-  .hero-section {
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-  }
-
-  /* Les stats du hero sont en absolute sur desktop : on les remet
-     dans le flux pour éviter qu'elles chevauchent le texte. */
-  .hero-stats {
-    position: static !important;
-    right: auto !important; bottom: auto !important;
-    margin-top: 44px; justify-content: flex-start;
-  }
-
-  .about-grid   { gap: 48px !important; }
-  .contact-grid { gap: 44px !important; }
+  .hamburger   { display: inline-flex !important; }
+  .cols-2, .cols-3, .cols-4, .split { grid-template-columns: 1fr !important; }
+  .split { gap: 36px !important; }
+}
+@media (max-width: 720px) {
+  .cols-2, .cols-3, .cols-4 { grid-template-columns: 1fr !important; }
+  .btn { width: 100%; justify-content: center; }
+  .stack-sm { flex-direction: column !important; align-items: stretch !important; }
 }
 
-/* ---------- Mobile (≤ 768px) ---------- */
-@media (max-width: 768px) {
-  .section { padding: 70px 5%; }
-  .section-title { font-size: 28px; }
-  p, .section-sub { text-align: left; }
+/* Barre de défilement discrète */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: #cfcabd; border-radius: 8px; border: 3px solid var(--paper); }
+::-webkit-scrollbar-thumb:hover { background: #b7b1a2; }
 
-  /* Tout ce qui était multi-colonnes passe sur une seule colonne */
-  .grid-3,
-  .svc-row,
-  .about-grid,
-  .contact-grid,
-  .form-grid,
-  .check-grid,
-  .footer-grid { grid-template-columns: 1fr !important; }
-
-  .grid-5        { grid-template-columns: 1fr 1fr !important; }
-  .budget-grid   { grid-template-columns: 1fr 1fr !important; }
-  .portfolio-grid{ grid-template-columns: 1fr 1fr !important; }
-
-  .hero-stats   { gap: 26px !important; flex-wrap: wrap; }
-  .footer-bottom{ flex-direction: column; align-items: flex-start !important; gap: 10px; }
-  .footer-grid  { gap: 36px !important; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .zoom:hover img { transform: none !important; }
 }
-
-/* ---------- Petit téléphone (≤ 480px) ---------- */
-@media (max-width: 480px) {
-  .section { padding: 56px 5%; }
-  .grid-4,
-  .grid-5,
-  .budget-grid,
-  .portfolio-grid { grid-template-columns: 1fr !important; }
-
-  .btn-primary, .btn-outline { width: 100%; text-align: center; }
-  .hero-actions { flex-direction: column; }
-  .hero-actions .btn-primary,
-  .hero-actions .btn-outline { width: 100%; }
-  .whatsapp-float { bottom: 18px !important; right: 18px !important; width: 54px !important; height: 54px !important; }
-}
-
-/* ============================================================
-   FINITIONS MODERNES — touches additives (élévation, sélection,
-   barre de défilement). Aucune incidence sur la structure.
-   ============================================================ */
-.btn-primary { box-shadow: 0 6px 18px rgba(0, 102, 255, 0.28); }
-.btn-primary:hover { box-shadow: 0 8px 24px rgba(0, 102, 255, 0.40); }
-
-::selection { background: rgba(0, 102, 255, 0.30); color: #fff; }
-
-/* Barre de défilement discrète (navigateurs WebKit) */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--noir); }
-::-webkit-scrollbar-thumb { background: var(--gris2); border-radius: 6px; border: 2px solid var(--noir); }
-::-webkit-scrollbar-thumb:hover { background: var(--gris3); }

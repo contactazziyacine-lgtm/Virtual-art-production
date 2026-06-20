@@ -3,96 +3,151 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import ServiceIcon from '../components/ServiceIcon';
 import Seo from '../components/Seo';
+import Reveal from '../components/Reveal';
+import Cover from '../components/Cover';
+import { IMG, FALLBACK } from '../data/covers';
 
 export default function Services() {
   const { t } = useLang();
   const s = t.servicesPage;
-  const cardColors = ['#f59e0b','#0066ff','#a855f7','#10b981','#ec4899'];
+  const cardIcons = ['event', 'drone', 'tour360', 'motion', 'web'];
 
   return (
-    <div style={{ paddingTop: 72 }}>
+    <div>
       <Seo
         title={t.nav.services}
         description="Spots publicitaires, films corporate, visites virtuelles 360°, captation drone, motion design et création de sites web — tous nos services de production audiovisuelle."
       />
-      <section style={{ padding: '80px 5%' }}>
-        <div className="section-tag">{s.tag}</div>
-        <div className="section-title">{s.title1}<br />{s.title2}</div>
-        <p className="section-sub" style={{ marginTop: 16 }}>{s.sub}</p>
-        <div style={{ marginTop: 60, display: 'flex', flexDirection: 'column', gap: 32 }}>
 
-          <div className="svc-row" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: 40, display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 40, alignItems: 'center' }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ display:'inline-flex', width:90, height:90, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.1)', border:'1px solid rgba(0,102,255,0.2)', borderRadius:20, marginBottom: 16 }}><ServiceIcon name="spot" size={48} /></div>
-              <h2 style={{ fontSize: 22, fontWeight: 900, color: '#0066ff' }}>{s.spotTitle}</h2>
-            </div>
-            <div>
-              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8 }}>{s.spotDesc}</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                {s.spotItems.map(([icon, label]) => (
-                  <div key={label} style={{ background: 'rgba(0,102,255,0.08)', border: '1px solid rgba(0,102,255,0.15)', borderRadius: 8, padding: 14 }}>
-                    <span style={{ fontSize: 18 }}>{icon}</span>
-                    <p style={{ fontSize: 13, marginTop: 6, color: 'rgba(255,255,255,0.8)' }}>{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="svc-row" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 20, padding: 40, display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 40, alignItems: 'center' }}>
-            <div>
-              <p style={{ color: '#8892a4', marginBottom: 20, lineHeight: 1.8 }}>{s.filmDesc}</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                {s.filmItems.map(([icon, label]) => (
-                  <div key={label} style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.15)', borderRadius: 8, padding: 14 }}>
-                    <span style={{ fontSize: 18 }}>{icon}</span>
-                    <p style={{ fontSize: 13, marginTop: 6, color: 'rgba(255,255,255,0.8)' }}>{label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ display:'inline-flex', width:90, height:90, alignItems:'center', justifyContent:'center', background:'rgba(16,185,129,0.1)', border:'1px solid rgba(16,185,129,0.2)', borderRadius:20, marginBottom: 16 }}><ServiceIcon name="film" size={48} /></div>
-              <h2 style={{ fontSize: 22, fontWeight: 900, color: '#10b981' }}>{s.filmTitle}</h2>
-            </div>
-          </div>
-
-          <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 20 }}>
-            {s.cards.map((c, i) => (
-              <div key={c.title} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28 }}>
-                <div style={{ display:'inline-flex', width:56, height:56, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.08)', border:'1px solid rgba(0,102,255,0.15)', borderRadius:14, marginBottom: 16 }}><ServiceIcon name={['event','drone','tour360','motion','web'][i]} size={30} /></div>
-                <h3 style={{ fontSize: 18, fontWeight: 800, color: cardColors[i], marginBottom: 12 }}>{c.title}</h3>
-                <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7, marginBottom: 16 }}>{c.desc}</p>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                  {c.tags.map(tag => <span key={tag} style={{ fontSize: 11, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: '4px 10px', borderRadius: 100, color: '#8892a4' }}>{tag}</span>)}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ background: 'linear-gradient(135deg,rgba(0,102,255,0.08),rgba(168,85,247,0.08))', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 20, padding: 40 }}>
-            <div style={{ textAlign: 'center', marginBottom: 32 }}>
-              <div style={{ display:'inline-flex', width:64, height:64, alignItems:'center', justifyContent:'center', background:'rgba(0,102,255,0.1)', border:'1px solid rgba(0,102,255,0.2)', borderRadius:16, marginBottom: 12 }}><ServiceIcon name="social" size={34} /></div>
-              <h2 style={{ fontSize: 26, fontWeight: 900, marginBottom: 8 }}>{s.socialTitle}</h2>
-              <p style={{ color: '#8892a4', maxWidth: 600, margin: '0 auto', textAlign: 'center' }}>{s.socialDesc}</p>
-            </div>
-            <div className="grid-5" style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 16 }}>
-              {s.socialItems.map(([icon, label]) => (
-                <div key={label} style={{ background: 'rgba(255,255,255,0.04)', borderRadius: 12, padding: 16, textAlign: 'center' }}>
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>{icon}</div>
-                  <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)' }}>{label}</p>
-                </div>
-              ))}
-            </div>
+      {/* ============ HÉRO ============ */}
+      <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 440, display: 'flex', alignItems: 'flex-end' }}>
+        <Cover src={IMG.tlemcen} fallback={FALLBACK.tlemcen} alt="Tlemcen" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.55) 0%, rgba(7,39,31,0.42) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
+          <div className="reveal in" style={{ maxWidth: 860 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{s.tag}</div>
+            <h1 className="display" style={{ color: '#fff', marginBottom: 22, textWrap: 'balance' }}>{s.title1} {s.title2}</h1>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.86)', maxWidth: 620 }}>{s.sub}</p>
           </div>
         </div>
       </section>
-      <section style={{ padding: '80px 5%', textAlign: 'center', background: '#12121a' }}>
-        <h2 className="section-title">{s.ctaTitle}</h2>
-        <p className="section-sub" style={{ margin: '16px auto 36px', textAlign: 'center' }}>{s.ctaSub}</p>
-        <Link to="/devis" className="btn-primary">{s.ctaBtn}</Link>
+
+      {/* ============ SPOT — ligne éditoriale image / texte ============ */}
+      <section className="band band--surface">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'center' }}>
+          <Reveal className="media media--4x3" style={{ borderRadius: 'var(--r-lg)' }}>
+            <Cover src={IMG.constantineBelle} fallback={FALLBACK.constantineBelle} alt={s.spotTitle} />
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="eyebrow">{s.spotTitle}</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 16 }}>{s.spotTitle}</h2>
+            <p className="lead" style={{ marginBottom: 26 }}>{s.spotDesc}</p>
+            <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {s.spotItems.map(([icon, label]) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
+                  <span style={{ fontSize: 18, lineHeight: 1 }}>{icon}</span>
+                  <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
-      <style>{`@media(max-width:768px){.svc-row{grid-template-columns:1fr!important}.grid-3{grid-template-columns:1fr!important}.grid-5{grid-template-columns:1fr 1fr!important}}`}</style>
+
+      {/* ============ FILM — ligne inversée ============ */}
+      <section className="band band--paper">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '0.95fr 1.05fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'center' }}>
+          <Reveal>
+            <div className="eyebrow">{s.filmTitle}</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 16 }}>{s.filmTitle}</h2>
+            <p className="lead" style={{ marginBottom: 26 }}>{s.filmDesc}</p>
+            <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              {s.filmItems.map(([icon, label]) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
+                  <span style={{ fontSize: 18, lineHeight: 1 }}>{icon}</span>
+                  <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={120} className="media media--4x3 svc-media-2" style={{ borderRadius: 'var(--r-lg)' }}>
+            <Cover src={IMG.constantineMedina} fallback={FALLBACK.constantineMedina} alt={s.filmTitle} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ CARTES — grille fine ============ */}
+      <section className="band band--surface">
+        <div className="wrap">
+          <Reveal>
+            <div className="eyebrow">Expertises complémentaires</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 'clamp(28px,3.4vw,44px)' }}>Tout l'audiovisuel, sous un seul toit</h2>
+          </Reveal>
+          <div className="svc-cards cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', borderTop: '1px solid var(--line)', borderLeft: '1px solid var(--line)' }}>
+            {s.cards.map((c, i) => (
+              <Reveal key={c.title} delay={(i % 3) * 70} style={{ borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+                <div style={{ padding: 'clamp(24px,2.4vw,32px)', height: '100%', transition: 'background .25s' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                  <div style={{ width: 48, height: 48, borderRadius: 'var(--r)', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                    <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={cardIcons[i]} size={26} /></span>
+                  </div>
+                  <h3 className="h3" style={{ marginBottom: 10 }}>{c.title}</h3>
+                  <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 18 }}>{c.desc}</p>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
+                    {c.tags.map(tag => <span key={tag} style={{ fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 500, background: 'var(--paper)', border: '1px solid var(--line-2)', padding: '4px 11px', borderRadius: 100, color: 'var(--ink-soft)' }}>{tag}</span>)}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SOCIAL ============ */}
+      <section className="band band--paper">
+        <div className="wrap">
+          <Reveal style={{ maxWidth: 680 }}>
+            <div className="eyebrow">{s.socialTitle}</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 14 }}>{s.socialTitle}</h2>
+            <p className="lead" style={{ marginBottom: 'clamp(26px,3vw,40px)' }}>{s.socialDesc}</p>
+          </Reveal>
+          <div className="social-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5,1fr)', gap: 'clamp(12px,1.2vw,16px)' }}>
+            {s.socialItems.map(([icon, label]) => (
+              <div key={label} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(18px,2vw,26px) 14px', textAlign: 'center', transition: 'transform .25s var(--ease), border-color .25s' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
+                <div style={{ fontSize: 28, marginBottom: 10 }}>{icon}</div>
+                <p style={{ fontSize: 13, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ CTA ============ */}
+      <section className="band band--deep" style={{ textAlign: 'center' }}>
+        <div className="wrap" style={{ maxWidth: 760 }}>
+          <Reveal>
+            <h2 className="h1" style={{ color: '#fff', marginBottom: 18 }}>{s.ctaTitle}</h2>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.82)', margin: '0 auto 34px' }}>{s.ctaSub}</p>
+            <Link to="/devis" className="btn">{s.ctaBtn} <span className="arw">→</span></Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <style>{`
+        @media(max-width:860px){
+          .split{grid-template-columns:1fr!important;gap:28px!important}
+          .svc-media-2{order:-1}
+          .svc-cards{grid-template-columns:1fr 1fr!important}
+          .social-grid{grid-template-columns:1fr 1fr 1fr!important}
+        }
+        @media(max-width:560px){
+          .svc-cards{grid-template-columns:1fr!important}
+          .social-grid{grid-template-columns:1fr 1fr!important}
+        }
+      `}</style>
     </div>
   );
 }

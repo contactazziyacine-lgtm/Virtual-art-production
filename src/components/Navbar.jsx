@@ -19,85 +19,89 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => setMenuOpen(false), [pathname]);
-
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
   const langs = ['FR', 'AR', 'EN'];
-
   const LangSwitcher = () => (
-    <div style={{ display: 'flex', gap: 2, background: 'rgba(255,255,255,0.06)', borderRadius: 8, padding: 3 }}>
-      {langs.map(l => (
-        <button key={l} onClick={() => setLang(l.toLowerCase())} style={{
-          padding: '5px 10px', borderRadius: 6, border: 'none', cursor: 'pointer',
-          fontSize: 12, fontWeight: 700,
-          background: lang === l.toLowerCase() ? '#0066ff' : 'transparent',
-          color: lang === l.toLowerCase() ? '#fff' : 'rgba(255,255,255,0.6)',
-          transition: 'all 0.2s'
-        }}>{l}</button>
-      ))}
+    <div style={{ display: 'flex', gap: 2, border: '1px solid var(--line-2)', borderRadius: 'var(--r)', padding: 2 }}>
+      {langs.map(l => {
+        const on = lang === l.toLowerCase();
+        return (
+          <button key={l} onClick={() => setLang(l.toLowerCase())} aria-pressed={on} style={{
+            padding: '5px 10px', borderRadius: 3, border: 'none', cursor: 'pointer',
+            fontFamily: 'var(--body)', fontSize: 12, fontWeight: 700,
+            background: on ? 'var(--ink)' : 'transparent', color: on ? '#fff' : 'var(--muted)',
+            transition: 'all .2s',
+          }}>{l}</button>
+        );
+      })}
     </div>
   );
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-      padding: '0 5%', height: 72, display: 'flex', alignItems: 'center',
-      justifyContent: 'space-between',
-      background: scrolled ? 'rgba(10,10,15,0.97)' : 'rgba(10,10,15,0.85)',
-      backdropFilter: 'blur(20px)',
-      borderBottom: '1px solid rgba(255,255,255,0.06)',
-      transition: 'background 0.3s'
+      position: 'fixed', top: 0, insetInline: 0, zIndex: 1000,
+      height: 70, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      paddingInline: 'var(--pad)',
+      background: scrolled ? 'rgba(251,250,248,0.86)' : 'rgba(251,250,248,0.0)',
+      backdropFilter: scrolled ? 'saturate(180%) blur(14px)' : 'none',
+      borderBottom: `1px solid ${scrolled ? 'var(--line)' : 'transparent'}`,
+      transition: 'background .3s, border-color .3s',
     }}>
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <Logo height={40} />
-      </Link>
+      <Link to="/" aria-label="Accueil"><Logo height={36} /></Link>
 
-      <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
-        <ul style={{ display: 'flex', gap: 20, listStyle: 'none', alignItems: 'center' }}>
-          {links.map(l => (
-            <li key={l.to}>
-              <Link to={l.to} style={{
-                color: pathname === l.to ? '#fff' : 'rgba(255,255,255,0.7)',
-                textDecoration: 'none', fontSize: 14, fontWeight: 500, transition: 'color 0.2s'
-              }}>{l.label}</Link>
-            </li>
-          ))}
+      <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
+        <ul style={{ display: 'flex', gap: 24, listStyle: 'none', alignItems: 'center' }}>
+          {links.map(l => {
+            const on = pathname === l.to;
+            return (
+              <li key={l.to}>
+                <Link to={l.to} style={{
+                  position: 'relative', fontSize: 14.5, fontWeight: on ? 600 : 500,
+                  color: on ? 'var(--ink)' : 'var(--ink-soft)', paddingBottom: 4,
+                  borderBottom: `2px solid ${on ? 'var(--accent)' : 'transparent'}`, transition: 'color .2s',
+                }}>{l.label}</Link>
+              </li>
+            );
+          })}
         </ul>
         <LangSwitcher />
-        <Link to="/devis" style={{
-          background: '#0066ff', color: '#fff', padding: '9px 20px',
-          borderRadius: 6, fontWeight: 700, fontSize: 13, textDecoration: 'none'
-        }}>{t.nav.quote}</Link>
+        <Link to="/devis" className="btn" style={{ padding: '10px 18px', fontSize: 14 }}>{t.nav.quote}</Link>
       </div>
 
-      <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger" style={{
-        display: 'none', background: 'none', border: 'none', cursor: 'pointer',
-        flexDirection: 'column', gap: 5, padding: 8
-      }} aria-label="Menu">
-        {[0,1,2].map(i => <span key={i} style={{ width: 24, height: 2, background: '#fff', display: 'block' }} />)}
+      <button onClick={() => setMenuOpen(o => !o)} className="hamburger" aria-label="Menu" aria-expanded={menuOpen}
+        style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 8 }}>
+        {[0,1,2].map(i => (
+          <span key={i} style={{
+            width: 24, height: 2, background: 'var(--ink)', display: 'block', transition: 'transform .25s, opacity .2s',
+            transform: menuOpen ? (i === 0 ? 'translateY(7px) rotate(45deg)' : i === 2 ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+            opacity: menuOpen && i === 1 ? 0 : 1,
+          }} />
+        ))}
       </button>
 
       {menuOpen && (
         <div style={{
-          position: 'fixed', top: 72, left: 0, right: 0,
-          background: '#12121a', borderBottom: '1px solid rgba(255,255,255,0.06)',
-          padding: 20, display: 'flex', flexDirection: 'column', gap: 16,
-          maxHeight: 'calc(100vh - 72px)', overflowY: 'auto'
+          position: 'fixed', top: 70, insetInline: 0, background: 'var(--surface)',
+          borderBottom: '1px solid var(--line)', padding: 'var(--pad)',
+          display: 'flex', flexDirection: 'column', gap: 14,
+          maxHeight: 'calc(100vh - 70px)', overflowY: 'auto',
         }}>
           {links.map(l => (
-            <Link key={l.to} to={l.to} style={{ color: '#fff', textDecoration: 'none', fontSize: 16, fontWeight: 600 }}>{l.label}</Link>
+            <Link key={l.to} to={l.to} style={{ fontFamily: 'var(--display)', fontSize: 20, fontWeight: 700, color: 'var(--ink)' }}>{l.label}</Link>
           ))}
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}><LangSwitcher /></div>
-          <Link to="/devis" style={{ background: '#0066ff', color: '#fff', padding: '12px 20px', borderRadius: 8, fontWeight: 700, textDecoration: 'none', textAlign: 'center' }}>{t.nav.quote}</Link>
+          <div style={{ paddingBlock: 6 }}><LangSwitcher /></div>
+          <Link to="/devis" className="btn" style={{ justifyContent: 'center' }}>{t.nav.quote}</Link>
         </div>
       )}
     </nav>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLang } from '../i18n/LanguageContext';
 import { sendForm } from '../lib/sendForm';
 import Seo from '../components/Seo';
+import Reveal from '../components/Reveal';
 
 export default function Devis() {
   const { t } = useLang();
@@ -12,7 +13,7 @@ export default function Devis() {
   const [checkedServices, setCheckedServices] = useState([]);
   const [checkedSocials, setCheckedSocials] = useState([]);
 
-  const toggle = (list, setList, val) => setList(prev => prev.includes(val) ? prev.filter(x=>x!==val) : [...prev,val]);
+  const toggle = (list, setList, val) => setList(prev => prev.includes(val) ? prev.filter(x => x !== val) : [...prev, val]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -44,39 +45,50 @@ export default function Devis() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const ACCENT = '#12A065';
   const fieldStyle = { display: 'flex', flexDirection: 'column', gap: 8 };
-  const labelStyle = { fontSize: 13, fontWeight: 600, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: 0.5 };
-  const sectionTitle = { gridColumn: '1/-1', fontSize: 14, fontWeight: 700, color: '#0066ff', textTransform: 'uppercase', letterSpacing: 1, paddingTop: 8 };
-  const divider = { gridColumn: '1/-1', border: 'none', borderTop: '1px solid rgba(255,255,255,0.06)', margin: '8px 0' };
+  const labelStyle = { fontFamily: 'var(--display)', fontSize: 12.5, fontWeight: 600, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '.06em' };
+  const sectionTitle = { gridColumn: '1/-1', fontFamily: 'var(--display)', fontSize: 13, fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.1em', paddingTop: 8 };
+  const divider = { gridColumn: '1/-1', border: 'none', borderTop: '1px solid var(--line)', margin: '8px 0' };
+  const checkLabel = { display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 14, color: 'var(--ink-soft)' };
 
   if (submitted) {
     return (
-      <div style={{ paddingTop: 72, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 72 }}>
         <div style={{ textAlign: 'center', padding: 40 }}>
-          <div style={{ fontSize: 72, marginBottom: 24 }}>✅</div>
-          <h2 style={{ fontSize: 32, fontWeight: 900, marginBottom: 16 }}>{d.successTitle}</h2>
-          <p style={{ color: '#8892a4', fontSize: 17, lineHeight: 1.7, maxWidth: 500, margin: '0 auto 24px' }}>{d.successText}</p>
-          <button onClick={() => setSubmitted(false)} className="btn-outline">{d.successBtn}</button>
+          <div style={{ width: 80, height: 80, margin: '0 auto 24px', borderRadius: '50%', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 38, color: 'var(--accent)' }}>✓</div>
+          <h2 className="h1" style={{ marginBottom: 16 }}>{d.successTitle}</h2>
+          <p className="lead" style={{ color: 'var(--muted)', maxWidth: 500, margin: '0 auto 24px' }}>{d.successText}</p>
+          <button onClick={() => setSubmitted(false)} className="btn btn--ghost">{d.successBtn}</button>
         </div>
       </div>
     );
   }
 
   return (
-    <div style={{ paddingTop: 72 }}>
+    <div>
       <Seo title={d.title} description={d.sub} />
-      <section style={{ padding: '80px 5%' }}>
-        <div className="section-tag">{d.tag}</div>
-        <div className="section-title">{d.title}</div>
-        <p className="section-sub" style={{ marginTop: 16 }}>{d.sub}</p>
 
-        <div className="quote-form" style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 24, padding: 60, maxWidth: 900, margin: '60px auto 0' }}>
+      {/* ============ HÉRO ============ */}
+      <section className="band--deep" style={{ position: 'relative', paddingTop: 132 }}>
+        <div className="wrap" style={{ color: '#fff', paddingTop: 'clamp(24px,4vw,40px)', paddingBottom: 'clamp(8px,2vw,18px)' }}>
+          <div className="reveal in" style={{ maxWidth: 760 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 18 }}>{d.tag}</div>
+            <h1 className="display" style={{ color: '#fff', marginBottom: 18, textWrap: 'balance' }}>{d.title}</h1>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.86)', maxWidth: 600 }}>{d.sub}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ FORMULAIRE ============ */}
+      <section className="band band--surface">
+        <Reveal className="quote-form" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,4vw,56px)', maxWidth: 900, margin: '0 auto', boxShadow: '0 10px 40px rgba(10,50,42,.05)' }}>
           <form onSubmit={handleSubmit}>
             <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
 
               <div style={sectionTitle}>{d.sGeneral}</div>
-              {[[d.fName,'text',true,'name'],[d.fCompany,'text',false,'company'],[d.fSector,'text',false,'sector'],[d.fPhone,'tel',true,'phone'],[d.fEmail,'email',true,'email'],[d.fCity,'text',false,'city']].map(([label,type,req,name]) => (
-                <div key={name} style={fieldStyle}><label style={labelStyle}>{label}{req?' *':''}</label><input type={type} name={name} required={req} /></div>
+              {[[d.fName, 'text', true, 'name'], [d.fCompany, 'text', false, 'company'], [d.fSector, 'text', false, 'sector'], [d.fPhone, 'tel', true, 'phone'], [d.fEmail, 'email', true, 'email'], [d.fCity, 'text', false, 'city']].map(([label, type, req, name]) => (
+                <div key={name} style={fieldStyle}><label style={labelStyle}>{label}{req ? ' *' : ''}</label><input type={type} name={name} required={req} /></div>
               ))}
 
               <hr style={divider} />
@@ -84,9 +96,9 @@ export default function Devis() {
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.servicesLabel}</label>
                 <div className="check-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 4 }}>
-                  {d.serviceOpts.map(s => (
-                    <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
-                      <input type="checkbox" checked={checkedServices.includes(s)} onChange={() => toggle(checkedServices,setCheckedServices,s)} style={{ accentColor: '#0066ff', width: 18, height: 18 }} />{s}
+                  {d.serviceOpts.map(svc => (
+                    <label key={svc} style={checkLabel}>
+                      <input type="checkbox" checked={checkedServices.includes(svc)} onChange={() => toggle(checkedServices, setCheckedServices, svc)} style={{ accentColor: ACCENT, width: 18, height: 18 }} />{svc}
                     </label>
                   ))}
                 </div>
@@ -115,10 +127,10 @@ export default function Devis() {
               <div style={sectionTitle}>{d.sSocial}</div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.platformsLabel}</label>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 4 }}>
-                  {d.platforms.map(s => (
-                    <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
-                      <input type="checkbox" checked={checkedSocials.includes(s)} onChange={() => toggle(checkedSocials,setCheckedSocials,s)} style={{ accentColor: '#0066ff' }} />{s}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 4 }}>
+                  {d.platforms.map(svc => (
+                    <label key={svc} style={{ ...checkLabel, gap: 8 }}>
+                      <input type="checkbox" checked={checkedSocials.includes(svc)} onChange={() => toggle(checkedSocials, setCheckedSocials, svc)} style={{ accentColor: ACCENT }} />{svc}
                     </label>
                   ))}
                 </div>
@@ -126,9 +138,9 @@ export default function Devis() {
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.socialSvcLabel}</label>
                 <div className="check-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 4 }}>
-                  {d.socialSvc.map(s => (
-                    <label key={s} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.75)' }}>
-                      <input type="checkbox" name="socialServices" value={s} style={{ accentColor: '#0066ff' }} />{s}
+                  {d.socialSvc.map(svc => (
+                    <label key={svc} style={{ ...checkLabel, gap: 8 }}>
+                      <input type="checkbox" name="socialServices" value={svc} style={{ accentColor: ACCENT }} />{svc}
                     </label>
                   ))}
                 </div>
@@ -139,14 +151,18 @@ export default function Devis() {
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.budgetLabel}</label>
                 <div className="budget-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginTop: 4 }}>
-                  {d.budgetOpts.map(b => (
-                    <div key={b} onClick={() => setBudget(b)} style={{
-                      background: budget === b ? 'rgba(0,102,255,0.12)' : 'rgba(255,255,255,0.04)',
-                      border: `1px solid ${budget === b ? '#0066ff' : 'rgba(255,255,255,0.1)'}`,
-                      borderRadius: 8, padding: '12px 8px', textAlign: 'center', fontSize: 13, cursor: 'pointer',
-                      color: budget === b ? '#0066ff' : 'rgba(255,255,255,0.7)', transition: 'all 0.2s'
-                    }}>{b}</div>
-                  ))}
+                  {d.budgetOpts.map(b => {
+                    const on = budget === b;
+                    return (
+                      <div key={b} onClick={() => setBudget(b)} style={{
+                        background: on ? 'var(--accent-soft)' : 'var(--paper)',
+                        border: `1px solid ${on ? 'var(--accent)' : 'var(--line-2)'}`,
+                        borderRadius: 'var(--r)', padding: '13px 8px', textAlign: 'center', fontSize: 13, cursor: 'pointer',
+                        fontWeight: on ? 700 : 500,
+                        color: on ? 'var(--accent-2)' : 'var(--ink-soft)', transition: 'all .2s var(--ease)'
+                      }}>{b}</div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -159,18 +175,19 @@ export default function Devis() {
 
               <hr style={divider} />
               <div style={{ gridColumn: '1/-1' }}>
-                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', fontSize: 14, color: 'rgba(255,255,255,0.8)', lineHeight: 1.5 }}>
-                  <input type="checkbox" required style={{ accentColor: '#0066ff', width: 18, height: 18, marginTop: 1, flexShrink: 0 }} />{d.consent} *
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: 10, cursor: 'pointer', fontSize: 14, color: 'var(--ink-soft)', lineHeight: 1.55 }}>
+                  <input type="checkbox" required style={{ accentColor: ACCENT, width: 18, height: 18, marginTop: 1, flexShrink: 0 }} />{d.consent} *
                 </label>
               </div>
               <div style={{ gridColumn: '1/-1' }}>
-                <button type="submit" disabled={sending} style={{ width: '100%', padding: 18, background: sending ? '#0a4bb0' : '#0066ff', color: '#fff', border: 'none', borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: sending ? 'wait' : 'pointer', letterSpacing: 0.3, marginTop: 8, opacity: sending ? 0.85 : 1 }}>{sending ? '⏳ Envoi…' : d.submit}</button>
+                <button type="submit" disabled={sending} className="btn" style={{ width: '100%', justifyContent: 'center', padding: 18, fontSize: 16, marginTop: 8, opacity: sending ? 0.85 : 1, cursor: sending ? 'wait' : 'pointer' }}>{sending ? 'Envoi…' : d.submit}</button>
               </div>
             </div>
           </form>
-        </div>
+        </Reveal>
       </section>
-      <style>{`@media(max-width:768px){.form-grid{grid-template-columns:1fr!important}.budget-grid{grid-template-columns:1fr 1fr!important}.quote-form{padding:32px 20px!important}}`}</style>
+
+      <style>{`@media(max-width:768px){.form-grid{grid-template-columns:1fr!important}.budget-grid{grid-template-columns:1fr 1fr!important}.quote-form{padding:28px 20px!important}}`}</style>
     </div>
   );
 }

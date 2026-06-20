@@ -18,16 +18,14 @@ const clients = [
 
 export default function Clients() {
   const { t } = useLang();
-  const row = [...clients, ...clients]; // doublé pour défilement continu
+  const row = [...clients, ...clients];
 
   return (
-    <section style={{ padding: '56px 0', background: '#12121a', overflow: 'hidden' }}>
-      <div style={{ padding: '0 5%' }}>
-        <div className="section-tag" style={{ textAlign: 'center' }}>{t.testimonials.tag}</div>
-        <h2 className="section-title" style={{ textAlign: 'center', marginBottom: 8 }}>{t.clientsTitle}</h2>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <span style={{ fontSize: 40, fontWeight: 900, color: '#0066ff' }}>+100</span>
-          <span style={{ fontSize: 15, color: '#8892a4', marginLeft: 10 }}>clients &amp; partenaires</span>
+    <section className="band--paper" style={{ paddingBlock: '70px 64px', overflow: 'hidden', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+      <div className="wrap" style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14, marginBottom: 38 }}>
+        <div className="eyebrow eyebrow--muted">{t.testimonials.tag}</div>
+        <div style={{ fontFamily: 'var(--display)', fontWeight: 800, fontSize: 'clamp(24px,2.4vw,34px)', letterSpacing: '-.02em' }}>
+          <span style={{ color: 'var(--accent)' }}>+100</span> {t.clientsTitle.toLowerCase().includes('confian') ? 'partenaires de confiance' : t.clientsTitle}
         </div>
       </div>
 
@@ -42,14 +40,15 @@ export default function Clients() {
       </div>
 
       <style>{`
-        .marquee { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-        .marquee-track { display: flex; gap: 18px; width: max-content; animation: scroll-x 40s linear infinite; }
+        .marquee { width: 100%; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+        .marquee-track { display: flex; gap: 16px; width: max-content; animation: scroll-x 46s linear infinite; }
         .marquee:hover .marquee-track { animation-play-state: paused; }
-        .client-card { flex: 0 0 auto; width: 150px; height: 78px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 14px; }
+        .client-card { flex: 0 0 auto; width: 156px; height: 80px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); display: flex; align-items: center; justify-content: center; padding: 16px; filter: grayscale(1); opacity: .72; transition: filter .3s, opacity .3s, transform .3s; }
+        .client-card:hover { filter: grayscale(0); opacity: 1; transform: translateY(-3px); }
         .client-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
         @keyframes scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         html[dir="rtl"] .marquee-track { animation-direction: reverse; }
-        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; } }
+        @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; } .client-card { filter: grayscale(0); opacity: 1; } }
       `}</style>
     </section>
   );

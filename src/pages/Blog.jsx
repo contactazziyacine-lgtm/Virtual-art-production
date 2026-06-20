@@ -1,12 +1,18 @@
 import React from 'react';
 import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
-  'linear-gradient(135deg,#0d1a3a,#1428aa)',
-  'linear-gradient(135deg,#0d2a1a,#0d5a3a)',
-  'linear-gradient(135deg,#1a0d2a,#3d0d5a)',
-  'linear-gradient(135deg,#2a1a0d,#5a3a0d)',
-  'linear-gradient(135deg,#0d2a2a,#0d4a4a)',
-  'linear-gradient(135deg,#2a0d0d,#5a0d1a)',
+import Reveal from '../components/Reveal';
+import Cover from '../components/Cover';
+import { IMG, FALLBACK } from '../data/covers';
+
+// Une vraie photo algérienne par article (remplace les anciens dégradés + emoji)
+const covers = [
+  { src: IMG.constantine, fb: FALLBACK.constantine },
+  { src: IMG.tlemcen, fb: FALLBACK.tlemcen },
+  { src: IMG.alger, fb: FALLBACK.alger },
+  { src: IMG.constantineBridge, fb: FALLBACK.constantineBridge },
+  { src: IMG.constantineNature, fb: FALLBACK.constantineNature },
+  { src: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque },
 ];
 
 export default function Blog() {
@@ -14,32 +20,63 @@ export default function Blog() {
   const b = t.blog;
 
   return (
-    <div style={{ paddingTop: 72 }}>
+    <div>
       <Seo
         title={t.nav.blog}
         description="Le blog de Virtual Art Production : conseils, tendances et coulisses de la production audiovisuelle, du film corporate et de la communication digitale en Algérie."
       />
-      <section style={{ padding: '80px 5%' }}>
-        <div className="section-tag">{b.tag}</div>
-        <div className="section-title">{b.title}</div>
-        <p className="section-sub" style={{ marginTop: 16 }}>{b.sub}</p>
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 60 }}>
-          {b.posts.map((p, i) => (
-            <div key={i} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden', cursor: 'pointer', transition: 'transform 0.3s' }}
-              onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-4px)'}
-              onMouseLeave={e => e.currentTarget.style.transform = 'none'}>
-              <div style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 48, background: bgColors[i] }}>{p.icon}</div>
-              <div style={{ padding: 24 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#0066ff', marginBottom: 10 }}>{p.cat}</div>
-                <h3 style={{ fontSize: 16, fontWeight: 700, marginBottom: 10, lineHeight: 1.4 }}>{p.title}</h3>
-                <p style={{ fontSize: 13, color: '#8892a4', lineHeight: 1.6, marginBottom: 16 }}>{p.excerpt}</p>
-                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 14 }}>{p.date} · {p.read} {b.readTime}</div>
-              </div>
-            </div>
-          ))}
+
+      {/* ============ HÉRO ============ */}
+      <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 400, display: 'flex', alignItems: 'flex-end' }}>
+        <Cover src={IMG.constantineMedina} fallback={FALLBACK.constantineMedina} alt="Médina" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.5) 0%, rgba(7,39,31,0.42) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,80px)', color: '#fff' }}>
+          <div className="reveal in" style={{ maxWidth: 820 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{b.tag}</div>
+            <h1 className="display" style={{ color: '#fff', marginBottom: 20, textWrap: 'balance' }}>{b.title}</h1>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.86)', maxWidth: 600 }}>{b.sub}</p>
+          </div>
         </div>
       </section>
-      <style>{`@media(max-width:768px){.grid-3{grid-template-columns:1fr!important}}`}</style>
+
+      {/* ============ ARTICLES ============ */}
+      <section className="band band--surface">
+        <div className="wrap">
+          <div className="blog-grid cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(18px,2vw,28px)' }}>
+            {b.posts.map((p, i) => {
+              const cv = covers[i % covers.length];
+              return (
+                <Reveal key={i} delay={(i % 3) * 80}>
+                  <article className="blog-card" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', overflow: 'hidden', cursor: 'pointer', height: '100%', transition: 'transform .3s var(--ease), box-shadow .3s' }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 18px 40px rgba(10,50,42,.12)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
+                    <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden' }}>
+                      <div className="blog-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
+                        <Cover src={cv.src} fallback={cv.fb} alt={p.title} />
+                      </div>
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0) 55%, rgba(7,39,31,0.55) 100%)' }} />
+                      <span style={{ position: 'absolute', top: 14, left: 14, padding: '6px 12px', borderRadius: 100, background: 'var(--accent)', color: '#fff', fontFamily: 'var(--display)', fontSize: 11, fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase' }}>{p.cat}</span>
+                    </div>
+                    <div style={{ padding: 'clamp(20px,2vw,26px)' }}>
+                      <h3 style={{ fontFamily: 'var(--display)', fontSize: 17, fontWeight: 700, marginBottom: 10, lineHeight: 1.35, letterSpacing: '-.01em' }}>{p.title}</h3>
+                      <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 18 }}>{p.excerpt}</p>
+                      <div style={{ fontSize: 12, color: 'var(--muted)', borderTop: '1px solid var(--line)', paddingTop: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span>{p.date}</span><span style={{ opacity: .5 }}>·</span><span>{p.read} {b.readTime}</span>
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        .blog-card:hover .blog-img{transform:scale(1.06)}
+        @media(max-width:860px){.blog-grid{grid-template-columns:1fr 1fr!important}}
+        @media(max-width:560px){.blog-grid{grid-template-columns:1fr!important}}
+      `}</style>
     </div>
   );
 }

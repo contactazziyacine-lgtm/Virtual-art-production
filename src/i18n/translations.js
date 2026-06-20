@@ -35,7 +35,7 @@ export const translations = {
     cats: { all: 'Tous', pub: 'Spots publicitaires', corporate: 'Films institutionnels', event: 'Couverture médiatique', t360: 'Visites virtuelles', social: 'Marketing digital', motion: 'Production 3D & Motion', web: 'Sites web' },
     about: {
       tag: 'Notre histoire', title1: 'Virtual Art Production,', title2: 'l\'image au service de votre ambition',
-      p1: 'Fondée avec la passion de l\'image et de la créativité, Virtual Art Production est née de la volonté de proposer aux entreprises algériennes et africaines une production audiovisuelle de niveau international.',
+      p1: 'Fondée avec la passion de l\'image et de la créativité, Virtual Art Production est née de la volonté de proposer aux entreprises algériennes une production audiovisuelle de niveau international.',
       p2: 'Depuis notre création, nous avons accompagné de nombreux clients dans la réalisation de leurs projets audiovisuels, de la conception jusqu\'à la diffusion. Notre approche combine expertise technique et vision créative pour produire des contenus qui font la différence.',
       p3: 'Notre équipe de professionnels passionnés maîtrise l\'ensemble de la chaîne de production : de la rédaction du scénario au montage final, en passant par le tournage, le drone et la postproduction.',
       values: [
@@ -140,7 +140,7 @@ export const translations = {
     cats: { all: 'الكل', pub: 'إعلانات', corporate: 'أفلام مؤسساتية', event: 'تغطية إعلامية', t360: 'جولات افتراضية', social: 'التسويق الرقمي', motion: 'إنتاج 3D وموشن', web: 'مواقع إلكترونية' },
     about: {
       tag: 'قصتنا', title1: 'Virtual Art Production،', title2: 'الصورة في خدمة طموحكم',
-      p1: 'تأسست Virtual Art Production بشغف الصورة والإبداع، من أجل تقديم إنتاج سمعي بصري بمستوى عالمي للشركات الجزائرية والأفريقية.',
+      p1: 'تأسست Virtual Art Production بشغف الصورة والإبداع، من أجل تقديم إنتاج سمعي بصري بمستوى عالمي للشركات الجزائرية.',
       p2: 'منذ تأسيسنا، رافقنا العديد من العملاء في إنجاز مشاريعهم السمعية البصرية، من التصميم إلى البث. نهجنا يجمع بين الخبرة التقنية والرؤية الإبداعية لإنتاج محتوى يصنع الفرق.',
       p3: 'يتقن فريقنا من المحترفين الشغوفين سلسلة الإنتاج بأكملها: من كتابة السيناريو إلى المونتاج النهائي، مروراً بالتصوير والطائرة المسيّرة وما بعد الإنتاج.',
       values: [
@@ -245,7 +245,7 @@ export const translations = {
     cats: { all: 'All', pub: 'Commercials', corporate: 'Corporate films', event: 'Media coverage', t360: 'Virtual tours', social: 'Digital marketing', motion: '3D & Motion Graphics', web: 'Websites' },
     about: {
       tag: 'Our story', title1: 'Virtual Art Production,', title2: 'image serving your ambition',
-      p1: 'Founded with a passion for image and creativity, Virtual Art Production was born from the desire to offer Algerian and African companies audiovisual production of international standard.',
+      p1: 'Founded with a passion for image and creativity, Virtual Art Production was born from the desire to offer Algerian companies audiovisual production of international standard.',
       p2: 'Since our creation, we have supported many clients in delivering their audiovisual projects, from concept to broadcast. Our approach combines technical expertise and creative vision to produce content that makes a difference.',
       p3: 'Our team of passionate professionals masters the entire production chain: from script writing to final editing, including filming, drone and post-production.',
       values: [

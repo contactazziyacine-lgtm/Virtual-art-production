@@ -4,92 +4,122 @@ import { useLang } from '../i18n/LanguageContext';
 import Clients from '../components/Clients';
 import ServiceIcon from '../components/ServiceIcon';
 import Seo from '../components/Seo';
+import Reveal from '../components/Reveal';
+import Cover from '../components/Cover';
+import { IMG, FALLBACK } from '../data/covers';
 
 export default function Home() {
   const { t } = useLang();
 
   const services = [
-    { ic: 'spot', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV','Social','4K'] },
-    { ic: 'film', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate','RH','Reportage'] },
-    { ic: 'tour360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel','Immobilier','Commerce'] },
-    { ic: 'social', title: t.cats.social, desc: 'Stratégie marketing digitale complète : SEO, publicité en ligne, content marketing et analyse de performance.', tags: ['SEO','Ads','Analytics'] },
-    { ic: 'drone', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K','Certifié','Pro'] },
-    { ic: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live','Photo','Vidéo'] },
-    { ic: 'motion', title: 'Production 3D & Motion Graphics', desc: 'Animations 3D, motion design, habillage graphique et effets visuels pour des contenus modernes et dynamiques.', tags: ['3D','Motion','VFX'] },
-    { ic: 'web', title: 'Création de Site Web', desc: 'Sites web modernes, responsives et optimisés SEO. Vitrines, plateformes et applications web sur mesure.', tags: ['Web','Responsive','SEO'] },
+    { ic: 'spot', title: t.cats.pub, desc: 'Conception créative, storyboard, tournage et post-production pour des campagnes percutantes.', tags: ['TV', 'Social', '4K'] },
+    { ic: 'film', title: t.cats.corporate, desc: 'Valorisez votre image d\'entreprise avec des productions corporate de haute qualité.', tags: ['Corporate', 'RH', 'Reportage'] },
+    { ic: 'tour360', title: t.cats.t360, desc: 'Offrez une immersion totale dans vos espaces avec notre technologie de pointe.', tags: ['Hôtel', 'Immobilier', 'Commerce'] },
+    { ic: 'social', title: t.cats.social, desc: 'Stratégie marketing digitale complète : SEO, publicité en ligne, content marketing et performance.', tags: ['SEO', 'Ads', 'Analytics'] },
+    { ic: 'drone', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K', 'Certifié', 'Pro'] },
+    { ic: 'event', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live', 'Photo', 'Vidéo'] },
+    { ic: 'motion', title: 'Production 3D & Motion', desc: 'Animations 3D, motion design, habillage graphique et effets visuels modernes.', tags: ['3D', 'Motion', 'VFX'] },
+    { ic: 'web', title: 'Création de site web', desc: 'Sites modernes, responsives et optimisés SEO. Vitrines, plateformes et applications.', tags: ['Web', 'Responsive', 'SEO'] },
   ];
 
   return (
     <div>
-      <Seo
-        title={t.nav.home}
-        description="Virtual Art Production — production audiovisuelle en Algérie : spots publicitaires, films corporate, visites virtuelles 360°, captation drone et motion design."
-      />
-      {/* HERO */}
-      <section className="hero-section" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', padding: '0 5%', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg,#0a0a0f 0%,#0d0d1a 40%,#0a1428 100%)' }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(0,102,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,0.04) 1px,transparent 1px)', backgroundSize: '60px 60px' }} />
-        <div style={{ position: 'absolute', width: 600, height: 600, background: 'radial-gradient(circle,rgba(0,102,255,0.12) 0%,transparent 70%)', top: '50%', left: '60%', transform: 'translate(-50%,-50%)' }} />
+      <Seo title={t.nav.home} description="Virtual Art Production — production audiovisuelle en Algérie : spots publicitaires, films corporate, visites virtuelles 360°, captation drone et motion design." />
 
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: 720, paddingTop: 72 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(0,102,255,0.12)', border: '1px solid rgba(0,102,255,0.3)', borderRadius: 100, padding: '6px 16px', fontSize: 12, fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: '#0066ff', marginBottom: 28 }}>
-            <span style={{ width: 6, height: 6, background: '#0066ff', borderRadius: '50%', animation: 'pulse 2s infinite' }} />
-            {t.hero.badge}
-          </div>
-          <h1 style={{ fontSize: 'clamp(42px,6vw,80px)', fontWeight: 900, lineHeight: 1.05, letterSpacing: -2, marginBottom: 24 }}>
-            {t.hero.title1}<br /><span style={{ color: '#0066ff' }}>{t.hero.title2}</span><br />{t.hero.title3}
-          </h1>
-          <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.65)', maxWidth: 560, marginBottom: 44, lineHeight: 1.8 }}>
-            {t.hero.sub}
-          </p>
-          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-            <Link to="/devis" className="btn-primary">{t.hero.cta1}</Link>
-            <Link to="/portfolio" className="btn-outline">{t.hero.cta2}</Link>
-          </div>
-        </div>
-
-        <div className="hero-stats" style={{ position: 'absolute', bottom: 60, right: '5%', display: 'flex', gap: 40, zIndex: 2 }}>
-          {[['+ 100',t.hero.stat1],['+ 8',t.hero.stat2],['4K',t.hero.stat3]].map(([n,l]) => (
-            <div key={l} style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: 36, fontWeight: 900, letterSpacing: -1 }}>{n}</div>
-              <div style={{ fontSize: 12, color: '#8892a4', textTransform: 'uppercase', letterSpacing: 1 }}>{l}</div>
+      {/* ============ HÉRO — pleine page photographique ============ */}
+      <section style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
+        <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Baie d'Alger" style={{ position: 'absolute', inset: 0 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.42) 0%, rgba(7,39,31,0.20) 38%, rgba(7,39,31,0.78) 100%)' }} />
+        <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingBottom: 'clamp(56px, 9vw, 110px)', paddingTop: 120, color: '#fff' }}>
+          <div className="reveal in" style={{ maxWidth: 980 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', opacity: .92, marginBottom: 22 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)' }} /> {t.hero.badge}
             </div>
-          ))}
-        </div>
-      </section>
+            <h1 className="display" style={{ color: '#fff', marginBottom: 26, textWrap: 'balance' }}>
+              {t.hero.title1} {t.hero.title2}<br />{t.hero.title3}
+            </h1>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.88)', marginBottom: 38 }}>{t.hero.sub}</p>
+            <div className="stack-sm" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+              <Link to="/devis" className="btn">{t.hero.cta1} <span className="arw">→</span></Link>
+              <Link to="/portfolio" className="btn btn--light">{t.hero.cta2}</Link>
+            </div>
+          </div>
 
-      {/* SERVICES */}
-      <section style={{ padding: '100px 5%' }}>
-        <div className="section-tag">{t.services.tag}</div>
-        <div className="section-title">{t.services.title1}<br />{t.services.title2}</div>
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 50 }}>
-          {services.map(s => (
-            <div key={s.title} style={{ background: '#1e1e2a', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 32, transition: 'all 0.35s', cursor: 'pointer' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,102,255,0.4)'; e.currentTarget.style.transform = 'translateY(-4px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'none'; }}>
-              <div style={{ width: 52, height: 52, background: 'rgba(0,102,255,0.1)', border: '1px solid rgba(0,102,255,0.2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}><ServiceIcon name={s.ic} size={28} /></div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 10 }}>{s.title}</h3>
-              <p style={{ fontSize: 14, color: '#8892a4', lineHeight: 1.7 }}>{s.desc}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16 }}>
-                {s.tags.map(tag => <span key={tag} style={{ fontSize: 11, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', padding: '4px 10px', borderRadius: 100, color: '#8892a4' }}>{tag}</span>)}
+          <div style={{ display: 'flex', gap: 'clamp(28px,5vw,64px)', flexWrap: 'wrap', marginTop: 'clamp(40px,6vw,72px)', borderTop: '1px solid rgba(255,255,255,0.22)', paddingTop: 30 }}>
+            {[['+ 100', t.hero.stat1], ['+ 8', t.hero.stat2], ['4K', t.hero.stat3]].map(([n, l]) => (
+              <div key={l}>
+                <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(28px,3vw,42px)', fontWeight: 800, letterSpacing: '-.02em', color: '#fff' }}>{n}</div>
+                <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '.12em', marginTop: 4 }}>{l}</div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* CLIENTS — Ils nous ont fait confiance */}
+      {/* ============ INTRO ÉDITORIALE ============ */}
+      <section className="band band--surface">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 'clamp(36px,6vw,96px)', alignItems: 'start' }}>
+          <Reveal>
+            <div className="eyebrow">{t.services.tag}</div>
+            <h2 className="h1" style={{ marginTop: 18 }}>{t.services.title1} {t.services.title2}</h2>
+          </Reveal>
+          <Reveal delay={120}>
+            <p className="lead" style={{ marginBottom: 22 }}>{t.cta.sub}</p>
+            <Link to="/services" className="alink">Découvrir nos expertises <span className="arw">→</span></Link>
+          </Reveal>
+        </div>
+
+        {/* Services en grille fine */}
+        <div className="wrap" style={{ marginTop: 'clamp(40px,5vw,68px)' }}>
+          <div className="cols-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', borderTop: '1px solid var(--line)', borderLeft: '1px solid var(--line)' }}>
+            {services.map((s, i) => (
+              <Reveal key={s.title} delay={(i % 4) * 70} style={{ borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+                <div className="svc-cell" style={{ padding: 'clamp(22px,2.2vw,30px)', height: '100%', transition: 'background .25s', cursor: 'default' }}
+                  onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
+                  onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                  <div style={{ width: 46, height: 46, borderRadius: 'var(--r)', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
+                    <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={s.ic} size={24} /></span>
+                  </div>
+                  <h3 className="h3" style={{ marginBottom: 9 }}>{s.title}</h3>
+                  <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65 }}>{s.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ VISITES VIRTUELLES — teaser plein cadre ============ */}
+      <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 520, display: 'flex', alignItems: 'center' }}>
+        <Cover src={IMG.constantine} fallback={FALLBACK.constantine} alt="Constantine" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(7,39,31,0.92) 0%, rgba(7,39,31,0.62) 55%, rgba(7,39,31,0.30) 100%)' }} />
+        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
+          <Reveal style={{ maxWidth: 640 }}>
+            <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 18 }}>Visites virtuelles 360°</div>
+            <h2 className="h1" style={{ color: '#fff', marginBottom: 20 }}>L'Algérie, explorée en immersion totale</h2>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.84)', marginBottom: 32 }}>
+              Constantine, Tlemcen, Alger — faites entrer vos visiteurs à l'intérieur de vos espaces et des plus beaux sites du pays, en 360°, depuis n'importe quel écran.
+            </p>
+            <Link to="/portfolio" className="btn">Explorer les visites <span className="arw">→</span></Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ CLIENTS ============ */}
       <Clients />
 
-      {/* CTA */}
-      <section style={{ padding: '100px 5%', textAlign: 'center', background: 'linear-gradient(135deg,#0d1a3a,#0a0a1f)' }}>
-        <div className="section-tag" style={{ display: 'inline-block' }}>{t.cta.tag}</div>
-        <h2 className="section-title" style={{ margin: '0 auto' }}>{t.cta.title}</h2>
-        <p className="section-sub" style={{ margin: '20px auto 40px', textAlign: 'center' }}>{t.cta.sub}</p>
-        <Link to="/devis" className="btn-primary" style={{ fontSize: 16, padding: '16px 40px' }}>{t.cta.btn}</Link>
+      {/* ============ CTA ============ */}
+      <section className="band band--surface">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'clamp(32px,5vw,72px)', alignItems: 'center' }}>
+          <Reveal>
+            <div className="eyebrow">{t.cta.tag}</div>
+            <h2 className="h1" style={{ marginTop: 16 }}>{t.cta.title}</h2>
+          </Reveal>
+          <Reveal delay={120} style={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Link to="/devis" className="btn" style={{ padding: '16px 30px', fontSize: 16 }}>{t.cta.btn} <span className="arw">→</span></Link>
+          </Reveal>
+        </div>
       </section>
-
-      <style>{`@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}@media(max-width:1024px){.hero-section{flex-direction:column!important;align-items:flex-start!important;justify-content:center!important}.hero-stats{position:static!important;right:auto!important;bottom:auto!important;margin-top:40px}}`}</style>
     </div>
   );
 }
