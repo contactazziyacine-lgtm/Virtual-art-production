@@ -7,6 +7,8 @@ import Logo from './Logo';
 export default function Footer() {
   const { t, contact, lang } = useLang();
   const address = lang === 'ar' ? contact.addressAr : lang === 'en' ? contact.addressEn : contact.addressFr;
+  const privacyLabel = lang === 'ar' ? 'سياسة الخصوصية' : lang === 'en' ? 'Privacy Policy' : 'Politique de confidentialité';
+  const termsLabel = lang === 'ar' ? 'شروط الاستخدام' : lang === 'en' ? 'Terms of Use' : 'Conditions d\'utilisation';
 
   const services = [t.cats.pub, t.cats.corporate, t.cats.t360, t.cats.event, t.cats.social];
   const pages = [t.nav.about, t.nav.portfolio, t.nav.blog, t.nav.contact, t.nav.quote];
@@ -62,7 +64,11 @@ export default function Footer() {
 
         <hr style={{ height: 1, border: 0, background: 'rgba(234,242,238,0.12)' }} />
         <div className="footer-bottom" style={{ paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, fontSize: 13, color: 'rgba(234,242,238,0.45)' }}>
-          <span>© 2024 Virtual Art Production. {t.footer.rights}</span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+            <span>© 2024 Virtual Art Production. {t.footer.rights}</span>
+            <Link to="/privacy" style={{ color: 'rgba(234,242,238,0.62)', borderBottom: '1px solid rgba(234,242,238,0.28)', paddingBottom: 1 }}>{privacyLabel}</Link>
+            <Link to="/conditions-utilisation" style={{ color: 'rgba(234,242,238,0.62)', borderBottom: '1px solid rgba(234,242,238,0.28)', paddingBottom: 1 }}>{termsLabel}</Link>
+          </span>
           <span style={{ maxWidth: 520, textAlign: 'right' }}>Production 4K · Drone · 360° · Digital — Photos des villes : Wikimedia Commons (CC BY-SA)</span>
         </div>
       </div>

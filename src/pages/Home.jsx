@@ -140,11 +140,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ VISITES VIRTUELLES — teaser plein cadre ============ */}
-      <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 520, display: 'flex', alignItems: 'center' }}>
-        <Cover src={IMG.constantine} fallback={FALLBACK.constantine} alt="Constantine" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(17,5,48,0.92) 0%, rgba(17,5,48,0.62) 55%, rgba(17,5,48,0.30) 100%)' }} />
-        <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
+      {/* ============ VISITES VIRTUELLES — teaser texte + visuel AVT ============ */}
+      <section className="band band--deep">
+        <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(32px,5vw,64px)', alignItems: 'center' }}>
           <Reveal style={{ maxWidth: 640 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 18 }}>Visites virtuelles 360°</div>
             <h2 className="h1" style={{ color: '#fff', marginBottom: 20 }}>L'Algérie, explorée en immersion totale</h2>
@@ -152,6 +150,14 @@ export default function Home() {
               Constantine, Tlemcen, Alger — faites entrer vos visiteurs à l'intérieur de vos espaces et des plus beaux sites du pays, en 360°, depuis n'importe quel écran.
             </p>
             <Link to="/portfolio" className="btn">Explorer les visites <span className="arw">→</span></Link>
+          </Reveal>
+          <Reveal delay={120}>
+            <img
+              src="/assets/hero/avt2.jpg"
+              alt="Algeria Virtual Travel — par Virtual Art Production"
+              loading="lazy"
+              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 16, boxShadow: '0 30px 70px rgba(0,0,0,0.45)' }}
+            />
           </Reveal>
         </div>
       </section>

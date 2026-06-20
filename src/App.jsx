@@ -16,6 +16,8 @@ import Devis from './pages/Devis';
 import Blog from './pages/Blog';
 import Article from './pages/Article';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
@@ -41,6 +43,8 @@ export default function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<Article />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/conditions-utilisation" element={<Terms />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
