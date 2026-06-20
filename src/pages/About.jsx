@@ -3,7 +3,9 @@ import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK } from '../data/covers';
+import UiIcon from '../components/UiIcon';
+import AnimatedIcon from '../components/AnimatedIcon';
+import { IMG, FALLBACK, PHOTO, PHOTO_FB } from '../data/covers';
 
 const teamColors = [
   { color: 'rgba(91,13,221,0.14)', tc: 'var(--accent)' },
@@ -45,7 +47,7 @@ export default function About() {
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 36 }}>
               {a.values.map(v => (
                 <div key={v.title} style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 22 }}>
-                  <div style={{ width: 42, height: 42, background: 'var(--accent-soft)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, marginBottom: 14 }}>{v.icon}</div>
+                  <div style={{ width: 42, height: 42, background: 'var(--accent-soft)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 14 }}><AnimatedIcon style={{ color: 'var(--accent)' }}><UiIcon e={v.icon} size={22} /></AnimatedIcon></div>
                   <h4 style={{ fontFamily: 'var(--display)', fontSize: 15.5, fontWeight: 700, marginBottom: 7 }}>{v.title}</h4>
                   <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.65 }}>{v.text}</p>
                 </div>
@@ -55,7 +57,7 @@ export default function About() {
 
           <Reveal delay={120} style={{ position: 'sticky', top: 100 }}>
             <div style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4' }}>
-              <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Alger" />
+              <Cover src={PHOTO.communication} fallback={PHOTO_FB.communication} alt="Virtual Art Production" />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0) 45%, rgba(17,5,48,0.9) 100%)' }} />
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(22px,2.4vw,30px)', display: 'flex', gap: 'clamp(20px,3vw,38px)', flexWrap: 'wrap' }}>
                 {a.stats.map(([n, l]) => (
@@ -86,7 +88,7 @@ export default function About() {
                   <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(22px,2.2vw,30px)', textAlign: 'center', height: '100%', transition: 'transform .25s var(--ease), border-color .25s' }}
                     onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
-                    <div style={{ width: 76, height: 76, background: c.color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}>{m.icon}</div>
+                    <div style={{ width: 76, height: 76, background: c.color, borderRadius: '50%', margin: '0 auto 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 30 }}><AnimatedIcon style={{ fontSize: 30 }}>{m.icon}</AnimatedIcon></div>
                     <h3 style={{ fontFamily: 'var(--display)', fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{m.name}</h3>
                     <p style={{ fontSize: 13, color: c.tc, fontWeight: 600, marginBottom: 8 }}>{m.role}</p>
                     <p style={{ fontSize: 12.5, color: 'var(--muted)', lineHeight: 1.6 }}>{m.desc}</p>

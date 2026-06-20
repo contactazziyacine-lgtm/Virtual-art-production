@@ -53,6 +53,18 @@ export const BLOG_IMG = {
 export const BLOG_HERO    = '/assets/blog/cameraman.jpg';
 export const BLOG_HERO_FB = FALLBACK.constantineMedina;
 
+// Photos réelles (images importées) réutilisées dans les sections du site.
+export const PHOTO = {
+  cameraman:     '/assets/blog/cameraman.jpg',    // tournage / spot pub
+  boardroom:     '/assets/blog/video-roi.jpg',    // réunion entreprise / film institutionnel
+  communication: '/assets/blog/video-trends.jpg', // communication / à propos
+};
+export const PHOTO_FB = {
+  cameraman:     FALLBACK.constantineMedina,
+  boardroom:     FALLBACK.constantineBridge,
+  communication: FALLBACK.constantine,
+};
+
 export const BLOG_FB = {
   videoTrends:  FALLBACK.constantine,
   linkedin:     FALLBACK.tlemcen,

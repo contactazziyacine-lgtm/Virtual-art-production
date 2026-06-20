@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import ServiceIcon from '../components/ServiceIcon';
 import UiIcon from '../components/UiIcon';
+import AnimatedIcon from '../components/AnimatedIcon';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK } from '../data/covers';
+import { IMG, FALLBACK, PHOTO, PHOTO_FB } from '../data/covers';
 
 export default function Services() {
   const { t } = useLang();
@@ -38,7 +39,7 @@ export default function Services() {
       <section className="band band--surface">
         <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 'clamp(32px,5vw,80px)', alignItems: 'center' }}>
           <Reveal className="media media--4x3" style={{ borderRadius: 'var(--r-lg)' }}>
-            <Cover src={IMG.constantineBelle} fallback={FALLBACK.constantineBelle} alt={s.spotTitle} />
+            <Cover src={PHOTO.cameraman} fallback={PHOTO_FB.cameraman} alt={s.spotTitle} />
           </Reveal>
           <Reveal delay={120}>
             <div className="eyebrow">{s.spotTitle}</div>
@@ -47,7 +48,7 @@ export default function Services() {
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {s.spotItems.map(([icon, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
-                  <UiIcon e={icon} size={20} style={{ color: 'var(--accent)' }} />
+                  <AnimatedIcon style={{ color: 'var(--accent)' }}><UiIcon e={icon} size={20} /></AnimatedIcon>
                   <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
                 </div>
               ))}
@@ -66,14 +67,14 @@ export default function Services() {
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               {s.filmItems.map(([icon, label]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r)' }}>
-                  <UiIcon e={icon} size={20} style={{ color: 'var(--accent)' }} />
+                  <AnimatedIcon style={{ color: 'var(--accent)' }}><UiIcon e={icon} size={20} /></AnimatedIcon>
                   <p style={{ fontSize: 13.5, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
                 </div>
               ))}
             </div>
           </Reveal>
           <Reveal delay={120} className="media media--4x3 svc-media-2" style={{ borderRadius: 'var(--r-lg)' }}>
-            <Cover src={IMG.constantineMedina} fallback={FALLBACK.constantineMedina} alt={s.filmTitle} />
+            <Cover src={PHOTO.boardroom} fallback={PHOTO_FB.boardroom} alt={s.filmTitle} />
           </Reveal>
         </div>
       </section>
@@ -93,7 +94,7 @@ export default function Services() {
                   onMouseEnter={e => e.currentTarget.style.background = 'var(--paper)'}
                   onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                   <div style={{ width: 48, height: 48, borderRadius: 'var(--r)', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
-                    <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={cardIcons[i]} size={26} /></span>
+                    <AnimatedIcon style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={cardIcons[i]} size={26} /></AnimatedIcon>
                   </div>
                   <h3 className="h3" style={{ marginBottom: 10 }}>{c.title}</h3>
                   <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.65, marginBottom: 18 }}>{c.desc}</p>
@@ -121,7 +122,7 @@ export default function Services() {
               <div key={label} style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(18px,2vw,26px) 14px', textAlign: 'center', transition: 'transform .25s var(--ease), border-color .25s' }}
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.borderColor = 'var(--accent)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--line)'; }}>
-                <div style={{ marginBottom: 10, color: 'var(--accent)', display: 'flex', justifyContent: 'center' }}><UiIcon e={icon} size={30} /></div>
+                <div style={{ marginBottom: 10, color: 'var(--accent)', display: 'flex', justifyContent: 'center' }}><AnimatedIcon><UiIcon e={icon} size={30} /></AnimatedIcon></div>
                 <p style={{ fontSize: 13, color: 'var(--ink-soft)', fontWeight: 500 }}>{label}</p>
               </div>
             ))}

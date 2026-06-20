@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import Clients from '../components/Clients';
 import ServiceIcon from '../components/ServiceIcon';
+import AnimatedIcon from '../components/AnimatedIcon';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import { IMG, FALLBACK } from '../data/covers';
+import { featuredPortfolio, portfolioThumb } from '../data/portfolio';
 
 export default function Home() {
   const { t } = useLang();
@@ -21,6 +23,9 @@ export default function Home() {
     { ic: 'motion', to: 'motion', title: 'Production 3D & Motion', desc: 'Animations 3D, motion design, habillage graphique et effets visuels modernes.', tags: ['3D', 'Motion', 'VFX'] },
     { ic: 'web', to: 'web', title: 'Création de site web', desc: 'Sites modernes, responsives et optimisés SEO. Vitrines, plateformes et applications.', tags: ['Web', 'Responsive', 'SEO'] },
   ];
+
+  // Libellé de catégorie pour les pastilles de la vitrine portfolio
+  const catLabel = { pub: t.cats.pub, corporate: t.cats.corporate, event: t.cats.event, motion: t.cats.motion, social: t.cats.social, web: t.cats.web };
 
   return (
     <div>
@@ -81,7 +86,7 @@ export default function Home() {
               <Reveal key={s.title} delay={(i % 4) * 70} style={{ borderRight: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
                 <Link to={`/portfolio?cat=${s.to}`} className="svc-cell" style={{ display: 'block', padding: 'clamp(22px,2.2vw,30px)', height: '100%', color: 'inherit', transition: 'background .25s' }}>
                   <div style={{ width: 46, height: 46, borderRadius: 'var(--r)', background: 'var(--accent-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>
-                    <span style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={s.ic} size={24} /></span>
+                    <AnimatedIcon style={{ color: 'var(--accent)', display: 'inline-flex' }}><ServiceIcon name={s.ic} size={24} /></AnimatedIcon>
                   </div>
                   <h3 className="h3" style={{ marginBottom: 9, display: 'flex', alignItems: 'center', gap: 8 }}>
                     {s.title}
@@ -91,6 +96,46 @@ export default function Home() {
                 </Link>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ PORTFOLIO — aperçu des réalisations ============ */}
+      <section className="band band--paper">
+        <div className="wrap">
+          <Reveal className="stack-sm" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 18, marginBottom: 'clamp(28px,3.4vw,44px)' }}>
+            <div>
+              <div className="eyebrow">Portfolio</div>
+              <h2 className="h1" style={{ marginTop: 16 }}>Nos réalisations</h2>
+            </div>
+            <Link to="/portfolio" className="alink">Voir tout le portfolio <span className="arw">→</span></Link>
+          </Reveal>
+
+          <div className="port-grid cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(14px,1.4vw,20px)' }}>
+            {featuredPortfolio.map((item, i) => {
+              const isExternal = !!item.link;
+              const is360 = !!item.tour;
+              const pill = is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : (catLabel[item.cat] || 'Vidéo');
+              return (
+                <Reveal key={item.title} delay={(i % 3) * 80}>
+                  <Link to={`/portfolio?cat=${item.cat}`} className="home-port-card"
+                    style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/10', background: 'var(--deep)' }}>
+                    <div className="home-port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
+                      <Cover src={portfolioThumb(item)} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
+                    </div>
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.05) 0%, rgba(17,5,48,0.35) 55%, rgba(17,5,48,0.92) 100%)' }} />
+                    <div style={{ position: 'absolute', top: 14, left: 14, padding: '6px 12px', borderRadius: 100, background: 'rgba(17,5,48,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>{pill}</div>
+                    <div className="home-port-play" style={{ position: 'absolute', top: '46%', left: '50%', transform: 'translate(-50%,-50%) scale(.85)', width: 54, height: 54, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 10px 30px rgba(91,13,221,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', opacity: 0, transition: 'all .3s var(--ease)' }}>
+                      <span style={{ fontSize: 17, lineHeight: 1 }}>{is360 ? '⤢' : isExternal ? '↗' : '▶'}</span>
+                    </div>
+                    <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(16px,1.6vw,22px)', color: '#fff' }}>
+                      <h3 style={{ fontFamily: 'var(--display)', fontSize: 16, fontWeight: 700, marginBottom: 4, letterSpacing: '-.01em' }}>{item.title}</h3>
+                      <p style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.74)' }}>{item.sub}</p>
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -131,6 +176,10 @@ export default function Home() {
         .svc-cell:hover{background:var(--paper)}
         .svc-cell:hover .svc-arw{opacity:1;transform:none}
         .svc-cell:focus-visible{background:var(--paper);outline-offset:-2px}
+        .home-port-card:hover .home-port-img{transform:scale(1.06)}
+        .home-port-card:hover .home-port-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+        @media(max-width:900px){.port-grid{grid-template-columns:1fr 1fr!important}}
+        @media(max-width:560px){.port-grid{grid-template-columns:1fr!important}}
       `}</style>
     </div>
   );

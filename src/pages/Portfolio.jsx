@@ -6,41 +6,14 @@ import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import { IMG, FALLBACK } from '../data/covers';
-
-const items = [
-  { cat: 'pub', video: '0Vb4MBjoRw4', title: 'Spot Publicitaire — Production 1', sub: 'Réalisation Virtual Art Production' },
-  { cat: 'pub', video: '6AyGuNUa5tk', title: 'Spot Publicitaire — Production 2', sub: 'Réalisation Virtual Art Production' },
-  { cat: 'pub', video: 'm_R9Ehai9g0', title: 'Spot Publicitaire — Production 3', sub: 'Réalisation Virtual Art Production' },
-
-  { cat: 'corporate', video: 'Y87QLWrx8dE', title: 'Film Institutionnel — Entreprise 1', sub: 'Communication corporate' },
-  { cat: 'corporate', video: 'Xa4nVCcB5Xg', title: 'Film Institutionnel — Entreprise 2', sub: 'Présentation d\'entreprise' },
-  { cat: 'corporate', video: '_dvTG-fB4C4', title: 'Film Institutionnel — Entreprise 3', sub: 'Reportage d\'entreprise' },
-
-  { cat: 'event', video: 'H3ZkvTk7Lys', title: 'Couverture Médiatique — Événement 1', sub: 'Captation événementielle' },
-  { cat: 'event', video: 'RP7wOoqQmoU', title: 'Couverture Médiatique — Événement 2', sub: 'Reportage vidéo professionnel' },
-
-  { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/safex-snc/index.htm', title: 'SAFEX — SNC', sub: 'Visite virtuelle 360° immersive', cover: IMG.constantineBelle, fallback: FALLBACK.constantineBelle },
-  { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/AZ-hotel%20zeralda/index.htm', title: 'AZ Hôtel Zéralda', sub: 'Visite virtuelle 360° hôtellerie', cover: IMG.alger, fallback: FALLBACK.alger },
-
-  { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Marketing Digital — Short 1', sub: 'Contenu vertical engageant' },
-  { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Marketing Digital — Short 2', sub: 'Format court & dynamique' },
-  { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Marketing Digital — Short 3', sub: 'Contenu social engageant' },
-
-  { cat: 'motion', video: 'G3mUgVckCtA', title: 'Production 3D — Projet 1', sub: 'Animation 3D & motion design' },
-  { cat: 'motion', video: 'qWK_MgDza2U', title: 'Production 3D — Projet 2', sub: 'Habillage graphique & VFX' },
-  { cat: 'motion', video: '62WtUzTOhmk', title: 'Motion Graphics — Projet 3', sub: 'Animation graphique dynamique' },
-  { cat: 'motion', video: 'idVjpMBZaGM', title: 'Motion Graphics — Projet 4', sub: 'Design animé & effets visuels' },
-
-  { cat: 'web', link: 'https://algeriavirtualtravel.com/en', title: 'Algeria Virtual Travel', sub: 'Plateforme web de tourisme digital', cover: IMG.tlemcen, fallback: FALLBACK.tlemcen },
-];
+import { portfolioItems as items } from '../data/portfolio';
 
 // Destinations phares — chaque carte ouvre la plateforme réelle Algeria Virtual Travel
 const destinations = [
-  { name: 'Constantine', tag: 'La ville suspendue', img: IMG.constantine, fb: FALLBACK.constantine },
-  { name: 'Tlemcen', tag: 'Perle du Maghreb', img: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque },
-  { name: 'Alger', tag: 'La blanche', img: IMG.alger, fb: FALLBACK.alger },
+  { name: 'Constantine', tag: 'La ville suspendue', img: IMG.constantine, fb: FALLBACK.constantine, link: 'https://algeriavirtualtravel.com/fr/search' },
+  { name: 'Tlemcen', tag: 'Perle du Maghreb', img: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque, link: 'https://algeriavirtualtravel.com/fr' },
+  { name: 'Alger', tag: 'La blanche', img: IMG.alger, fb: FALLBACK.alger, link: 'https://algeriavirtualtravel.com/fr/travel' },
 ];
-const AVT_PLATFORM = 'https://algeriavirtualtravel.com/en';
 
 const VALID_CATS = ['all', 'pub', 'corporate', 'event', '360', 'social', 'motion', 'web'];
 
@@ -115,7 +88,7 @@ export default function Portfolio() {
           <div className="cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(16px,1.6vw,22px)' }}>
             {destinations.map((d, i) => (
               <Reveal key={d.name} delay={i * 90}>
-                <a href={AVT_PLATFORM} target="_blank" rel="noopener noreferrer"
+                <a href={d.link} target="_blank" rel="noopener noreferrer"
                   className="dest-card"
                   style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4', textDecoration: 'none', color: '#fff' }}>
                   <div className="dest-img" style={{ position: 'absolute', inset: 0, transition: 'transform .7s var(--ease)' }}>
@@ -161,7 +134,7 @@ export default function Portfolio() {
           </div>
 
           {/* Grille */}
-          <motion.div layout className="port-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(14px,1.4vw,20px)' }}>
+          <motion.div layout className="port-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(14px,1.4vw,20px)', alignItems: 'start' }}>
             <AnimatePresence mode="popLayout">
               {filtered.map(item => {
                 const ytThumb = item.video ? `https://img.youtube.com/vi/${item.video}/hqdefault.jpg` : null;
@@ -175,7 +148,7 @@ export default function Portfolio() {
                     transition={{ duration: .35, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => openItem(item)}
                     className="port-card"
-                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/10', cursor: 'pointer', background: 'var(--deep)' }}>
+                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: item.short ? '9 / 16' : '16/10', cursor: 'pointer', background: 'var(--deep)' }}>
                     <div className="port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
                       <Cover src={ytThumb || item.cover} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
                     </div>
@@ -183,7 +156,7 @@ export default function Portfolio() {
 
                     {/* Pastille type */}
                     <div style={{ position: 'absolute', top: 14, left: 14, display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 12px', borderRadius: 100, background: 'rgba(17,5,48,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>
-                      {is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : 'Vidéo'}
+                      {is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : item.short ? 'Story 9:16' : 'Vidéo'}
                     </div>
 
                     {/* Bouton lecture / explorer */}

@@ -144,6 +144,26 @@ const PATHS = {
       <rect x="16.4" y="13" width="2.6" height="4" rx=".4" />
     </svg>
   ),
+
+  // ---- Valeurs (À propos) ----
+  '⚡': (                                    // Innovation (éclair)
+    <svg viewBox="0 0 24 24" {...base}>
+      <path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10.5H13z" />
+    </svg>
+  ),
+  '✅': (                                    // Qualité (validation)
+    <svg viewBox="0 0 24 24" {...base}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="m8 12 2.5 2.5L16 9" />
+    </svg>
+  ),
+  '🤝': (                                    // Engagement (poignée de main)
+    <svg viewBox="0 0 24 24" {...base}>
+      <path d="M11 7 8.5 9.5a2 2 0 0 0 2.8 2.8l1.2-1.2 3.5 3.5a1.6 1.6 0 0 1-2.3 2.3" />
+      <path d="m13 17 1.4 1.4a1.6 1.6 0 0 0 2.3-2.3M4 8l3.5-3.5a2 2 0 0 1 2.8 0L12 6" />
+      <path d="m2.5 13.5 3 3M21.5 8l-3 3" />
+    </svg>
+  ),
 };
 
 export default function UiIcon({ e, size = 20, style }) {
