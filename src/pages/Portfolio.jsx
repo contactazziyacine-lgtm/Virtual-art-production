@@ -19,6 +19,13 @@ const items = [
   { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Réseaux Sociaux — Short 1', sub: 'Contenu vertical engageant' },
   { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Réseaux Sociaux — Short 2', sub: 'Format court & dynamique' },
   { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Réseaux Sociaux — Short 3', sub: 'Vidéo réseaux sociaux' },
+
+  { cat: 'motion', video: 'G3mUgVckCtA', title: 'Production 3D — Projet 1', sub: 'Animation 3D & motion design' },
+  { cat: 'motion', video: 'qWK_MgDza2U', title: 'Production 3D — Projet 2', sub: 'Habillage graphique & VFX' },
+  { cat: 'motion', video: '62WtUzTOhmk', title: 'Motion Graphics — Projet 3', sub: 'Animation graphique dynamique' },
+  { cat: 'motion', video: 'idVjpMBZaGM', title: 'Motion Graphics — Projet 4', sub: 'Design animé & effets visuels' },
+
+  { cat: 'web', link: 'https://algeriavirtualtravel.com/en', title: 'Algeria Virtual Travel', sub: 'Plateforme web de tourisme digital', bg: 'linear-gradient(135deg,#0d2a1a,#0d5a3a)' },
 ];
 
 export default function Portfolio() {
@@ -33,12 +40,15 @@ export default function Portfolio() {
     { key: 'event', label: t.cats.event },
     { key: '360', label: t.cats.t360 },
     { key: 'social', label: t.cats.social },
+    { key: 'motion', label: t.cats.motion },
+    { key: 'web', label: t.cats.web },
   ];
 
   const filtered = active === 'all' ? items : items.filter(i => i.cat === active);
 
   const openItem = item => {
-    if (item.tour) setModal({ type: 'tour', src: item.tour });
+    if (item.link) window.open(item.link, '_blank', 'noopener');
+    else if (item.tour) setModal({ type: 'tour', src: item.tour });
     else if (item.short) setModal({ type: 'short', src: item.video });
     else if (item.video) setModal({ type: 'video', src: item.video });
   };
@@ -71,9 +81,9 @@ export default function Portfolio() {
                 onMouseEnter={e => { e.currentTarget.querySelector('.overlay').style.opacity='1'; e.currentTarget.querySelector('.play').style.opacity='1'; e.currentTarget.querySelector('.thumb').style.transform='scale(1.08)'; }}
                 onMouseLeave={e => { e.currentTarget.querySelector('.overlay').style.opacity='0'; e.currentTarget.querySelector('.play').style.opacity='0'; e.currentTarget.querySelector('.thumb').style.transform='scale(1)'; }}>
                 <div className="thumb" style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 48, transition: 'transform 0.5s', background: thumb }}>
-                  {item.tour && '🌐'}
+                  {item.tour && '🌐'}{item.link && '💻'}
                 </div>
-                <div className="play" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 52, height: 52, background: 'rgba(0,102,255,0.85)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, opacity: 0, transition: 'opacity 0.3s' }}>{item.tour ? '⤢' : '▶'}</div>
+                <div className="play" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 52, height: 52, background: 'rgba(0,102,255,0.85)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, opacity: 0, transition: 'opacity 0.3s' }}>{item.tour ? '⤢' : item.link ? '↗' : '▶'}</div>
                 <div className="overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.3) 50%,transparent)', opacity: 0, transition: 'opacity 0.3s', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: 20 }}>
                   <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 4 }}>{item.title}</h4>
                   <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.7)' }}>{item.sub}</p>

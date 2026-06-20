@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
-
-const serviceIcons = ['🎬','🏢','🌐','📡','🚁','🎤'];
+import Clients from '../components/Clients';
 
 export default function Home() {
   const { t } = useLang();
@@ -14,12 +13,8 @@ export default function Home() {
     { icon: '📡', title: t.cats.social, desc: 'Stratégie digitale complète, création de contenu et community management.', tags: ['Instagram','LinkedIn','TikTok'] },
     { icon: '🚁', title: 'Captation drone', desc: 'Prises de vue aériennes spectaculaires avec nos drones professionnels certifiés.', tags: ['4K','Certifié','Pro'] },
     { icon: '🎤', title: t.cats.event, desc: 'Conférences, salons, séminaires — nous capturons chaque instant de vos événements.', tags: ['Live','Photo','Vidéo'] },
-  ];
-
-  const testimonials = [
-    { text: 'Virtual Art Production a transformé notre communication. La qualité du film institutionnel a dépassé toutes nos attentes. Une équipe professionnelle et créative.', name: 'Kamel Mansouri', role: 'Directeur Marketing – TechAlger', initials: 'KM', color: 'rgba(0,102,255,0.2)', tc: '#0066ff' },
-    { text: 'La visite virtuelle de notre hôtel a révolutionné nos réservations en ligne. Un travail remarquable, des délais respectés et un accompagnement exemplaire.', name: 'Sarah Benali', role: 'Directrice – AZ Hôtel Zéralda', initials: 'SB', color: 'rgba(245,158,11,0.15)', tc: '#f59e0b' },
-    { text: 'Notre spot publicitaire a généré un engagement exceptionnel sur les réseaux sociaux. Virtual Art Production comprend parfaitement les enjeux du marketing digital.', name: 'Ahmed Rahali', role: 'CEO – Groupe Maghreb Invest', initials: 'AR', color: 'rgba(16,185,129,0.15)', tc: '#10b981' },
+    { icon: '🎨', title: 'Production 3D & Motion Graphics', desc: 'Animations 3D, motion design, habillage graphique et effets visuels pour des contenus modernes et dynamiques.', tags: ['3D','Motion','VFX'] },
+    { icon: '💻', title: 'Création de Site Web', desc: 'Sites web modernes, responsives et optimisés SEO. Vitrines, plateformes et applications web sur mesure.', tags: ['Web','Responsive','SEO'] },
   ];
 
   return (
@@ -48,7 +43,7 @@ export default function Home() {
         </div>
 
         <div className="hero-stats" style={{ position: 'absolute', bottom: 60, right: '5%', display: 'flex', gap: 40, zIndex: 2 }}>
-          {[['100',t.hero.stat1],['+ 8',t.hero.stat2],['4K',t.hero.stat3]].map(([n,l]) => (
+          {[['+ 100',t.hero.stat1],['+ 8',t.hero.stat2],['4K',t.hero.stat3]].map(([n,l]) => (
             <div key={l} style={{ textAlign: 'right' }}>
               <div style={{ fontSize: 36, fontWeight: 900, letterSpacing: -1 }}>{n}</div>
               <div style={{ fontSize: 12, color: '#8892a4', textTransform: 'uppercase', letterSpacing: 1 }}>{l}</div>
@@ -77,26 +72,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section style={{ padding: '100px 5%', background: '#12121a' }}>
-        <div className="section-tag">{t.testimonials.tag}</div>
-        <div className="section-title">{t.testimonials.title}</div>
-        <div className="grid-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 60 }}>
-          {testimonials.map(tm => (
-            <div key={tm.name} style={{ background: '#2a2a3a', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 16, padding: 28 }}>
-              <div style={{ color: '#f59e0b', fontSize: 14, marginBottom: 16, letterSpacing: 2 }}>★★★★★</div>
-              <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.8)', lineHeight: 1.7, marginBottom: 24, fontStyle: 'italic', textAlign: 'justify' }}>"{tm.text}"</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: tm.color, color: tm.tc, display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 16 }}>{tm.initials}</div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 700 }}>{tm.name}</div>
-                  <div style={{ fontSize: 12, color: '#8892a4' }}>{tm.role}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* CLIENTS — Ils nous ont fait confiance */}
+      <Clients />
 
       {/* CTA */}
       <section style={{ padding: '100px 5%', textAlign: 'center', background: 'linear-gradient(135deg,#0d1a3a,#0a0a1f)' }}>
