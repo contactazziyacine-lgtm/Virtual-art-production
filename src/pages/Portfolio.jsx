@@ -5,14 +5,14 @@ import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { FALLBACK, HERO, HERO_FB } from '../data/covers';
+import { IMG, FALLBACK, HERO, HERO_FB } from '../data/covers';
 import { portfolioItems as items } from '../data/portfolio';
 
 // Destinations phares — chaque carte ouvre la plateforme réelle Algeria Virtual Travel
 const destinations = [
-  { id: 'constantine', name: 'Choisissez votre destination', tag: '', img: '/assets/destinations/constantine.jpg', fb: FALLBACK.constantine, link: 'https://algeriavirtualtravel.com/fr/search' },
-  { id: 'tlemcen', name: 'Choisissez votre destination', tag: '', img: '/assets/destinations/tlemcen.jpg', fb: FALLBACK.tlemcenMosque, link: 'https://algeriavirtualtravel.com/fr' },
-  { id: 'alger', name: 'Alger', tag: 'La blanche', img: '/assets/destinations/alger.jpg', fb: FALLBACK.alger, link: 'https://algeriavirtualtravel.com/fr/travel' },
+  { name: 'Constantine', tag: 'La ville suspendue', img: IMG.constantine, fb: FALLBACK.constantine, link: 'https://algeriavirtualtravel.com/fr/search' },
+  { name: 'Tlemcen', tag: 'Perle du Maghreb', img: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque, link: 'https://algeriavirtualtravel.com/fr' },
+  { name: 'Alger', tag: 'La blanche', img: IMG.alger, fb: FALLBACK.alger, link: 'https://algeriavirtualtravel.com/fr/travel' },
 ];
 
 const VALID_CATS = ['all', 'pub', 'corporate', 'event', '360', 'social', 'motion', 'web'];
@@ -90,16 +90,16 @@ export default function Portfolio() {
 
           <div className="cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(16px,1.6vw,22px)' }}>
             {destinations.map((d, i) => (
-              <Reveal key={d.id} delay={i * 90}>
+              <Reveal key={d.name} delay={i * 90}>
                 <a href={d.link} target="_blank" rel="noopener noreferrer"
                   className="dest-card"
-                  style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '4/5', textDecoration: 'none', color: '#fff' }}>
+                  style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4', textDecoration: 'none', color: '#fff' }}>
                   <div className="dest-img" style={{ position: 'absolute', inset: 0, transition: 'transform .7s var(--ease)' }}>
                     <Cover src={d.img} fallback={d.fb} alt={d.name} />
                   </div>
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0) 40%, rgba(17,5,48,0.88) 100%)' }} />
                   <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(20px,2.2vw,28px)' }}>
-                    {d.tag && <div className="eyebrow no-tick" style={{ color: 'rgba(255,255,255,0.82)', marginBottom: 8 }}>{d.tag}</div>}
+                    <div className="eyebrow no-tick" style={{ color: 'rgba(255,255,255,0.82)', marginBottom: 8 }}>{d.tag}</div>
                     <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(22px,2.4vw,30px)', fontWeight: 800, letterSpacing: '-.02em', display: 'flex', alignItems: 'center', gap: 10 }}>
                       {d.name} <span className="dest-arw" style={{ display: 'inline-block', transition: 'transform .3s var(--ease)' }}>→</span>
                     </div>

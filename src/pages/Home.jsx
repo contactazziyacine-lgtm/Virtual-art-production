@@ -125,7 +125,7 @@ export default function Home() {
             <p className="lead justify" style={{ color: 'rgba(255,255,255,0.84)', marginBottom: 32 }}>
               Constantine, Tlemcen, Alger — faites entrer vos visiteurs à l'intérieur de vos espaces et des plus beaux sites du pays, en 360°, depuis n'importe quel écran.
             </p>
-            <Link to="/portfolio" className="btn">Explorer les visites <span className="arw">→</span></Link>
+            <a href="https://algeriavirtualtravel.com/en" target="_blank" rel="noopener noreferrer" className="btn">Explorer les visites <span className="arw">→</span></a>
           </Reveal>
           <Reveal delay={120}>
             <img
