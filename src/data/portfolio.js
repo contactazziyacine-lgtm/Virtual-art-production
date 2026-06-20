@@ -17,6 +17,7 @@ export const portfolioItems = [
 
   { cat: 'event', video: 'H3ZkvTk7Lys', title: 'Couverture Médiatique — Événement 1', sub: 'Captation événementielle' },
   { cat: 'event', video: 'RP7wOoqQmoU', title: 'Couverture Médiatique — Événement 2', sub: 'Reportage vidéo professionnel' },
+  { cat: 'event', video: 'EioxivWwKHw', title: 'Couverture Médiatique — Événement 3', sub: 'Reportage vidéo professionnel' },
 
   { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/safex-snc/index.htm', title: 'SAFEX — SNC', sub: 'Visite virtuelle 360° immersive', cover: IMG.constantineBelle, fallback: FALLBACK.constantineBelle },
   { cat: '360', tour: 'https://s3.algeriavirtualtravel.com/visites/AZ-hotel%20zeralda/index.htm', title: 'AZ Hôtel Zéralda', sub: 'Visite virtuelle 360° hôtellerie', cover: AZ_HOTEL_IMG, fallback: FALLBACK.alger },
@@ -24,11 +25,19 @@ export const portfolioItems = [
   { cat: 'social', video: 'WjNukodGau8', short: true, title: 'Marketing Digital — Short 1', sub: 'Contenu vertical engageant' },
   { cat: 'social', video: 'JFqNpQNCCO8', short: true, title: 'Marketing Digital — Short 2', sub: 'Format court & dynamique' },
   { cat: 'social', video: 'oEp7UpDA4x8', short: true, title: 'Marketing Digital — Short 3', sub: 'Contenu social engageant' },
+  { cat: 'social', video: '7Gm__UsPA5g', short: true, title: 'Marketing Digital — Short 4', sub: 'Format court & dynamique' },
 
   { cat: 'motion', video: 'G3mUgVckCtA', title: 'Production 3D — Projet 1', sub: 'Animation 3D & motion design' },
   { cat: 'motion', video: 'qWK_MgDza2U', title: 'Production 3D — Projet 2', sub: 'Habillage graphique & VFX' },
   { cat: 'motion', video: '62WtUzTOhmk', title: 'Motion Graphics — Projet 3', sub: 'Animation graphique dynamique' },
   { cat: 'motion', video: 'idVjpMBZaGM', title: 'Motion Graphics — Projet 4', sub: 'Design animé & effets visuels' },
+
+  { cat: 'motion', image: '/assets/motion/vg-bright-white.jpg', title: 'Vogue Secret — Bright White', sub: 'Design produit & habillage graphique' },
+  { cat: 'motion', image: '/assets/motion/minas-ecran-total-spf50.jpg', title: 'Minas — Écran Total SPF 50', sub: 'Habillage graphique & design produit' },
+  { cat: 'motion', image: '/assets/motion/vg-ph5-hydratant.jpg', title: 'Vogue Secret — PH5 Hydratant', sub: 'Design produit & motion design' },
+  { cat: 'motion', image: '/assets/motion/vg-ph7-matifiant.jpg', title: 'Vogue Secret — PH7 Matifiant', sub: 'Habillage graphique & design produit' },
+  { cat: 'motion', image: '/assets/motion/maxi-chazen-huiles.jpg', title: 'Maxi Chazen — Lait aux Huiles', sub: 'Composition visuelle & design produit' },
+  { cat: 'motion', image: '/assets/motion/maxi-chazen-bebe.jpg', title: 'Maxi Chazen — Lait Hydratant Bébé', sub: 'Design produit & habillage graphique' },
 
   { cat: 'web', link: 'https://algeriavirtualtravel.com/en', title: 'Algeria Virtual Travel', sub: 'Plateforme web de tourisme digital', cover: IMG.tlemcen, fallback: FALLBACK.tlemcen },
 ];

@@ -5,14 +5,14 @@ import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK, HERO, HERO_FB } from '../data/covers';
+import { FALLBACK, HERO, HERO_FB } from '../data/covers';
 import { portfolioItems as items } from '../data/portfolio';
 
 // Destinations phares — chaque carte ouvre la plateforme réelle Algeria Virtual Travel
 const destinations = [
-  { name: 'Constantine', tag: 'La ville suspendue', img: IMG.constantine, fb: FALLBACK.constantine, link: 'https://algeriavirtualtravel.com/fr/search' },
-  { name: 'Tlemcen', tag: 'Perle du Maghreb', img: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque, link: 'https://algeriavirtualtravel.com/fr' },
-  { name: 'Alger', tag: 'La blanche', img: IMG.alger, fb: FALLBACK.alger, link: 'https://algeriavirtualtravel.com/fr/travel' },
+  { name: 'Constantine', tag: 'La ville suspendue', img: '/assets/destinations/constantine.jpg', fb: FALLBACK.constantine, link: 'https://algeriavirtualtravel.com/fr/search' },
+  { name: 'Tlemcen', tag: 'Perle du Maghreb', img: '/assets/destinations/tlemcen.jpg', fb: FALLBACK.tlemcenMosque, link: 'https://algeriavirtualtravel.com/fr' },
+  { name: 'Alger', tag: 'La blanche', img: '/assets/destinations/alger.jpg', fb: FALLBACK.alger, link: 'https://algeriavirtualtravel.com/fr/travel' },
 ];
 
 const VALID_CATS = ['all', 'pub', 'corporate', 'event', '360', 'social', 'motion', 'web'];
@@ -52,6 +52,7 @@ export default function Portfolio() {
   const openItem = item => {
     if (item.link) window.open(item.link, '_blank', 'noopener');
     else if (item.tour) setModal({ type: 'tour', src: item.tour, title: item.title });
+    else if (item.image) setModal({ type: 'image', src: item.image, title: item.title });
     else if (item.short) setModal({ type: 'short', src: item.video, title: item.title });
     else if (item.video) setModal({ type: 'video', src: item.video, title: item.title });
   };
@@ -92,7 +93,7 @@ export default function Portfolio() {
               <Reveal key={d.name} delay={i * 90}>
                 <a href={d.link} target="_blank" rel="noopener noreferrer"
                   className="dest-card"
-                  style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4', textDecoration: 'none', color: '#fff' }}>
+                  style={{ display: 'block', position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '4/5', textDecoration: 'none', color: '#fff' }}>
                   <div className="dest-img" style={{ position: 'absolute', inset: 0, transition: 'transform .7s var(--ease)' }}>
                     <Cover src={d.img} fallback={d.fb} alt={d.name} />
                   </div>
@@ -142,6 +143,7 @@ export default function Portfolio() {
                 const ytThumb = item.video ? `https://img.youtube.com/vi/${item.video}/hqdefault.jpg` : null;
                 const isExternal = !!item.link;
                 const is360 = !!item.tour;
+                const isImage = !!item.image;
                 return (
                   <motion.div key={item.title} layout
                     initial={{ opacity: 0, scale: .96 }}
@@ -150,20 +152,20 @@ export default function Portfolio() {
                     transition={{ duration: .35, ease: [0.22, 1, 0.36, 1] }}
                     onClick={() => openItem(item)}
                     className="port-card"
-                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: item.short ? '9 / 16' : '16/9', cursor: 'pointer', background: 'var(--deep)', width: '100%', maxWidth: item.short ? 230 : 'none', justifySelf: item.short ? 'center' : 'stretch' }}>
+                    style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: item.short ? '9 / 16' : isImage ? '1 / 1' : '16/9', cursor: 'pointer', background: 'var(--deep)', width: '100%', maxWidth: item.short ? 230 : 'none', justifySelf: item.short ? 'center' : 'stretch' }}>
                     <div className="port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
-                      <Cover src={ytThumb || item.cover} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
+                      <Cover src={ytThumb || item.image || item.cover} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
                     </div>
                     <div className="port-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.05) 0%, rgba(17,5,48,0.35) 55%, rgba(17,5,48,0.92) 100%)', transition: 'opacity .3s' }} />
 
                     {/* Pastille type */}
                     <div style={{ position: 'absolute', top: 14, left: 14, display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 12px', borderRadius: 100, background: 'rgba(17,5,48,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>
-                      {is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : item.short ? 'Story 9:16' : 'Vidéo'}
+                      {is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : isImage ? 'Design' : item.short ? 'Story 9:16' : 'Vidéo'}
                     </div>
 
                     {/* Bouton lecture / explorer */}
                     <div className="port-play" style={{ position: 'absolute', top: '46%', left: '50%', transform: 'translate(-50%,-50%) scale(.85)', width: 58, height: 58, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 10px 30px rgba(91,13,221,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', opacity: 0, transition: 'all .3s var(--ease)' }}>
-                      <span style={{ fontSize: 18, lineHeight: 1 }}>{is360 ? '⤢' : isExternal ? '↗' : '▶'}</span>
+                      <span style={{ fontSize: 18, lineHeight: 1 }}>{is360 ? '⤢' : isExternal ? '↗' : isImage ? '⤢' : '▶'}</span>
                     </div>
 
                     <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(16px,1.6vw,22px)', color: '#fff' }}>
@@ -192,7 +194,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 24, scale: .97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 24, scale: .97 }}
               transition={{ duration: .35, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
-              style={{ width: '100%', maxWidth: modal.type === 'short' ? 420 : (modal.type === 'tour' ? 1160 : 980), position: 'relative' }}>
+              style={{ width: '100%', maxWidth: modal.type === 'short' ? 420 : (modal.type === 'tour' ? 1160 : modal.type === 'image' ? 720 : 980), position: 'relative' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14, gap: 16 }}>
                 <span style={{ color: '#fff', fontFamily: 'var(--display)', fontSize: 15, fontWeight: 600, letterSpacing: '.01em' }}>{modal.title}</span>
                 <button onClick={() => setModal(null)} aria-label="Fermer"
@@ -203,6 +205,10 @@ export default function Portfolio() {
               {modal.type === 'tour' ? (
                 <div style={{ position: 'relative', height: '78vh', borderRadius: 'var(--r-lg)', overflow: 'hidden', background: '#000', boxShadow: '0 30px 80px rgba(0,0,0,.5)' }}>
                   <iframe src={modal.src} title="Visite virtuelle 360°" allowFullScreen style={{ width: '100%', height: '100%', border: 0 }} />
+                </div>
+              ) : modal.type === 'image' ? (
+                <div style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', background: '#000', boxShadow: '0 30px 80px rgba(0,0,0,.5)', lineHeight: 0 }}>
+                  <img src={modal.src} alt={modal.title} style={{ width: '100%', height: 'auto', maxHeight: '82vh', objectFit: 'contain', display: 'block' }} />
                 </div>
               ) : (
                 <div style={{ position: 'relative', paddingBottom: modal.type === 'short' ? '177.78%' : '56.25%', height: 0, borderRadius: 'var(--r-lg)', overflow: 'hidden', background: '#000', boxShadow: '0 30px 80px rgba(0,0,0,.5)' }}>
