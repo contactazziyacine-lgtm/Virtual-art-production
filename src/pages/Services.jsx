@@ -22,7 +22,7 @@ export default function Services() {
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 440, display: 'flex', alignItems: 'flex-end' }}>
         <Cover src={IMG.tlemcen} fallback={FALLBACK.tlemcen} alt="Tlemcen" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.55) 0%, rgba(7,39,31,0.42) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.55) 0%, rgba(17,5,48,0.42) 42%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 860 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{s.tag}</div>

@@ -45,7 +45,7 @@ export default function Devis() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const ACCENT = '#12A065';
+  const ACCENT = '#5B0DDD';
   const fieldStyle = { display: 'flex', flexDirection: 'column', gap: 8 };
   const labelStyle = { fontFamily: 'var(--display)', fontSize: 12.5, fontWeight: 600, color: 'var(--ink-soft)', textTransform: 'uppercase', letterSpacing: '.06em' };
   const sectionTitle = { gridColumn: '1/-1', fontFamily: 'var(--display)', fontSize: 13, fontWeight: 700, color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '.1em', paddingTop: 8 };
@@ -82,7 +82,7 @@ export default function Devis() {
 
       {/* ============ FORMULAIRE ============ */}
       <section className="band band--surface">
-        <Reveal className="quote-form" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,4vw,56px)', maxWidth: 900, margin: '0 auto', boxShadow: '0 10px 40px rgba(10,50,42,.05)' }}>
+        <Reveal className="quote-form" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,4vw,56px)', maxWidth: 900, margin: '0 auto', boxShadow: '0 10px 40px rgba(27,10,77,.05)' }}>
           <form onSubmit={handleSubmit}>
             <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
 

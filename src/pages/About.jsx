@@ -6,10 +6,10 @@ import Cover from '../components/Cover';
 import { IMG, FALLBACK } from '../data/covers';
 
 const teamColors = [
-  { color: 'rgba(18,160,101,0.14)', tc: 'var(--accent)' },
+  { color: 'rgba(91,13,221,0.14)', tc: 'var(--accent)' },
   { color: 'rgba(14,134,84,0.14)', tc: 'var(--accent-2)' },
-  { color: 'rgba(10,50,42,0.10)', tc: 'var(--deep)' },
-  { color: 'rgba(18,160,101,0.10)', tc: 'var(--accent)' },
+  { color: 'rgba(27,10,77,0.10)', tc: 'var(--deep)' },
+  { color: 'rgba(91,13,221,0.10)', tc: 'var(--accent)' },
 ];
 
 export default function About() {
@@ -26,7 +26,7 @@ export default function About() {
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 440, display: 'flex', alignItems: 'flex-end' }}>
         <Cover src={IMG.constantineNature} fallback={FALLBACK.constantineNature} alt="Algérie" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.5) 0%, rgba(7,39,31,0.40) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.5) 0%, rgba(17,5,48,0.40) 42%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 860 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{a.tag}</div>
@@ -39,9 +39,9 @@ export default function About() {
       <section className="band band--surface">
         <div className="wrap split" style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 'clamp(36px,5vw,84px)', alignItems: 'start' }}>
           <Reveal>
-            <p className="lead" style={{ marginBottom: 18 }}>{a.p1}</p>
-            <p style={{ color: 'var(--muted)', marginBottom: 18, fontSize: 16, lineHeight: 1.8 }}>{a.p2}</p>
-            <p style={{ color: 'var(--muted)', fontSize: 16, lineHeight: 1.8 }}>{a.p3}</p>
+            <p className="lead justify" style={{ marginBottom: 18 }}>{a.p1}</p>
+            <p className="justify" style={{ color: 'var(--muted)', marginBottom: 18, fontSize: 16, lineHeight: 1.8 }}>{a.p2}</p>
+            <p className="justify" style={{ color: 'var(--muted)', fontSize: 16, lineHeight: 1.8 }}>{a.p3}</p>
             <div className="cols-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginTop: 36 }}>
               {a.values.map(v => (
                 <div key={v.title} style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 22 }}>
@@ -56,7 +56,7 @@ export default function About() {
           <Reveal delay={120} style={{ position: 'sticky', top: 100 }}>
             <div style={{ position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '3/4' }}>
               <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Alger" />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0) 45%, rgba(7,39,31,0.9) 100%)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0) 45%, rgba(17,5,48,0.9) 100%)' }} />
               <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(22px,2.4vw,30px)', display: 'flex', gap: 'clamp(20px,3vw,38px)', flexWrap: 'wrap' }}>
                 {a.stats.map(([n, l]) => (
                   <div key={l}>

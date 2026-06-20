@@ -76,7 +76,7 @@ export default function Portfolio() {
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 460, display: 'flex', alignItems: 'flex-end' }}>
         <Cover src={IMG.constantineBridge} fallback={FALLBACK.constantineBridge} alt="Constantine" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.55) 0%, rgba(7,39,31,0.40) 40%, rgba(7,39,31,0.92) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.55) 0%, rgba(17,5,48,0.40) 40%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,86px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 860 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{t.portfolio.tag}</div>
@@ -106,7 +106,7 @@ export default function Portfolio() {
                   <div className="dest-img" style={{ position: 'absolute', inset: 0, transition: 'transform .7s var(--ease)' }}>
                     <Cover src={d.img} fallback={d.fb} alt={d.name} />
                   </div>
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0) 40%, rgba(7,39,31,0.88) 100%)' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0) 40%, rgba(17,5,48,0.88) 100%)' }} />
                   <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 'clamp(20px,2.2vw,28px)' }}>
                     <div className="eyebrow no-tick" style={{ color: 'rgba(255,255,255,0.82)', marginBottom: 8 }}>{d.tag}</div>
                     <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(22px,2.4vw,30px)', fontWeight: 800, letterSpacing: '-.02em', display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -164,15 +164,15 @@ export default function Portfolio() {
                     <div className="port-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
                       <Cover src={ytThumb || item.cover} fallback={item.fallback || FALLBACK.constantine} alt={item.title} />
                     </div>
-                    <div className="port-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.05) 0%, rgba(7,39,31,0.35) 55%, rgba(7,39,31,0.92) 100%)', transition: 'opacity .3s' }} />
+                    <div className="port-scrim" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.05) 0%, rgba(17,5,48,0.35) 55%, rgba(17,5,48,0.92) 100%)', transition: 'opacity .3s' }} />
 
                     {/* Pastille type */}
-                    <div style={{ position: 'absolute', top: 14, left: 14, display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 12px', borderRadius: 100, background: 'rgba(7,39,31,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>
+                    <div style={{ position: 'absolute', top: 14, left: 14, display: 'inline-flex', alignItems: 'center', gap: 7, padding: '6px 12px', borderRadius: 100, background: 'rgba(17,5,48,0.55)', backdropFilter: 'blur(6px)', color: '#fff', fontSize: 11.5, fontFamily: 'var(--display)', fontWeight: 600, letterSpacing: '.04em' }}>
                       {is360 ? '360° Immersif' : isExternal ? 'Plateforme web' : 'Vidéo'}
                     </div>
 
                     {/* Bouton lecture / explorer */}
-                    <div className="port-play" style={{ position: 'absolute', top: '46%', left: '50%', transform: 'translate(-50%,-50%) scale(.85)', width: 58, height: 58, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 10px 30px rgba(18,160,101,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', opacity: 0, transition: 'all .3s var(--ease)' }}>
+                    <div className="port-play" style={{ position: 'absolute', top: '46%', left: '50%', transform: 'translate(-50%,-50%) scale(.85)', width: 58, height: 58, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 10px 30px rgba(91,13,221,.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', opacity: 0, transition: 'all .3s var(--ease)' }}>
                       <span style={{ fontSize: 18, lineHeight: 1 }}>{is360 ? '⤢' : isExternal ? '↗' : '▶'}</span>
                     </div>
 

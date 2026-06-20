@@ -98,7 +98,7 @@ export default function Contact() {
 
           {/* Colonne formulaire */}
           <Reveal delay={120}>
-            <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,3.4vw,48px)', boxShadow: '0 10px 40px rgba(10,50,42,.05)' }}>
+            <div style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,3.4vw,48px)', boxShadow: '0 10px 40px rgba(27,10,77,.05)' }}>
               <h3 className="h3" style={{ marginBottom: 26, fontSize: 22 }}>{t.contact.msgTitle}</h3>
 
               {status === 'sent' ? (

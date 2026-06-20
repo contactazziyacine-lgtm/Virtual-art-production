@@ -26,30 +26,35 @@ export default function Home() {
     <div>
       <Seo title={t.nav.home} description="Virtual Art Production — production audiovisuelle en Algérie : spots publicitaires, films corporate, visites virtuelles 360°, captation drone et motion design." />
 
-      {/* ============ HÉRO — pleine page photographique ============ */}
-      <section style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'flex-end', overflow: 'hidden' }}>
-        <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Baie d'Alger" style={{ position: 'absolute', inset: 0 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.42) 0%, rgba(7,39,31,0.20) 38%, rgba(7,39,31,0.78) 100%)' }} />
+      {/* ============ HÉRO — pleine page, fond dégradé de marque + photo ============ */}
+      <section style={{ position: 'relative', minHeight: '100svh', display: 'flex', alignItems: 'flex-end', overflow: 'hidden', background: 'var(--deep-2)' }}>
+        {/* dégradé de marque (toujours rendu) */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, #1B0A4D 0%, #2202EB 52%, #9529AC 100%)' }} />
+        {/* photo, fondue dans la palette ; si elle échoue, le dégradé reste */}
+        <Cover src={IMG.alger} fallback={FALLBACK.alger} alt="Baie d'Alger" style={{ position: 'absolute', inset: 0, opacity: .42, mixBlendMode: 'overlay' }} />
+        {/* halo lumineux + voile sombre pour la lisibilité du texte */}
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(120% 90% at 78% 8%, rgba(149,41,172,0.55) 0%, rgba(149,41,172,0) 55%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.30) 0%, rgba(17,5,48,0.10) 36%, rgba(17,5,48,0.82) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingBottom: 'clamp(56px, 9vw, 110px)', paddingTop: 120, color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 980 }}>
-            <div className="eyebrow no-tick" style={{ color: '#fff', opacity: .92, marginBottom: 22 }}>
-              <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--accent)' }} /> {t.hero.badge}
+            <div className="eyebrow no-tick" style={{ color: '#fff', opacity: .95, marginBottom: 22 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#fff', boxShadow: '0 0 14px rgba(255,255,255,.9)' }} /> {t.hero.badge}
             </div>
             <h1 className="display" style={{ color: '#fff', marginBottom: 26, textWrap: 'balance' }}>
               {t.hero.title1} {t.hero.title2}<br />{t.hero.title3}
             </h1>
-            <p className="lead" style={{ color: 'rgba(255,255,255,0.88)', marginBottom: 38 }}>{t.hero.sub}</p>
+            <p className="lead" style={{ color: 'rgba(255,255,255,0.92)', marginBottom: 38 }}>{t.hero.sub}</p>
             <div className="stack-sm" style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <Link to="/devis" className="btn">{t.hero.cta1} <span className="arw">→</span></Link>
-              <Link to="/portfolio" className="btn btn--light">{t.hero.cta2}</Link>
+              <Link to="/devis" className="btn btn--light">{t.hero.cta1} <span className="arw">→</span></Link>
+              <Link to="/portfolio" className="btn btn--ghost" style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.5)' }}>{t.hero.cta2}</Link>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: 'clamp(28px,5vw,64px)', flexWrap: 'wrap', marginTop: 'clamp(40px,6vw,72px)', borderTop: '1px solid rgba(255,255,255,0.22)', paddingTop: 30 }}>
+          <div style={{ display: 'flex', gap: 'clamp(28px,5vw,64px)', flexWrap: 'wrap', marginTop: 'clamp(40px,6vw,72px)', borderTop: '1px solid rgba(255,255,255,0.24)', paddingTop: 30 }}>
             {[['+ 100', t.hero.stat1], ['+ 8', t.hero.stat2], ['4K', t.hero.stat3]].map(([n, l]) => (
               <div key={l}>
                 <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(28px,3vw,42px)', fontWeight: 800, letterSpacing: '-.02em', color: '#fff' }}>{n}</div>
-                <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: '.12em', marginTop: 4 }}>{l}</div>
+                <div style={{ fontSize: 12.5, color: 'rgba(255,255,255,0.74)', textTransform: 'uppercase', letterSpacing: '.12em', marginTop: 4 }}>{l}</div>
               </div>
             ))}
           </div>
@@ -64,7 +69,7 @@ export default function Home() {
             <h2 className="h1" style={{ marginTop: 18 }}>{t.services.title1} {t.services.title2}</h2>
           </Reveal>
           <Reveal delay={120}>
-            <p className="lead" style={{ marginBottom: 22 }}>{t.cta.sub}</p>
+            <p className="lead justify" style={{ marginBottom: 22 }}>{t.cta.sub}</p>
             <Link to="/services" className="alink">Découvrir nos expertises <span className="arw">→</span></Link>
           </Reveal>
         </div>
@@ -92,12 +97,12 @@ export default function Home() {
       {/* ============ VISITES VIRTUELLES — teaser plein cadre ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 520, display: 'flex', alignItems: 'center' }}>
         <Cover src={IMG.constantine} fallback={FALLBACK.constantine} alt="Constantine" style={{ position: 'absolute', inset: 0, opacity: .5 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(7,39,31,0.92) 0%, rgba(7,39,31,0.62) 55%, rgba(7,39,31,0.30) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(17,5,48,0.92) 0%, rgba(17,5,48,0.62) 55%, rgba(17,5,48,0.30) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2 }}>
           <Reveal style={{ maxWidth: 640 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 18 }}>Visites virtuelles 360°</div>
             <h2 className="h1" style={{ color: '#fff', marginBottom: 20 }}>L'Algérie, explorée en immersion totale</h2>
-            <p className="lead" style={{ color: 'rgba(255,255,255,0.84)', marginBottom: 32 }}>
+            <p className="lead justify" style={{ color: 'rgba(255,255,255,0.84)', marginBottom: 32 }}>
               Constantine, Tlemcen, Alger — faites entrer vos visiteurs à l'intérieur de vos espaces et des plus beaux sites du pays, en 360°, depuis n'importe quel écran.
             </p>
             <Link to="/portfolio" className="btn">Explorer les visites <span className="arw">→</span></Link>

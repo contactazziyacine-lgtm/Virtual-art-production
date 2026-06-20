@@ -33,14 +33,16 @@ export default function Navbar() {
 
   const langs = ['FR', 'AR', 'EN'];
   const LangSwitcher = () => (
-    <div style={{ display: 'flex', gap: 2, border: '1px solid var(--line-2)', borderRadius: 'var(--r)', padding: 2 }}>
+    <div style={{ display: 'flex', gap: 2, border: `1px solid ${scrolled ? 'var(--line-2)' : 'rgba(255,255,255,0.35)'}`, borderRadius: 'var(--r)', padding: 2 }}>
       {langs.map(l => {
         const on = lang === l.toLowerCase();
+        const offColor = scrolled ? 'var(--muted)' : 'rgba(255,255,255,0.80)';
         return (
           <button key={l} onClick={() => setLang(l.toLowerCase())} aria-pressed={on} style={{
             padding: '5px 10px', borderRadius: 3, border: 'none', cursor: 'pointer',
             fontFamily: 'var(--body)', fontSize: 12, fontWeight: 700,
-            background: on ? 'var(--ink)' : 'transparent', color: on ? '#fff' : 'var(--muted)',
+            background: on ? (scrolled ? 'var(--ink)' : 'rgba(255,255,255,0.95)') : 'transparent',
+            color: on ? (scrolled ? '#fff' : 'var(--deep-2)') : offColor,
             transition: 'all .2s',
           }}>{l}</button>
         );
@@ -58,18 +60,20 @@ export default function Navbar() {
       borderBottom: `1px solid ${scrolled ? 'var(--line)' : 'transparent'}`,
       transition: 'background .3s, border-color .3s',
     }}>
-      <Link to="/" aria-label="Accueil"><Logo height={36} /></Link>
+      <Link to="/" aria-label="Accueil"><Logo height={36} tone={scrolled ? 'ink' : 'light'} /></Link>
 
       <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
         <ul style={{ display: 'flex', gap: 24, listStyle: 'none', alignItems: 'center' }}>
           {links.map(l => {
             const on = pathname === l.to;
+            const idle = scrolled ? 'var(--ink-soft)' : 'rgba(255,255,255,0.86)';
+            const active = scrolled ? 'var(--ink)' : '#fff';
             return (
               <li key={l.to}>
                 <Link to={l.to} style={{
                   position: 'relative', fontSize: 14.5, fontWeight: on ? 600 : 500,
-                  color: on ? 'var(--ink)' : 'var(--ink-soft)', paddingBottom: 4,
-                  borderBottom: `2px solid ${on ? 'var(--accent)' : 'transparent'}`, transition: 'color .2s',
+                  color: on ? active : idle, paddingBottom: 4,
+                  borderBottom: `2px solid ${on ? (scrolled ? 'var(--accent)' : '#C9B6FF') : 'transparent'}`, transition: 'color .2s',
                 }}>{l.label}</Link>
               </li>
             );
@@ -83,7 +87,7 @@ export default function Navbar() {
         style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 8 }}>
         {[0,1,2].map(i => (
           <span key={i} style={{
-            width: 24, height: 2, background: 'var(--ink)', display: 'block', transition: 'transform .25s, opacity .2s',
+            width: 24, height: 2, background: (scrolled || menuOpen) ? 'var(--ink)' : '#fff', display: 'block', transition: 'transform .25s, opacity .2s',
             transform: menuOpen ? (i === 0 ? 'translateY(7px) rotate(45deg)' : i === 2 ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
             opacity: menuOpen && i === 1 ? 0 : 1,
           }} />

@@ -9,7 +9,7 @@ export default function Cover({ src, fallback, alt = '', className = '', style }
   const [failed, setFailed] = useState(false);
   if (failed || !src) {
     return <div className={className} role="img" aria-label={alt}
-      style={{ background: fallback || 'linear-gradient(135deg,#0a322a,#0e6e54)', width: '100%', height: '100%', ...style }} />;
+      style={{ background: fallback || 'linear-gradient(135deg,#1B0A4D,#5B0DDD)', width: '100%', height: '100%', ...style }} />;
   }
   return (
     <img src={src} alt={alt} loading="lazy" className={className}

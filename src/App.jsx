@@ -14,6 +14,7 @@ import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Devis from './pages/Devis';
 import Blog from './pages/Blog';
+import Article from './pages/Article';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
 
@@ -38,6 +39,7 @@ export default function App() {
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/devis" element={<Devis />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Article />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

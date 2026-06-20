@@ -5,19 +5,23 @@
    ===================================================================== */
 
 :root {
-  /* Couleurs */
-  --paper:    #FBFAF8;   /* fond chaud, presque blanc */
+  /* Couleurs — palette dégradé bleu → violet */
+  --paper:    #FBFAFE;   /* fond très clair, légère teinte froide */
   --surface:  #FFFFFF;   /* cartes, panneaux */
-  --ink:      #0E1A1C;   /* texte / titres */
-  --ink-soft: #34433F;
-  --muted:    #6B7A75;   /* texte secondaire */
-  --line:     #E7E3DA;   /* filets */
-  --line-2:   #D9D4C8;
-  --deep:     #0A322A;   /* bandes sombres / footer (vert pétrole) */
-  --deep-2:   #07271F;
-  --accent:   #12A065;   /* vert AVT — signature */
-  --accent-2: #0E8654;   /* vert pressé */
-  --accent-soft: rgba(18,160,101,0.10);
+  --ink:      #14102A;   /* texte / titres (encre violacée sombre) */
+  --ink-soft: #353052;
+  --muted:    #6E6A86;   /* texte secondaire */
+  --line:     #E6E3F2;   /* filets */
+  --line-2:   #D6D1EA;
+  --deep:     #1B0A4D;   /* bandes sombres / footer (indigo profond) */
+  --deep-2:   #110530;   /* indigo très profond (overlays) */
+  --accent:   #5B0DDD;   /* violet signature */
+  --accent-2: #4709B0;   /* violet pressé */
+  --accent-soft: rgba(91,13,221,0.10);
+  --blue:     #2202EB;   /* extrémité bleue du dégradé */
+  --magenta:  #9529AC;   /* extrémité magenta du dégradé */
+  --grad:     linear-gradient(90deg, #2202EB 0%, #9529AC 100%);
+  --grad-135: linear-gradient(135deg, #2202EB 0%, #9529AC 100%);
 
   /* Typo */
   --display: 'Archivo', 'Inter', system-ui, sans-serif;
@@ -143,6 +147,17 @@ select option { color: var(--ink); }
 
 /* ---------- Accessibilité ---------- */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- Texte justifié (corps d'article & paragraphes longs) ---------- */
+.justify { text-align: justify; text-justify: inter-word; hyphens: auto; }
+.prose { max-width: 72ch; }
+.prose p { text-align: justify; text-justify: inter-word; hyphens: auto; font-size: 17px; line-height: 1.78; color: var(--ink-soft); margin-bottom: 20px; }
+.prose h2, .prose h3 { font-family: var(--display); letter-spacing: -.01em; margin: 40px 0 14px; }
+.prose ul { margin: 0 0 22px; padding-inline-start: 22px; }
+.prose li { font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 8px; }
+.prose li::marker { color: var(--accent); }
+.prose .lead { text-align: justify; text-justify: inter-word; }
+html[dir="rtl"] .justify, html[dir="rtl"] .prose p, html[dir="rtl"] .prose .lead { hyphens: none; }
 
 /* =====================================================================
    SUPPORT ARABE (RTL)

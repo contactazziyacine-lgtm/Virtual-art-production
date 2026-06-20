@@ -1,19 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
-import { IMG, FALLBACK } from '../data/covers';
-
-// Une vraie photo algérienne par article (remplace les anciens dégradés + emoji)
-const covers = [
-  { src: IMG.constantine, fb: FALLBACK.constantine },
-  { src: IMG.tlemcen, fb: FALLBACK.tlemcen },
-  { src: IMG.alger, fb: FALLBACK.alger },
-  { src: IMG.constantineBridge, fb: FALLBACK.constantineBridge },
-  { src: IMG.constantineNature, fb: FALLBACK.constantineNature },
-  { src: IMG.tlemcenMosque, fb: FALLBACK.tlemcenMosque },
-];
+import { IMG, FALLBACK, BLOG_IMG, BLOG_FB } from '../data/covers';
 
 export default function Blog() {
   const { t } = useLang();
@@ -29,7 +20,7 @@ export default function Blog() {
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 400, display: 'flex', alignItems: 'flex-end' }}>
         <Cover src={IMG.constantineMedina} fallback={FALLBACK.constantineMedina} alt="Médina" style={{ position: 'absolute', inset: 0, opacity: .48 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0.5) 0%, rgba(7,39,31,0.42) 42%, rgba(7,39,31,0.92) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0.5) 0%, rgba(17,5,48,0.42) 42%, rgba(17,5,48,0.92) 100%)' }} />
         <div className="wrap" style={{ position: 'relative', zIndex: 2, paddingTop: 140, paddingBottom: 'clamp(48px,7vw,80px)', color: '#fff' }}>
           <div className="reveal in" style={{ maxWidth: 820 }}>
             <div className="eyebrow no-tick" style={{ color: '#fff', marginBottom: 20 }}>{b.tag}</div>
@@ -44,17 +35,19 @@ export default function Blog() {
         <div className="wrap">
           <div className="blog-grid cols-3" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 'clamp(18px,2vw,28px)' }}>
             {b.posts.map((p, i) => {
-              const cv = covers[i % covers.length];
+              const src = BLOG_IMG[p.key];
+              const fb = BLOG_FB[p.key];
               return (
                 <Reveal key={i} delay={(i % 3) * 80}>
+                  <Link to={`/blog/${p.slug}`} style={{ display: 'block', height: '100%' }}>
                   <article className="blog-card" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', overflow: 'hidden', cursor: 'pointer', height: '100%', transition: 'transform .3s var(--ease), box-shadow .3s' }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 18px 40px rgba(10,50,42,.12)'; }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 18px 40px rgba(27,10,77,.12)'; }}
                     onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}>
                     <div style={{ position: 'relative', aspectRatio: '16/10', overflow: 'hidden' }}>
                       <div className="blog-img" style={{ position: 'absolute', inset: 0, transition: 'transform .6s var(--ease)' }}>
-                        <Cover src={cv.src} fallback={cv.fb} alt={p.title} />
+                        <Cover src={src} fallback={fb} alt={p.title} />
                       </div>
-                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7,39,31,0) 55%, rgba(7,39,31,0.55) 100%)' }} />
+                      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(17,5,48,0) 55%, rgba(17,5,48,0.55) 100%)' }} />
                       <span style={{ position: 'absolute', top: 14, left: 14, padding: '6px 12px', borderRadius: 100, background: 'var(--accent)', color: '#fff', fontFamily: 'var(--display)', fontSize: 11, fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase' }}>{p.cat}</span>
                     </div>
                     <div style={{ padding: 'clamp(20px,2vw,26px)' }}>
@@ -65,6 +58,7 @@ export default function Blog() {
                       </div>
                     </div>
                   </article>
+                  </Link>
                 </Reveal>
               );
             })}

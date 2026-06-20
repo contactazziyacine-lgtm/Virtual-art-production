@@ -23,12 +23,37 @@ export const IMG = {
 
 // Dégradé de repli (affiché si une image ne charge pas — jamais d'icône cassée)
 export const FALLBACK = {
-  alger: 'linear-gradient(135deg,#0a322a,#0e6e54)',
-  constantine: 'linear-gradient(135deg,#1b2a4a,#2b4a7a)',
-  constantineBridge: 'linear-gradient(135deg,#243b55,#3a5f86)',
-  constantineBelle: 'linear-gradient(135deg,#2a1f3d,#4a3a6a)',
-  constantineMedina: 'linear-gradient(135deg,#3a2a1a,#6a4a2a)',
-  constantineNature: 'linear-gradient(135deg,#143226,#1f5a40)',
-  tlemcen: 'linear-gradient(135deg,#3a2410,#7a4a1f)',
-  tlemcenMosque: 'linear-gradient(135deg,#42250f,#864a1f)',
+  alger: 'linear-gradient(135deg,#1B0A4D,#5B0DDD)',
+  constantine: 'linear-gradient(135deg,#1c0a52,#3a18c4)',
+  constantineBridge: 'linear-gradient(135deg,#1a0a4a,#4612c8)',
+  constantineBelle: 'linear-gradient(135deg,#240a55,#6a1fb8)',
+  constantineMedina: 'linear-gradient(135deg,#160740,#3a0fb0)',
+  constantineNature: 'linear-gradient(135deg,#1a0a4d,#5b0ddd)',
+  tlemcen: 'linear-gradient(135deg,#2a0a5a,#9529ac)',
+  tlemcenMosque: 'linear-gradient(135deg,#1e0a52,#7715d5)',
+};
+
+// =====================================================================
+//  BLOG — une image distincte et fiable par article.
+//  On réutilise les photographies algériennes déjà validées (chargement
+//  garanti) : carte + en-tête d'article partagent la même source.
+//  Pour mettre vos propres visuels de tournage, remplacez simplement
+//  les valeurs ci-dessous par vos URLs.
+// =====================================================================
+export const BLOG_IMG = {
+  videoTrends:  IMG.constantine,        // 5 tendances vidéo
+  linkedin:     IMG.tlemcen,            // présence LinkedIn
+  tour360:      IMG.constantineMedina,  // visite virtuelle 360°
+  videoRoi:     IMG.constantineBridge,  // ROI pub vidéo
+  drone:        IMG.constantineNature,  // drone & réglementation
+  storytelling: IMG.tlemcenMosque,      // storytelling
+};
+
+export const BLOG_FB = {
+  videoTrends:  FALLBACK.constantine,
+  linkedin:     FALLBACK.tlemcen,
+  tour360:      FALLBACK.constantineMedina,
+  videoRoi:     FALLBACK.constantineBridge,
+  drone:        FALLBACK.constantineNature,
+  storytelling: FALLBACK.tlemcenMosque,
 };
