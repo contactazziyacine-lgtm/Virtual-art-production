@@ -1,11 +1,23 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useLang } from '../i18n/LanguageContext';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import NotFound from './NotFound';
 import { BLOG_IMG, BLOG_FB } from '../data/covers';
+
+const SITE = 'https://virtualart-dz.com';
+// Dates de publication figées (ISO) par slug — indépendantes de la langue affichée.
+const PUB_DATES = {
+  'tendances-video-communication-entreprise': '2024-01-15',
+  'presence-linkedin-nouveaux-clients': '2024-01-08',
+  'visite-virtuelle-360-hotellerie': '2024-01-02',
+  'roi-publicite-video-vs-display': '2023-12-20',
+  'drone-reglementation-algerie': '2023-12-10',
+  'storytelling-entreprise': '2023-12-01',
+};
 
 export default function Article() {
   const { slug } = useParams();
@@ -17,6 +29,26 @@ export default function Article() {
 
   const img = BLOG_IMG[post.key];
   const fb = BLOG_FB[post.key];
+  const absImg = img && /^https?:/.test(img) ? img : `${SITE}${img || '/assets/logo.png'}`;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: absImg,
+    inLanguage: lang,
+    articleSection: post.cat,
+    datePublished: PUB_DATES[slug],
+    dateModified: PUB_DATES[slug],
+    mainEntityOfPage: `${SITE}/blog/${slug}`,
+    author: { '@type': 'Organization', name: 'Virtual Art Production', '@id': `${SITE}/#organization` },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Virtual Art Production',
+      '@id': `${SITE}/#organization`,
+      logo: { '@type': 'ImageObject', url: `${SITE}/assets/logo.png` },
+    },
+  };
   const backLabel = lang === 'ar' ? 'العودة إلى المدونة' : lang === 'en' ? 'Back to the blog' : 'Retour au blog';
   const ctaTitle = lang === 'ar' ? 'مشروع في الأفق؟'
     : lang === 'en' ? 'A project in mind?'
@@ -27,7 +59,10 @@ export default function Article() {
 
   return (
     <article>
-      <Seo title={post.title} description={post.excerpt} />
+      <Seo title={post.title} description={post.excerpt} type="article" />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
 
       {/* ============ HÉRO ARTICLE ============ */}
       <header className="band--deep" style={{ position: 'relative', overflow: 'hidden', minHeight: 480, display: 'flex', alignItems: 'flex-end' }}>

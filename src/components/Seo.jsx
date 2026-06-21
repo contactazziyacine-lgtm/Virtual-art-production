@@ -6,6 +6,20 @@ const BASE = 'Virtual Art Production';
 const SITE_URL = 'https://virtualart-dz.com';        // domaine de production
 const DEFAULT_IMG = `${SITE_URL}/assets/logo.png`;   // URL ABSOLUE (requis par Open Graph)
 
+// Mots-clés cibles (référencement Google + moteurs IA). Les <meta keywords>
+// n'influencent plus le classement Google, mais restent lus par certains
+// moteurs IA ; l'essentiel est leur présence dans les titres/descriptions/JSON-LD.
+const DEFAULT_KEYWORDS = [
+  'boîte de communication Alger', 'agence de communication Algérie',
+  'boîte de production audiovisuelle', 'société de production vidéo Alger',
+  'film institutionnel', 'vidéo corporate', 'film publicitaire', 'spot publicitaire',
+  'shooting photo professionnel', 'photographe entreprise Alger',
+  'couverture médiatique', 'couverture événementielle',
+  'community management', 'gestion réseaux sociaux', 'contenu réseaux sociaux',
+  'captation drone 4K', 'visite virtuelle 360°', 'motion design 3D',
+  'production audiovisuelle Algérie', 'Virtual Art Production',
+].join(', ');
+
 const OG_LOCALE = { fr: 'fr_FR', ar: 'ar_DZ', en: 'en_US' };
 
 /**
@@ -13,10 +27,11 @@ const OG_LOCALE = { fr: 'fr_FR', ar: 'ar_DZ', en: 'en_US' };
  * Rétro-compatible : <Seo title="…" description="…" /> continue de fonctionner.
  * Props optionnelles : image (URL absolue), path (chemin canonique), type, noindex.
  */
-export default function Seo({ title, description, image, path, type = 'website', noindex = false }) {
+export default function Seo({ title, description, image, path, type = 'website', noindex = false, keywords }) {
   const { lang } = useLang();
   const fullTitle = title ? `${title} · ${BASE}` : `${BASE} – Production Audiovisuelle Premium`;
   const img = image || DEFAULT_IMG;
+  const kw = keywords || DEFAULT_KEYWORDS;
 
   // Canonical : on privilégie le chemin courant, sinon le path fourni.
   const pathname =
@@ -28,6 +43,7 @@ export default function Seo({ title, description, image, path, type = 'website',
       <html lang={lang} />
       <title>{fullTitle}</title>
       {description && <meta name="description" content={description} />}
+      <meta name="keywords" content={kw} />
       <link rel="canonical" href={canonical} />
       {noindex
         ? <meta name="robots" content="noindex, nofollow" />

@@ -12,6 +12,7 @@ import WhatsAppFloat from './components/WhatsAppFloat';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
 import Portfolio from './pages/Portfolio';
 import Devis from './pages/Devis';
 import Blog from './pages/Blog';
@@ -43,6 +44,7 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/a-propos" element={<About />} />
               <Route path="/services" element={<Services />} />
+              <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="/devis" element={<Devis />} />
               <Route path="/blog" element={<Blog />} />

@@ -10,7 +10,6 @@ export default function Devis() {
   const d = t.devis;
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
-  const [budget, setBudget] = useState('');
   const [checkedServices, setCheckedServices] = useState([]);
   const [checkedSocials, setCheckedSocials] = useState([]);
 
@@ -25,6 +24,7 @@ export default function Devis() {
     if (v('website')) { setSubmitted(true); return; }
     setSending(true);
     const fileNames = Array.from(fd.getAll('files')).map(f => (f && f.name) ? f.name : '').filter(Boolean);
+    const files = Array.from(fd.getAll('files')).filter(f => f && f.size > 0);
     const socialServices = fd.getAll('socialServices').map(x => x.toString());
 
     const fields = [
@@ -34,11 +34,11 @@ export default function Devis() {
       [d.descLabel, v('description')], [d.dateLabel, v('date')], [d.placeLabel, v('place')],
       [d.durationLabel, v('duration')], [d.scriptLabel, v('script')], [d.daysLabel, v('days')],
       [d.platformsLabel, checkedSocials], [d.socialSvcLabel, socialServices],
-      [d.budgetLabel, budget], [d.filesLabel, fileNames],
+      [d.filesLabel, fileNames],
     ];
 
     try {
-      await sendForm({ subject: `${d.tag} — ${v('name') || 'Nouveau projet'}`, replyTo: v('email'), fields });
+      await sendForm({ subject: `${d.tag} — ${v('name') || 'Nouveau projet'}`, replyTo: v('email'), fields, files });
     } catch (err) {
       // Si l'envoi e-mail échoue, on affiche quand même la confirmation pour
       // ne pas perdre la saisie : le client peut nous joindre directement.
@@ -168,26 +168,6 @@ export default function Devis() {
               </div>
 
               <hr style={divider} />
-              <SectionTitle>{d.sBudget}</SectionTitle>
-              <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
-                <label style={labelStyle}>{d.budgetLabel}</label>
-                <div className="budget-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10, marginTop: 4 }}>
-                  {d.budgetOpts.map(b => {
-                    const on = budget === b;
-                    return (
-                      <div key={b} onClick={() => setBudget(b)} style={{
-                        background: on ? 'var(--accent-soft)' : 'var(--paper)',
-                        border: `1px solid ${on ? 'var(--accent)' : 'var(--line-2)'}`,
-                        borderRadius: 'var(--r)', padding: '13px 8px', textAlign: 'center', fontSize: 13, cursor: 'pointer',
-                        fontWeight: on ? 700 : 500,
-                        color: on ? 'var(--accent-2)' : 'var(--ink-soft)', transition: 'all .2s var(--ease)'
-                      }}>{b}</div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <hr style={divider} />
               <SectionTitle>{d.sFiles}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
                 <label style={labelStyle}>{d.filesLabel}</label>
@@ -208,7 +188,7 @@ export default function Devis() {
         </Reveal>
       </section>
 
-      <style>{`@media(max-width:768px){.form-grid{grid-template-columns:1fr!important}.budget-grid{grid-template-columns:1fr 1fr!important}.quote-form{padding:28px 20px!important}}`}</style>
+      <style>{`@media(max-width:768px){.form-grid{grid-template-columns:1fr!important}.quote-form{padding:28px 20px!important}}`}</style>
     </div>
   );
 }

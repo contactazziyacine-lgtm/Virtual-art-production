@@ -8,9 +8,10 @@ import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
 import Cover from '../components/Cover';
 import { PHOTO, PHOTO_FB, HERO, HERO_FB } from '../data/covers';
+import { SERVICE_DETAILS } from '../data/serviceDetails';
 
 export default function Services() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const s = t.servicesPage;
   const cardIcons = ['event', 'drone', 'tour360', 'motion', 'web'];
   const cardCats = ['event', 'all', '360', 'motion', 'web'];
@@ -130,6 +131,33 @@ export default function Services() {
         </div>
       </section>
 
+      {/* ============ PAGES SERVICES DÉDIÉES (maillage interne / SEO) ============ */}
+      <section className="band band--surface">
+        <div className="wrap">
+          <Reveal>
+            <div className="eyebrow">Nos services en détail</div>
+            <h2 className="h2" style={{ marginTop: 14, marginBottom: 'clamp(24px,3vw,38px)' }}>Explorez chaque expertise</h2>
+          </Reveal>
+          <div className="svc-links" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
+            {SERVICE_DETAILS.map((sv, i) => {
+              const c = lang === 'fr' ? sv : (sv.i18n && sv.i18n[lang]) || sv;
+              return (
+              <Reveal key={sv.slug} delay={(i % 3) * 60}>
+                <Link to={`/services/${sv.slug}`}
+                  style={{ display: 'block', padding: '20px 22px', background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', color: 'inherit', textDecoration: 'none', height: '100%', transition: 'border-color .2s, transform .2s' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-3px)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--line)'; e.currentTarget.style.transform = 'none'; }}>
+                  <div className="eyebrow" style={{ marginBottom: 8 }}>{c.eyebrow}</div>
+                  <h3 className="h3" style={{ marginBottom: 8 }}>{c.h1} <span style={{ color: 'var(--accent)' }}>→</span></h3>
+                  <p style={{ fontSize: 13.5, color: 'var(--muted)', lineHeight: 1.6 }}>{c.lead}</p>
+                </Link>
+              </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ============ CTA ============ */}
       <section className="band band--deep" style={{ textAlign: 'center' }}>
         <div className="wrap" style={{ maxWidth: 760 }}>
@@ -147,10 +175,12 @@ export default function Services() {
           .svc-media-2{order:-1}
           .svc-cards{grid-template-columns:1fr 1fr!important}
           .social-grid{grid-template-columns:1fr 1fr 1fr!important}
+          .svc-links{grid-template-columns:1fr 1fr!important}
         }
         @media(max-width:560px){
           .svc-cards{grid-template-columns:1fr!important}
           .social-grid{grid-template-columns:1fr 1fr!important}
+          .svc-links{grid-template-columns:1fr!important}
         }
       `}</style>
     </div>

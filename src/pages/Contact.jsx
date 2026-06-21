@@ -44,7 +44,7 @@ export default function Contact() {
 
   return (
     <div>
-      <Seo title={t.contact.title} description={t.contact.title} />
+      <Seo title={t.contact.title} description="Contactez Virtual Art Production, boîte de communication et de production audiovisuelle à Alger : film institutionnel, spot publicitaire, shooting photo, couverture médiatique et réseaux sociaux. Devis gratuit." />
 
       {/* ============ HÉRO ============ */}
       <section className="band--deep" style={{ position: 'relative', paddingTop: 132 }}>

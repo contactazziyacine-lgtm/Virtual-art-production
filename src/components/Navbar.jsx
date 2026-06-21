@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
+import { SERVICE_DETAILS } from '../data/serviceDetails';
 import Logo from './Logo';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [svcOpen, setSvcOpen] = useState(false);
   const { pathname } = useLocation();
   const { lang, setLang, t } = useLang();
 
   const links = [
     { to: '/', label: t.nav.home },
     { to: '/a-propos', label: t.nav.about },
-    { to: '/services', label: t.nav.services },
+    { to: '/services', label: t.nav.services, dropdown: true },
     { to: '/portfolio', label: t.nav.portfolio },
     { to: '/blog', label: t.nav.blog },
     { to: '/contact', label: t.nav.contact },
@@ -25,13 +27,14 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [pathname]);
+  useEffect(() => { setMenuOpen(false); setSvcOpen(false); }, [pathname]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
   const langs = ['FR', 'AR', 'EN'];
+  const svcLabel = (sv) => (lang === 'fr' ? sv.h1 : (sv.i18n && sv.i18n[lang] && sv.i18n[lang].h1) || sv.h1);
   const LangSwitcher = () => (
     <div style={{ display: 'flex', gap: 2, border: `1px solid ${scrolled ? 'var(--line-2)' : 'rgba(255,255,255,0.35)'}`, borderRadius: 'var(--r)', padding: 2 }}>
       {langs.map(l => {
@@ -65,16 +68,43 @@ export default function Navbar() {
       <div className="nav-desktop" style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
         <ul style={{ display: 'flex', gap: 24, listStyle: 'none', alignItems: 'center' }}>
           {links.map(l => {
-            const on = pathname === l.to;
+            const on = l.dropdown ? pathname.startsWith('/services') : pathname === l.to;
             const idle = scrolled ? 'var(--ink-soft)' : 'rgba(255,255,255,0.86)';
             const active = scrolled ? 'var(--ink)' : '#fff';
+            const linkEl = (
+              <Link to={l.to} aria-haspopup={l.dropdown ? 'menu' : undefined} aria-expanded={l.dropdown ? svcOpen : undefined} style={{
+                position: 'relative', fontSize: 14.5, fontWeight: on ? 600 : 500,
+                color: on ? active : idle, paddingBottom: 4,
+                borderBottom: `2px solid ${on ? (scrolled ? 'var(--accent)' : '#C9B6FF') : 'transparent'}`, transition: 'color .2s',
+              }}>{l.label}{l.dropdown && <span aria-hidden="true" style={{ fontSize: 10, marginInlineStart: 5, opacity: .7 }}>▾</span>}</Link>
+            );
+            if (!l.dropdown) return <li key={l.to}>{linkEl}</li>;
             return (
-              <li key={l.to}>
-                <Link to={l.to} style={{
-                  position: 'relative', fontSize: 14.5, fontWeight: on ? 600 : 500,
-                  color: on ? active : idle, paddingBottom: 4,
-                  borderBottom: `2px solid ${on ? (scrolled ? 'var(--accent)' : '#C9B6FF') : 'transparent'}`, transition: 'color .2s',
-                }}>{l.label}</Link>
+              <li key={l.to} style={{ position: 'relative' }}
+                onMouseEnter={() => setSvcOpen(true)} onMouseLeave={() => setSvcOpen(false)}
+                onFocus={() => setSvcOpen(true)} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setSvcOpen(false); }}>
+                {linkEl}
+                {svcOpen && (
+                  <div role="menu" style={{
+                    position: 'absolute', top: 'calc(100% + 14px)', insetInlineStart: '50%', transform: 'translateX(-50%)',
+                    background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)',
+                    boxShadow: '0 18px 50px rgba(17,5,48,0.16)', padding: 8, width: 290, display: 'grid', gap: 2, zIndex: 1001,
+                  }}>
+                    {SERVICE_DETAILS.map(sv => (
+                      <Link key={sv.slug} to={`/services/${sv.slug}`} role="menuitem" style={{
+                        display: 'block', padding: '9px 12px', borderRadius: 'var(--r)', fontSize: 13.5, fontWeight: 500,
+                        color: 'var(--ink-soft)', transition: 'background .15s, color .15s',
+                      }}
+                        onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent-soft)'; e.currentTarget.style.color = 'var(--accent)'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--ink-soft)'; }}>
+                        {svcLabel(sv)}
+                      </Link>
+                    ))}
+                    <Link to="/services" role="menuitem" style={{ display: 'block', padding: '9px 12px', borderRadius: 'var(--r)', fontSize: 13, fontWeight: 600, color: 'var(--accent)', borderTop: '1px solid var(--line)', marginTop: 2 }}>
+                      Tous les services →
+                    </Link>
+                  </div>
+                )}
               </li>
             );
           })}
@@ -102,7 +132,16 @@ export default function Navbar() {
           maxHeight: 'calc(100vh - 70px)', overflowY: 'auto',
         }}>
           {links.map(l => (
-            <Link key={l.to} to={l.to} style={{ fontFamily: 'var(--display)', fontSize: 20, fontWeight: 700, color: 'var(--ink)' }}>{l.label}</Link>
+            <div key={l.to}>
+              <Link to={l.to} style={{ fontFamily: 'var(--display)', fontSize: 20, fontWeight: 700, color: 'var(--ink)' }}>{l.label}</Link>
+              {l.dropdown && (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginTop: 10, paddingInlineStart: 14, borderInlineStart: '2px solid var(--line)' }}>
+                  {SERVICE_DETAILS.map(sv => (
+                    <Link key={sv.slug} to={`/services/${sv.slug}`} style={{ fontFamily: 'var(--body)', fontSize: 14.5, fontWeight: 500, color: 'var(--ink-soft)' }}>{svcLabel(sv)}</Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
           <div style={{ paddingBlock: 6 }}><LangSwitcher /></div>
           <Link to="/devis" className="btn" style={{ justifyContent: 'center' }}>{t.nav.quote}</Link>

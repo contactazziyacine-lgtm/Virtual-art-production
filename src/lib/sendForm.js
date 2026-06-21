@@ -1,9 +1,7 @@
-import emailjs from '@emailjs/browser';
-import { EMAILJS } from '../config';
 import { CONTACT } from '../i18n/translations';
 
-const isConfigured = () =>
-  Boolean(EMAILJS.serviceId && EMAILJS.templateId && EMAILJS.publicKey);
+// Point de réception (script PHP à la racine du site). Surchargeable via .env.
+const ENDPOINT = process.env.REACT_APP_MAIL_ENDPOINT || '/send-mail.php';
 
 // Construit un corps de message lisible à partir d'une liste [label, valeur].
 const buildBody = (fields) =>
@@ -13,24 +11,30 @@ const buildBody = (fields) =>
     .join('\n');
 
 /**
- * Envoie le contenu d'un formulaire.
+ * Envoie le contenu d'un formulaire (champs + fichiers) vers le script PHP,
+ * qui transmet le tout par e-mail avec les fichiers EN PIÈCES JOINTES.
+ * Repli mailto: (texte seul) si le script est indisponible.
  * @returns {Promise<'email'|'mailto'>} le canal réellement utilisé.
  */
-export async function sendForm({ subject, fields, replyTo = '' }) {
+export async function sendForm({ subject, fields, replyTo = '', files = [] }) {
   const message = buildBody(fields);
 
-  if (isConfigured()) {
-    await emailjs.send(
-      EMAILJS.serviceId,
-      EMAILJS.templateId,
-      { subject, message, reply_to: replyTo, to_email: CONTACT.email },
-      { publicKey: EMAILJS.publicKey }
-    );
-    return 'email';
-  }
+  const fd = new FormData();
+  fd.append('subject', subject);
+  fd.append('message', message);
+  fd.append('reply_to', replyTo);
+  fd.append('to_email', CONTACT.email);
+  (files || []).forEach((f) => { if (f && f.size > 0) fd.append('files[]', f, f.name); });
 
-  // Repli sans configuration : on ouvre le client e-mail pré-rempli.
-  const href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-  window.location.href = href;
-  return 'mailto';
+  try {
+    const res = await fetch(ENDPOINT, { method: 'POST', body: fd });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data && data.success) return 'email';
+    throw new Error('mail_failed');
+  } catch (e) {
+    // Repli : ouvre l'application e-mail du visiteur (texte seul, SANS pièces jointes).
+    const href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    window.location.href = href;
+    return 'mailto';
+  }
 }
