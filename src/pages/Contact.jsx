@@ -10,13 +10,16 @@ export default function Contact() {
   const { t, contact, lang } = useLang();
   const address = lang === 'ar' ? contact.addressAr : lang === 'en' ? contact.addressEn : contact.addressFr;
 
-  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: t.nav.quote, message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: t.nav.quote, message: '', company: '' });
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status === 'sending') return;
+    // Anti-spam (honeypot) : un bot remplit le champ caché « company ».
+    // On simule un succès sans rien envoyer, pour ne pas l'alerter.
+    if (form.company) { setStatus('sent'); return; }
     setStatus('sending');
     try {
       await sendForm({
@@ -110,15 +113,20 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <div><label className="field-label">{t.contact.name} *</label><input type="text" value={form.name} onChange={set('name')} required /></div>
-                  <div><label className="field-label">{t.contact.email} *</label><input type="email" value={form.email} onChange={set('email')} required /></div>
-                  <div><label className="field-label">{t.contact.phone}</label><input type="tel" value={form.phone} onChange={set('phone')} placeholder="0550 12 91 19" /></div>
-                  <div><label className="field-label">{t.contact.subject}</label>
-                    <select value={form.subject} onChange={set('subject')}>
+                  {/* Honeypot anti-spam — invisible pour l'humain, ignoré des lecteurs d'écran */}
+                  <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+                    <label htmlFor="cf-company">Ne pas remplir</label>
+                    <input id="cf-company" type="text" tabIndex={-1} autoComplete="off" value={form.company} onChange={set('company')} />
+                  </div>
+                  <div><label className="field-label" htmlFor="cf-name">{t.contact.name} *</label><input id="cf-name" name="name" autoComplete="name" type="text" value={form.name} onChange={set('name')} required /></div>
+                  <div><label className="field-label" htmlFor="cf-email">{t.contact.email} *</label><input id="cf-email" name="email" autoComplete="email" type="email" value={form.email} onChange={set('email')} required /></div>
+                  <div><label className="field-label" htmlFor="cf-phone">{t.contact.phone}</label><input id="cf-phone" name="phone" autoComplete="tel" type="tel" value={form.phone} onChange={set('phone')} placeholder="0550 12 91 19" /></div>
+                  <div><label className="field-label" htmlFor="cf-subject">{t.contact.subject}</label>
+                    <select id="cf-subject" name="subject" value={form.subject} onChange={set('subject')}>
                       <option>{t.nav.quote}</option><option>Info</option><option>Partenariat</option>
                     </select>
                   </div>
-                  <div><label className="field-label">{t.contact.message} *</label><textarea value={form.message} onChange={set('message')} required style={{ minHeight: 140 }} /></div>
+                  <div><label className="field-label" htmlFor="cf-message">{t.contact.message} *</label><textarea id="cf-message" name="message" value={form.message} onChange={set('message')} required style={{ minHeight: 140 }} /></div>
                   {status === 'error' && (
                     <p style={{ color: '#c0392b', fontSize: 14 }}>Une erreur est survenue. Réessayez ou écrivez-nous directement à {contact.email}.</p>
                   )}

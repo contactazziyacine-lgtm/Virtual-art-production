@@ -3,7 +3,7 @@ import React from 'react';
 export default function WhatsAppFloat() {
   return (
     <a href="https://wa.me/213550129119" target="_blank" rel="noopener noreferrer"
-      title="Contactez-nous sur WhatsApp" className="whatsapp-float"
+      title="Contactez-nous sur WhatsApp" aria-label="Contactez-nous sur WhatsApp" className="whatsapp-float"
       style={{
         position: 'fixed', bottom: 26, right: 26, zIndex: 999,
         width: 58, height: 58, background: '#25d366', borderRadius: '50%',

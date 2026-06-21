@@ -19,9 +19,11 @@ export default function Devis() {
   const handleSubmit = async e => {
     e.preventDefault();
     if (sending) return;
-    setSending(true);
     const fd = new FormData(e.currentTarget);
     const v = k => (fd.get(k) || '').toString().trim();
+    // Anti-spam (honeypot) : champ caché « website ». Rempli = bot → succès simulé.
+    if (v('website')) { setSubmitted(true); return; }
+    setSending(true);
     const fileNames = Array.from(fd.getAll('files')).map(f => (f && f.name) ? f.name : '').filter(Boolean);
     const socialServices = fd.getAll('socialServices').map(x => x.toString());
 
@@ -98,11 +100,16 @@ export default function Devis() {
       <section className="band band--surface">
         <Reveal className="quote-form" style={{ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 'var(--r-lg)', padding: 'clamp(28px,4vw,56px)', maxWidth: 900, margin: '0 auto', boxShadow: '0 10px 40px rgba(27,10,77,.05)' }}>
           <form onSubmit={handleSubmit}>
+            {/* Honeypot anti-spam — hors écran, ignoré des humains et lecteurs d'écran */}
+            <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+              <label htmlFor="q-website">Ne pas remplir</label>
+              <input id="q-website" type="text" name="website" tabIndex={-1} autoComplete="off" />
+            </div>
             <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
 
               <SectionTitle>{d.sGeneral}</SectionTitle>
-              {[[d.fName, 'text', true, 'name'], [d.fCompany, 'text', false, 'company'], [d.fSector, 'text', false, 'sector'], [d.fPhone, 'tel', true, 'phone'], [d.fEmail, 'email', true, 'email'], [d.fCity, 'text', false, 'city']].map(([label, type, req, name]) => (
-                <div key={name} style={fieldStyle}><label style={labelStyle}>{label}{req ? ' *' : ''}</label><input type={type} name={name} required={req} /></div>
+              {[[d.fName, 'text', true, 'name', 'name'], [d.fCompany, 'text', false, 'company', 'organization'], [d.fSector, 'text', false, 'sector', 'off'], [d.fPhone, 'tel', true, 'phone', 'tel'], [d.fEmail, 'email', true, 'email', 'email'], [d.fCity, 'text', false, 'city', 'address-level2']].map(([label, type, req, name, ac]) => (
+                <div key={name} style={fieldStyle}><label style={labelStyle} htmlFor={`q-${name}`}>{label}{req ? ' *' : ''}</label><input id={`q-${name}`} type={type} name={name} autoComplete={ac} required={req} /></div>
               ))}
 
               <hr style={divider} />
@@ -121,15 +128,15 @@ export default function Devis() {
               <hr style={divider} />
               <SectionTitle>{d.sGoal}</SectionTitle>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
-                <label style={labelStyle}>{d.goalLabel}</label>
-                <select name="goal"><option value="">{d.goalPlaceholder}</option>{d.goalOpts.map(o => <option key={o}>{o}</option>)}</select>
+                <label style={labelStyle} htmlFor="q-goal">{d.goalLabel}</label>
+                <select id="q-goal" name="goal"><option value="">{d.goalPlaceholder}</option>{d.goalOpts.map(o => <option key={o}>{o}</option>)}</select>
               </div>
               <div style={{ gridColumn: '1/-1', ...fieldStyle }}>
-                <label style={labelStyle}>{d.descLabel}</label>
-                <textarea name="description" placeholder={d.descPlaceholder} style={{ minHeight: 140 }} />
+                <label style={labelStyle} htmlFor="q-description">{d.descLabel}</label>
+                <textarea id="q-description" name="description" placeholder={d.descPlaceholder} style={{ minHeight: 140 }} />
               </div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.dateLabel}</label><input type="date" name="date" /></div>
-              <div style={fieldStyle}><label style={labelStyle}>{d.placeLabel}</label><input type="text" name="place" /></div>
+              <div style={fieldStyle}><label style={labelStyle} htmlFor="q-date">{d.dateLabel}</label><input id="q-date" type="date" name="date" /></div>
+              <div style={fieldStyle}><label style={labelStyle} htmlFor="q-place">{d.placeLabel}</label><input id="q-place" type="text" name="place" /></div>
 
               <hr style={divider} />
               <SectionTitle>{d.sVideo}</SectionTitle>
