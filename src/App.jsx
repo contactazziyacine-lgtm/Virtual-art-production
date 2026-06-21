@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import './styles/global.css';
 import { LanguageProvider } from './i18n/LanguageContext';
+import { initAnalytics, trackPageView } from './lib/analytics';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -22,7 +23,11 @@ import NotFound from './pages/NotFound';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => { initAnalytics(); }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    trackPageView(pathname + window.location.search);
+  }, [pathname]);
   return null;
 }
 

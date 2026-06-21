@@ -15,7 +15,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "postbuild": "react-snap"
   },
   "browserslist": {
     "production": [
@@ -26,5 +27,37 @@
       "last 1 chrome version"
     ]
   },
-  "homepage": "/"
+  "homepage": "/",
+  "devDependencies": {
+    "react-snap": "^1.23.0"
+  },
+  "reactSnap": {
+    "source": "build",
+    "inlineCss": false,
+    "minifyHtml": {
+      "collapseWhitespace": false,
+      "removeComments": false
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "include": [
+      "/",
+      "/a-propos",
+      "/services",
+      "/portfolio",
+      "/devis",
+      "/blog",
+      "/contact",
+      "/privacy",
+      "/conditions-utilisation",
+      "/blog/tendances-video-communication-entreprise",
+      "/blog/presence-linkedin-nouveaux-clients",
+      "/blog/visite-virtuelle-360-hotellerie",
+      "/blog/roi-publicite-video-vs-display",
+      "/blog/drone-reglementation-algerie",
+      "/blog/storytelling-entreprise"
+    ]
+  }
 }
