@@ -65,11 +65,10 @@ export default function Footer() {
         <hr style={{ height: 1, border: 0, background: 'rgba(234,242,238,0.12)' }} />
         <div className="footer-bottom" style={{ paddingTop: 22, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, fontSize: 13, color: 'rgba(234,242,238,0.45)' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-            <span>© 2024 Virtual Art Production. {t.footer.rights}</span>
+            <span><bdi dir="ltr">© 2024 Virtual Art Production.</bdi> {t.footer.rights}</span>
             <Link to="/privacy" style={{ color: 'rgba(234,242,238,0.62)', borderBottom: '1px solid rgba(234,242,238,0.28)', paddingBottom: 1 }}>{privacyLabel}</Link>
             <Link to="/conditions-utilisation" style={{ color: 'rgba(234,242,238,0.62)', borderBottom: '1px solid rgba(234,242,238,0.28)', paddingBottom: 1 }}>{termsLabel}</Link>
           </span>
-          <span style={{ maxWidth: 520, textAlign: 'right' }}>Production 4K · Drone · 360° · Digital — Photos des villes : Wikimedia Commons (CC BY-SA)</span>
         </div>
       </div>
       <style>{`@media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){.footer-grid{grid-template-columns:1fr!important}.footer-bottom span{text-align:left!important}}`}</style>

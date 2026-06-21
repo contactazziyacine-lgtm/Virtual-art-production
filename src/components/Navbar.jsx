@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
 import { SERVICE_DETAILS } from '../data/serviceDetails';
@@ -32,6 +32,12 @@ export default function Navbar() {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  // Dropdown stability: delayed close so the cursor can cross the gap
+  const svcTimer = useRef(null);
+  const openSvc = () => { clearTimeout(svcTimer.current); setSvcOpen(true); };
+  const closeSvc = () => { svcTimer.current = setTimeout(() => setSvcOpen(false), 140); };
+  useEffect(() => () => clearTimeout(svcTimer.current), []);
 
   const langs = ['FR', 'AR', 'EN'];
   const svcLabel = (sv) => (lang === 'fr' ? sv.h1 : (sv.i18n && sv.i18n[lang] && sv.i18n[lang].h1) || sv.h1);
@@ -81,8 +87,8 @@ export default function Navbar() {
             if (!l.dropdown) return <li key={l.to}>{linkEl}</li>;
             return (
               <li key={l.to} style={{ position: 'relative' }}
-                onMouseEnter={() => setSvcOpen(true)} onMouseLeave={() => setSvcOpen(false)}
-                onFocus={() => setSvcOpen(true)} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setSvcOpen(false); }}>
+                onMouseEnter={openSvc} onMouseLeave={closeSvc}
+                onFocus={openSvc} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setSvcOpen(false); }}>
                 {linkEl}
                 {svcOpen && (
                   <div role="menu" style={{
@@ -126,10 +132,11 @@ export default function Navbar() {
 
       {menuOpen && (
         <div style={{
-          position: 'fixed', top: 70, insetInline: 0, background: 'var(--surface)',
+          position: 'fixed', top: 70, insetInline: 0, zIndex: 1001,
+          background: 'var(--surface, #FBFAF8)',
           borderBottom: '1px solid var(--line)', padding: 'var(--pad)',
           display: 'flex', flexDirection: 'column', gap: 14,
-          maxHeight: 'calc(100vh - 70px)', overflowY: 'auto',
+          height: 'calc(100vh - 70px)', overflowY: 'auto',
         }}>
           {links.map(l => (
             <div key={l.to}>

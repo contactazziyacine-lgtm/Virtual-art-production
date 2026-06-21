@@ -18,7 +18,7 @@ export const EMAILJS = {
 export const SOCIAL = {
   facebook: '',
   instagram: '',
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/company/virtualartproduction',
   youtube: 'https://www.youtube.com/channel/UCY9QO4uXFHzNwJ4OZsVk1QA',
   tiktok: '',
 };

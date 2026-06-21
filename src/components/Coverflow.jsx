@@ -16,6 +16,8 @@ export default function Coverflow({ items = [], catLabel = {} }) {
   const draggingRef = useRef(false);
   const [w, setW] = useState(960);
   const [active, setActive] = useState(items.length ? Math.floor((items.length - 1) / 2) : 0);
+  const [paused, setPaused] = useState(false);
+  const dirRef = useRef(1);
 
   // Mesure de la largeur disponible (responsive)
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Coverflow({ items = [], catLabel = {} }) {
     return () => { ro ? ro.disconnect() : window.removeEventListener('resize', measure); };
   }, []);
 
-  const cardW = Math.max(240, Math.min(w * 0.64, 440));
+  const cardW = Math.max(260, Math.min(w * 0.72, 520));
   const cardH = Math.round(cardW * 9 / 16);
   const spread = cardW * 0.52;
 
@@ -58,10 +60,29 @@ export default function Coverflow({ items = [], catLabel = {} }) {
     navigate(`/portfolio?cat=${items[i].cat}`);
   };
 
+  // Défilement automatique (va-et-vient). En pause au survol, pendant un glisser,
+  // et désactivé si l'utilisateur préfère réduire les animations.
+  useEffect(() => {
+    if (paused || items.length <= 1) return;
+    const reduce = typeof window !== 'undefined' && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const id = setInterval(() => {
+      if (draggingRef.current) return;
+      setActive((a) => {
+        let d = dirRef.current;
+        if (a + d > items.length - 1) { dirRef.current = -1; d = -1; }
+        else if (a + d < 0) { dirRef.current = 1; d = 1; }
+        return a + d;
+      });
+    }, 3500);
+    return () => clearInterval(id);
+  }, [paused, items.length]);
+
   if (!items.length) return null;
 
   return (
-    <div>
+    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {/* Conteneur de clipping : empêche les cartes latérales de déborder la page */}
       <div style={{ overflow: 'hidden', width: '100%' }}>
         <motion.div
