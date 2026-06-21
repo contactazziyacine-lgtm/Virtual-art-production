@@ -4,6 +4,7 @@ import { SOCIAL } from '../config';
 import { sendForm } from '../lib/sendForm';
 import Seo from '../components/Seo';
 import Reveal from '../components/Reveal';
+import UiIcon from '../components/UiIcon';
 
 export default function Contact() {
   const { t, contact, lang } = useLang();
@@ -36,7 +37,7 @@ export default function Contact() {
     }
   };
 
-  const socials = [['📘', SOCIAL.facebook], ['📷', SOCIAL.instagram], ['💼', SOCIAL.linkedin], ['▶️', SOCIAL.youtube], ['🎵', SOCIAL.tiktok]];
+  const socials = [['facebook', SOCIAL.facebook], ['instagram', SOCIAL.instagram], ['linkedin', SOCIAL.linkedin], ['youtube', SOCIAL.youtube], ['tiktok', SOCIAL.tiktok]];
 
   return (
     <div>
@@ -62,10 +63,10 @@ export default function Contact() {
               ['📞', t.contact.phone, contact.phone, `tel:${contact.phoneRaw}`],
               ['📧', t.contact.email, contact.email, `mailto:${contact.email}`],
               ['📍', t.contact.address, address, null],
-              ['💬', t.contact.whatsapp, t.contact.whatsappDesc, `https://wa.me/${contact.whatsapp}`],
+              ['whatsapp', t.contact.whatsapp, t.contact.whatsappDesc, `https://wa.me/${contact.whatsapp}`],
             ].map(([icon, title, val, href]) => (
               <div key={title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                <div style={{ width: 46, height: 46, background: 'var(--accent-soft)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>{icon}</div>
+                <div style={{ width: 46, height: 46, background: 'var(--accent-soft)', color: 'var(--accent)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><UiIcon e={icon} size={22} /></div>
                 <div style={{ minWidth: 0, wordBreak: 'break-word' }}>
                   <h4 style={{ fontFamily: 'var(--display)', fontSize: 14, fontWeight: 700, marginBottom: 4 }}>{title}</h4>
                   {href ? <a href={href} style={{ fontSize: 14.5, color: 'var(--muted)', textDecoration: 'none' }}>{val}</a> : <p style={{ fontSize: 14.5, color: 'var(--muted)' }}>{val}</p>}
@@ -78,9 +79,9 @@ export default function Contact() {
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {socials.map(([icon, url], i) => (
                   <a key={i} href={url || '#'} target={url ? '_blank' : undefined} rel={url ? 'noopener noreferrer' : undefined}
-                    style={{ width: 44, height: 44, background: 'var(--paper)', border: '1px solid var(--line-2)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, textDecoration: 'none', transition: 'all .2s var(--ease)' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.borderColor = 'var(--line-2)'; e.currentTarget.style.transform = 'none'; }}>{icon}</a>
+                    style={{ width: 44, height: 44, background: 'var(--paper)', color: 'var(--accent)', border: '1px solid var(--line-2)', borderRadius: 'var(--r)', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', transition: 'all .2s var(--ease)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'var(--accent)'; e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = 'var(--paper)'; e.currentTarget.style.borderColor = 'var(--line-2)'; e.currentTarget.style.color = 'var(--accent)'; e.currentTarget.style.transform = 'none'; }}><UiIcon e={icon} size={19} /></a>
                 ))}
               </div>
             </div>
@@ -89,7 +90,7 @@ export default function Contact() {
             <div style={{ borderRadius: 'var(--r-lg)', overflow: 'hidden', border: '1px solid var(--line)', height: 230 }}>
               <iframe
                 title="Localisation Virtual Art Production"
-                src="https://www.google.com/maps?q=Beni+Messous,+Alger&output=embed"
+                src="https://www.google.com/maps?q=17+Rue+Ibrahim+Hadjr%C3%A8s,+B%C3%A9ni+Messous+16044,+Alger&output=embed"
                 style={{ width: '100%', height: '100%', border: 0 }}
                 loading="lazy"
               />

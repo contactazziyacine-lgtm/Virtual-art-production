@@ -3,9 +3,9 @@ export const CONTACT = {
   phone: '0550 12 91 19',
   phoneRaw: '0550129119',
   whatsapp: '213550129119',
-  addressFr: 'Cité Ennour, Beni Messous, Alger',
-  addressAr: 'حي النور، بني مسوس، الجزائر',
-  addressEn: 'Cité Ennour, Beni Messous, Algiers',
+  addressFr: 'Bt 17, 17 Rue Ibrahim Hadjrès, Béni Messous 16044, Alger',
+  addressAr: 'عمارة 17، 17 شارع إبراهيم حجرس، بني مسوس 16044، الجزائر',
+  addressEn: 'Bldg 17, 17 Ibrahim Hadjrès St, Béni Messous 16044, Algiers',
 };
 
 export const translations = {
